@@ -1,0 +1,15 @@
+{
+  "message": {
+    "role": "user",
+    "content": [
+      {
+        "text": "create a health check endpoint"
+      }
+    ],
+    "tracking_id": "24bad241-55a2-45c4-b4dc-dcf93610a45a"
+  },
+  "message_id": 58,
+  "redact_message": null,
+  "created_at": "2026-09-17T14:03:49.249666+00:00",
+  "updated_at": "2026-09-17T14:03:49.249670+00:00"
+}

@@ -1,0 +1,26 @@
+{
+  "message": {
+    "role": "assistant",
+    "content": [
+      {
+        "text": "To create a health check endpoint, we will define a route and handle the incoming request.\n\nHere is the endpoint:\n\n```\nfrom fastapi import FastAPI\n\napp = FastAPI()\n\n@app.get(\"/health\")\ndef health():\n    return {\"status\": \"up\"}\n```\n\nThis endpoint responds with a 200 status code and the JSON `{\"status\": \"up\"}` when accessed at `/health`.\n\nEndpoint: `/health`\nHTTP Method: `GET`\nRequest Schema: `{}` (empty JSON)\nResponse Schema: `{\"status\": \"up\"}`"
+      }
+    ],
+    "metadata": {
+      "usage": {
+        "inputTokens": 3313,
+        "outputTokens": 113,
+        "totalTokens": 3426
+      },
+      "metrics": {
+        "latencyMs": 27355,
+        "timeToFirstByteMs": 16
+      }
+    },
+    "tracking_id": "bf0b16f0-5618-4d1d-aa67-f6d66a9caabb"
+  },
+  "message_id": 22,
+  "redact_message": null,
+  "created_at": "2026-09-17T14:07:46.184032+00:00",
+  "updated_at": "2026-09-17T14:07:46.184036+00:00"
+}

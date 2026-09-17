@@ -1,0 +1,33 @@
+{
+  "message": {
+    "role": "assistant",
+    "content": [
+      {
+        "toolUse": {
+          "toolUseId": "tooluse_4ffce466579a41feb4358cf7",
+          "name": "add_memory",
+          "input": {
+            "entries": "['New user signed up for account']",
+            "stores": "['buddy_longterm_memory']"
+          }
+        }
+      }
+    ],
+    "metadata": {
+      "usage": {
+        "inputTokens": 1507,
+        "outputTokens": 35,
+        "totalTokens": 1542
+      },
+      "metrics": {
+        "latencyMs": 21914,
+        "timeToFirstByteMs": 18
+      }
+    },
+    "tracking_id": "1292c571-bab5-4287-9af3-3f88d6ca3fb2"
+  },
+  "message_id": 4,
+  "redact_message": null,
+  "created_at": "2026-09-17T09:22:39.927700+00:00",
+  "updated_at": "2026-09-17T09:22:39.927715+00:00"
+}

@@ -1,0 +1,26 @@
+{
+  "message": {
+    "role": "assistant",
+    "content": [
+      {
+        "text": "This health check endpoint can be used to verify the status of the service. When the endpoint is accessed, it returns a 200 status code with the JSON `{\"status\": \"up\"}`, indicating that the service is operational."
+      }
+    ],
+    "metadata": {
+      "usage": {
+        "inputTokens": 3926,
+        "outputTokens": 47,
+        "totalTokens": 3973
+      },
+      "metrics": {
+        "latencyMs": 50405,
+        "timeToFirstByteMs": 16
+      }
+    },
+    "tracking_id": "05e34da3-bd06-4e2b-9bd4-2a14eb18868c"
+  },
+  "message_id": 61,
+  "redact_message": null,
+  "created_at": "2026-09-17T14:08:36.879528+00:00",
+  "updated_at": "2026-09-17T14:08:36.879533+00:00"
+}

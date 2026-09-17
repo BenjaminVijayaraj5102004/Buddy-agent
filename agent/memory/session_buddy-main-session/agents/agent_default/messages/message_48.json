@@ -1,0 +1,32 @@
+{
+  "message": {
+    "role": "assistant",
+    "content": [
+      {
+        "toolUse": {
+          "toolUseId": "tooluse_2c10f49f1a034ba8860b1aee",
+          "name": "github_agent",
+          "input": {
+            "task_description": "Create a GitHub issue for adding a post API endpoint for adding items with pagination using FastAPI"
+          }
+        }
+      }
+    ],
+    "metadata": {
+      "usage": {
+        "inputTokens": 4092,
+        "outputTokens": 35,
+        "totalTokens": 4127
+      },
+      "metrics": {
+        "latencyMs": 65177,
+        "timeToFirstByteMs": 17
+      }
+    },
+    "tracking_id": "cc4b6096-28b3-4167-851b-2f86f0de4aa7"
+  },
+  "message_id": 48,
+  "redact_message": null,
+  "created_at": "2026-09-17T13:47:02.291571+00:00",
+  "updated_at": "2026-09-17T13:47:02.291575+00:00"
+}

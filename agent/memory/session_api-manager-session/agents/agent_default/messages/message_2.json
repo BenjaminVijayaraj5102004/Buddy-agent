@@ -1,0 +1,23 @@
+{
+  "message": {
+    "role": "user",
+    "content": [
+      {
+        "toolResult": {
+          "toolUseId": "tooluse_15f8d4b3f26941c3a6ab475b",
+          "status": "error",
+          "content": [
+            {
+              "text": "Error: RuntimeError - cannot schedule new futures after shutdown"
+            }
+          ]
+        }
+      }
+    ],
+    "tracking_id": "11ad8f72-3181-401b-9d5e-ef257055b1d3"
+  },
+  "message_id": 2,
+  "redact_message": null,
+  "created_at": "2026-09-17T09:28:13.831633+00:00",
+  "updated_at": "2026-09-17T09:28:13.831646+00:00"
+}

@@ -1,0 +1,26 @@
+{
+  "message": {
+    "role": "assistant",
+    "content": [
+      {
+        "text": "Here's how you can create a Post API endpoint for adding items with pagination using FastAPI:\n\n```python\nfrom fastapi import FastAPI, Depends, HTTPException\nfrom pydantic import BaseModel\nfrom typing import List\nfrom sqlalchemy import create_engine, Column, Integer, String\nfrom sqlalchemy.ext.declarative import declarative_base\nfrom sqlalchemy.orm import sessionmaker\nfrom fastapi_pagination import Page, Params, paginate\n\napp = FastAPI()\n\n# Database configuration\nSQLALCHEMY_DATABASE_URL = \"sqlite:///items.db\"\n\nengine = create_engine(SQLALCHEMY_DATABASE_URL)\nSessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)\n\nBase = declarative_base()\n\nclass Item(Base):\n    __tablename__ = \"items\"\n    id = Column(Integer, primary_key=True, index=True)\n    name = Column(String, index=True)\n    description = Column(String)\n\nclass ItemCreate(BaseModel):\n    name: str\n    description: str\n\nclass ItemUpdate(BaseModel):\n    name: str\n    description: str\n\nBase.metadata.create_all(bind=engine)\n\n@app.get(\"/items/\", response_model=Page[Item])\nasync def read_items(params: Params = Depends()):\n    session = SessionLocal()\n    items = session.query(Item).offset(params.offset).limit(params.limit)\n    return paginate(items)\n\n@app.post(\"/items/\")\nasync def create_item(item: ItemCreate):\n    session = SessionLocal()\n    new_item = Item(name=item.name, description=item.description)\n    session.add(new_item)\n    session.commit()\n    session.refresh(new_item)\n    return new_item\n\n@app.put(\"/items/{item_id}\")\nasync def update_item(item_id: int, item: ItemUpdate):\n    session = SessionLocal()\n    existing_item = session.get(Item, item_id)\n    if not existing_item:\n        raise HTTPException(status_code=404, detail=\"Item not found\")\n    existing_item.name = item.name\n    existing_item.description = item.description\n    session.commit()\n    return existing_item\n\n@app.delete(\"/items/{item_id}\")\nasync def delete_item(item_id: int):\n    session = SessionLocal()\n    item = session.get(Item, item_id)\n    if not item:\n        raise HTTPException(status_code=404, detail=\"Item not found\")\n    session.delete(item)\n    session.commit()\n    return {\"message\": \"Item deleted\"}\n```\n\nThis code sets up a FastAPI application with a database using SQLAlchemy. The database is a SQLite database called `items.db`. The application has endpoints for creating, reading, updating, and deleting items. The `read_items` endpoint uses FastAPI's built-in pagination functionality to return a paginated list of items. The `create_item`, `update_item`, and `delete_item` endpoints handle the creation, update, and deletion of items, respectively."
+      }
+    ],
+    "metadata": {
+      "usage": {
+        "inputTokens": 4094,
+        "outputTokens": 573,
+        "totalTokens": 4667
+      },
+      "metrics": {
+        "latencyMs": 183687,
+        "timeToFirstByteMs": 20
+      }
+    },
+    "tracking_id": "d908f51d-0d37-411f-8d81-b7f6cd6a4756"
+  },
+  "message_id": 50,
+  "redact_message": null,
+  "created_at": "2026-09-17T13:50:47.113002+00:00",
+  "updated_at": "2026-09-17T13:50:47.113005+00:00"
+}

@@ -1,0 +1,32 @@
+{
+  "message": {
+    "role": "assistant",
+    "content": [
+      {
+        "toolUse": {
+          "toolUseId": "tooluse_27d513957c9d41719f01a092",
+          "name": "REST_Agent",
+          "input": {
+            "task_description": "Create a POST endpoint for item posting with fields id, description, name, rate, and created_at as time"
+          }
+        }
+      }
+    ],
+    "metadata": {
+      "usage": {
+        "inputTokens": 1991,
+        "outputTokens": 39,
+        "totalTokens": 2030
+      },
+      "metrics": {
+        "latencyMs": 32675,
+        "timeToFirstByteMs": 17
+      }
+    },
+    "tracking_id": "a4abde98-374b-4aa8-9978-72d83f5a2428"
+  },
+  "message_id": 12,
+  "redact_message": null,
+  "created_at": "2026-09-17T10:06:44.435944+00:00",
+  "updated_at": "2026-09-17T10:06:44.435948+00:00"
+}

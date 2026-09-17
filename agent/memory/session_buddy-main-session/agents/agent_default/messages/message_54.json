@@ -1,0 +1,15 @@
+{
+  "message": {
+    "role": "user",
+    "content": [
+      {
+        "text": "use issues tool to add a issue in my github repository"
+      }
+    ],
+    "tracking_id": "65568f2d-7fb5-42db-a9af-17dc9e1a81ba"
+  },
+  "message_id": 54,
+  "redact_message": null,
+  "created_at": "2026-09-17T13:57:17.707784+00:00",
+  "updated_at": "2026-09-17T13:57:17.707789+00:00"
+}

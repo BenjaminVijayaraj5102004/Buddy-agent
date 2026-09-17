@@ -1,0 +1,26 @@
+{
+  "message": {
+    "role": "assistant",
+    "content": [
+      {
+        "text": "Based on the provided information, I will guide you through the process of using the `issues tool` to add an issue in your GitHub repository.\n\n**Step 1: Open your GitHub repository**\nOpen your repository on GitHub, where you want to add the issue.\n\n**Step 2: Click on \"Issues\" tab**\nClick on the \"Issues\" tab on the top navigation menu.\n\n**Step 3: Click on \"New issue\" button**\nClick on the \"New issue\" button.\n\n**Step 4: Fill in the issue template**\nFill in the issue template with the following information:\n\n* **Title**: A brief title summarizing the issue.\n* **Description**: A detailed description of the issue, including:\n\t+ The exact bug or problem encountered.\n\t+ Steps to reproduce the issue.\n\t+ Expected behavior.\n\t+ Any relevant screenshots or code snippets.\n* **Labels**: Assign relevant labels to the issue, such as \"bug,\" \"feature request,\" or \"question.\"\n* **Assignees**: Assign the issue to specific team members or contributors.\n* **Milestone**: Associate the issue with a specific milestone or version.\n\n**Step 5: Add a professional description**\nIn the description, add a professional tone by:\n\n* Using clear and concise language.\n* Breaking down complex issues into smaller, manageable parts.\n* Providing detailed steps to reproduce the issue.\n* Specifying any relevant dependencies or prerequisites.\n* Including any relevant code snippets or examples.\n\n**Step 6: Add relevant screenshots or code snippets**\nIf applicable, add relevant screenshots or code snippets to help illustrate the issue.\n\n**Step 7: Click on \"Submit new issue\" button**\nClick on the \"Submit new issue\" button to create the issue.\n\nBy following these steps, you will have successfully added a professional-looking issue to your GitHub repository, complete with a detailed description and relevant labels. This will help ensure that your team and contributors can quickly understand and address the issue."
+      }
+    ],
+    "metadata": {
+      "usage": {
+        "inputTokens": 2050,
+        "outputTokens": 397,
+        "totalTokens": 2447
+      },
+      "metrics": {
+        "latencyMs": 87482,
+        "timeToFirstByteMs": 22
+      }
+    },
+    "tracking_id": "13a62591-a5aa-4ebe-b47d-47d8f0a99712"
+  },
+  "message_id": 8,
+  "redact_message": null,
+  "created_at": "2026-09-17T14:00:41.292858+00:00",
+  "updated_at": "2026-09-17T14:00:41.292861+00:00"
+}

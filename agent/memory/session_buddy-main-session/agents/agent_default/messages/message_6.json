@@ -1,0 +1,23 @@
+{
+  "message": {
+    "role": "user",
+    "content": [
+      {
+        "toolResult": {
+          "toolUseId": "tooluse_50eba4fcebe2478badf5d03c",
+          "status": "error",
+          "content": [
+            {
+              "text": "Error: Validation failed for input parameters: 1 validation error for Search_memoryTool\nstores\n  Input should be a valid list [type=list_type, input_value='buddy_longterm_memory', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/list_type"
+            }
+          ]
+        }
+      }
+    ],
+    "tracking_id": "8629632a-0c94-4760-9764-9f929a691ed4"
+  },
+  "message_id": 6,
+  "redact_message": null,
+  "created_at": "2026-09-17T09:53:06.259977+00:00",
+  "updated_at": "2026-09-17T09:53:06.259987+00:00"
+}

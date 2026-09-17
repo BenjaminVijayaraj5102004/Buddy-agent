@@ -1,0 +1,15 @@
+{
+  "message": {
+    "role": "user",
+    "content": [
+      {
+        "text": "Create a health check endpoint with the following details: endpoint: /health, HTTP method: GET, request schema: {}, response schema: {\"status\": \"up\"}"
+      }
+    ],
+    "tracking_id": "d7bcf60d-0591-4ee8-930c-82d54843d4fd"
+  },
+  "message_id": 18,
+  "redact_message": null,
+  "created_at": "2026-09-17T09:50:01.945171+00:00",
+  "updated_at": "2026-09-17T09:50:01.945176+00:00"
+}

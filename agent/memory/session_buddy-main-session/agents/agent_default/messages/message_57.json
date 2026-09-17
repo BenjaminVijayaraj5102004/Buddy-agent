@@ -1,0 +1,26 @@
+{
+  "message": {
+    "role": "assistant",
+    "content": [
+      {
+        "text": "**SAM Template**\n\nHere is a SAM template that you can use to deploy your API:\n```yaml\nAWSTemplateFormatVersion: '2010-09-09'\nTransform: AWS::Serverless-2016-10-31\n\nResources:\n  API:\n    Type: AWS::Serverless::Api\n    Properties:\n      StageName: prod\n      Cors:\n        AllowHeaders:\n          - Content-Type\n          - X-Amz-Date\n          - Authorization\n        AllowMethods:\n          - GET\n          - POST\n          - PUT\n          - DELETE\n        AllowOrigin: '*'\n      DefinitionBody:\n        swagger: '2.0'\n        info:\n          title: My API\n          description: My API\n          version: 1.0.0\n        paths:\n          /items:\n            get:\n              summary: Get items\n              description: Get a list of items\n              responses:\n                200:\n                  description: List of items\n                  schema:\n                    type: array\n                    items:\n                      $ref: '#/definitions/Item'\n            post:\n              summary: Create item\n              description: Create a new item\n              consumes:\n                - application/json\n              parameters:\n                - in: body\n                  name: item\n                  schema:\n                    $ref: '#/definitions/Item'\n              responses:\n                201:\n                  description: Item created\n                  schema:\n                    $ref: '#/definitions/Item'\n          /items/{id}:\n            get:\n              summary: Get item\n              description: Get a specific item\n              parameters:\n                - in: path\n                  name: id\n                  required: true\n                  type: string\n              responses:\n                200:\n                  description: Item\n                  schema:\n                    $ref: '#/definitions/Item'\n            put:\n              summary: Update item\n              description: Update a specific item\n              parameters:\n                - in: path\n                  name: id\n                  required: true\n                  type: string\n              consumes:\n                - application/json\n              parameters:\n                - in: body\n                  name: item\n                  schema:\n                    $ref: '#/definitions/Item'\n              responses:\n                200:\n                  description: Item updated\n                  schema:\n                    $ref: '#/definitions/Item'\n            delete:\n              summary: Delete item\n              description: Delete a specific item\n              parameters:\n                - in: path\n                  name: id\n                  required: true\n                  type: string\n              responses:\n                204:\n                  description: Item deleted\n        definitions:\n          Item:\n            type: object\n            properties:\n              id:\n                type: string\n              name:\n                type: string\n              description:\n                type: string\n\n  ItemsTable:\n    Type: AWS::DynamoDB::Table\n    Properties:\n      TableName: items\n      AttributeDefinitions:\n        -\n          AttributeName: id\n          AttributeType: S\n        -\n          AttributeName: name\n          AttributeType: S\n        -\n          AttributeName: description\n          AttributeType: S\n      KeySchema:\n        -\n          AttributeName: id\n          KeyType: HASH\n        -\n          AttributeName: name\n          KeyType: RANGE\n      ProvisionedThroughput:\n        ReadCapacityUnits: 1\n        WriteCapacityUnits: 1\n\nOutputs:\n  API:\n    Value: !Sub \"https://${AWS::Region}.execute-api.${AWS::Region}.amazonaws.com/prod/items\"\n    Description: API endpoint\n```\nThis template defines a Serverless API with a single resource, `API`, which is a RESTful API that exposes a single endpoint, `GET /items`. The API uses a DynamoDB table, `ItemsTable`, to store items.\n\nNote that this is just a basic template, and you may need to modify it to fit your specific use case.\n\n**SAM Init**\n\nTo initialize a new SAM project, you can run the following command:\n```bash\nsam init\n```\nThis will create a new directory with the basic structure for a SAM project. You can then modify the template to fit your specific needs.\n\nNote that this is just a basic example, and you may need to modify it to fit your specific use case."
+      }
+    ],
+    "metadata": {
+      "usage": {
+        "inputTokens": 2050,
+        "outputTokens": 875,
+        "totalTokens": 2925
+      },
+      "metrics": {
+        "latencyMs": 171057,
+        "timeToFirstByteMs": 17
+      }
+    },
+    "tracking_id": "3989f11b-b715-43f0-8161-73c48d89b38a"
+  },
+  "message_id": 57,
+  "redact_message": null,
+  "created_at": "2026-09-17T14:03:32.652144+00:00",
+  "updated_at": "2026-09-17T14:03:32.652148+00:00"
+}

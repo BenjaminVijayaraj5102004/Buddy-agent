@@ -1,0 +1,15 @@
+{
+  "message": {
+    "role": "user",
+    "content": [
+      {
+        "text": "Write a postendpoint for new user for signup"
+      }
+    ],
+    "tracking_id": "f0b97920-edb9-4712-984d-df425cf4a649"
+  },
+  "message_id": 3,
+  "redact_message": null,
+  "created_at": "2026-09-17T09:22:17.725743+00:00",
+  "updated_at": "2026-09-17T09:22:17.725747+00:00"
+}

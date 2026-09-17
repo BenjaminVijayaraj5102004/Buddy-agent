@@ -1,0 +1,23 @@
+{
+  "message": {
+    "role": "user",
+    "content": [
+      {
+        "toolResult": {
+          "toolUseId": "tooluse_c8d9005a1d2042c2a56eadbf",
+          "status": "success",
+          "content": [
+            {
+              "text": "Based on the provided API documentation, you can use the `add_issue` tool to add a new issue in your GitHub repo. However, the `add_issue` tool is not explicitly mentioned in the documentation. Instead, you can use the `issue` tool, which has an `add` method.\n\nHere's an example of how you can use the `issue` tool with the `add` method to add a new issue in your GitHub repo:\n```\ngh issue add <repo-owner>/<repo-name> --title=\"<issue-title>\" --body=\"<issue-body>\"\n```\nReplace `<repo-owner>/<repo-name>` with your actual GitHub repository owner and name, `<issue-title>` with the title of the new issue, and `<issue-body>` with the body of the new issue.\n\nYou can also use the `search_issues` function to add a new issue. Here's an example:\n```\ngh issue search --repo=<repo-owner>/<repo-name> --query=\"<issue-title> <issue-body>\"\n```\nThis will search for issues in your GitHub repository that match the specified title and body, and if no matching issues are found, it will create a new issue.\n\nNote that you need to have the `issue` and `search_issues` tools installed and configured on your system to use these commands. If you don't have these tools installed, you can install them using the `gh` command-line tool.\n```\ngh issue install\n```\nAlso, make sure you have the necessary permissions to add issues to your GitHub repository.\n"
+            }
+          ]
+        }
+      }
+    ],
+    "tracking_id": "3a1b7734-91e7-458e-90ee-313185e9a74f"
+  },
+  "message_id": 45,
+  "redact_message": null,
+  "created_at": "2026-09-17T13:43:35.848773+00:00",
+  "updated_at": "2026-09-17T13:43:35.848777+00:00"
+}

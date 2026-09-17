@@ -1,0 +1,15 @@
+{
+  "message": {
+    "role": "user",
+    "content": [
+      {
+        "text": "Add a github issue in my repo"
+      }
+    ],
+    "tracking_id": "9ce31cb7-2720-4036-b50c-94bb5800549a"
+  },
+  "message_id": 8,
+  "redact_message": null,
+  "created_at": "2026-09-17T13:34:54.764897+00:00",
+  "updated_at": "2026-09-17T13:34:54.764900+00:00"
+}

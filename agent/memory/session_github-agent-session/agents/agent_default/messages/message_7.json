@@ -1,0 +1,15 @@
+{
+  "message": {
+    "role": "user",
+    "content": [
+      {
+        "text": "use issues tool to add a issue in my github repository\n[Human Operator Guidance]: The issue template need to be proffesional by adding the exact bug and how we can resolve it so other user can resolve those issues"
+      }
+    ],
+    "tracking_id": "c694b38e-009d-48a4-9912-937eb110c360"
+  },
+  "message_id": 7,
+  "redact_message": null,
+  "created_at": "2026-09-17T13:59:13.519149+00:00",
+  "updated_at": "2026-09-17T13:59:13.519153+00:00"
+}

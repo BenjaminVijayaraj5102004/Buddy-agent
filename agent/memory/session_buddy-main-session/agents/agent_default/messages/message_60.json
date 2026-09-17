@@ -1,0 +1,23 @@
+{
+  "message": {
+    "role": "user",
+    "content": [
+      {
+        "toolResult": {
+          "toolUseId": "tooluse_43494326da6c4df594817bdb",
+          "status": "success",
+          "content": [
+            {
+              "text": "To create a health check endpoint, we will define a route and handle the incoming request.\n\nHere is the endpoint:\n\n```\nfrom fastapi import FastAPI\n\napp = FastAPI()\n\n@app.get(\"/health\")\ndef health():\n    return {\"status\": \"up\"}\n```\n\nThis endpoint responds with a 200 status code and the JSON `{\"status\": \"up\"}` when accessed at `/health`.\n\nEndpoint: `/health`\nHTTP Method: `GET`\nRequest Schema: `{}` (empty JSON)\nResponse Schema: `{\"status\": \"up\"}`\n"
+            }
+          ]
+        }
+      }
+    ],
+    "tracking_id": "dde80377-5b61-4ba4-bb97-5552198f3ec7"
+  },
+  "message_id": 60,
+  "redact_message": null,
+  "created_at": "2026-09-17T14:07:46.188309+00:00",
+  "updated_at": "2026-09-17T14:07:46.188312+00:00"
+}

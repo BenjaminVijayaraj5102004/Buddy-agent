@@ -1,0 +1,26 @@
+{
+  "message": {
+    "role": "assistant",
+    "content": [
+      {
+        "text": "To answer the prompt, we will use the `add_memory` function to add the endpoint details to the long-term memory.\n\nHere is the function call with its proper arguments:\n\n```\n{\"name\": \"add_memory\", \"parameters\": {\"entries\": [\"Create a health check endpoint with the following details: endpoint: /health, HTTP method: GET, request schema: {}, response schema: \\\"{\\\"status\\\": \\\"up\\\"}\\\"\"], \"stores\": [\"buddy_longterm_memory\"]}}\n```"
+      }
+    ],
+    "metadata": {
+      "usage": {
+        "inputTokens": 3889,
+        "outputTokens": 100,
+        "totalTokens": 3989
+      },
+      "metrics": {
+        "latencyMs": 71166,
+        "timeToFirstByteMs": 17
+      }
+    },
+    "tracking_id": "7286ea75-d949-4c43-8511-d571e3c754f9"
+  },
+  "message_id": 25,
+  "redact_message": null,
+  "created_at": "2026-09-17T14:07:18.538107+00:00",
+  "updated_at": "2026-09-17T14:07:18.538112+00:00"
+}

@@ -1,0 +1,23 @@
+{
+  "message": {
+    "role": "user",
+    "content": [
+      {
+        "toolResult": {
+          "toolUseId": "tooluse_854a645bafef4920a8f15e44",
+          "status": "error",
+          "content": [
+            {
+              "text": "Error: Validation failed for input parameters: 2 validation errors for Add_memoryTool\nentries\n  Input should be a valid list [type=list_type, input_value='[\"Benjamin\\'s name\"]', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/list_type\nstores\n  Input should be a valid list [type=list_type, input_value='[\"buddy_longterm_memory\"]', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/list_type"
+            }
+          ]
+        }
+      }
+    ],
+    "tracking_id": "7b6d56fd-a815-4719-8369-9ddbf611a9fe"
+  },
+  "message_id": 10,
+  "redact_message": null,
+  "created_at": "2026-09-17T09:53:33.544676+00:00",
+  "updated_at": "2026-09-17T09:53:33.544685+00:00"
+}

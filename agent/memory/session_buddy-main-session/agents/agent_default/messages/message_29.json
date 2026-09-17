@@ -1,0 +1,32 @@
+{
+  "message": {
+    "role": "assistant",
+    "content": [
+      {
+        "toolUse": {
+          "toolUseId": "tooluse_dec5b4ee9e9c491f950efdb9",
+          "name": "sam_cli_agent",
+          "input": {
+            "task_description": "Add deployment template in my project using SAM init"
+          }
+        }
+      }
+    ],
+    "metadata": {
+      "usage": {
+        "inputTokens": 3425,
+        "outputTokens": 27,
+        "totalTokens": 3452
+      },
+      "metrics": {
+        "latencyMs": 53888,
+        "timeToFirstByteMs": 17
+      }
+    },
+    "tracking_id": "f4f77001-500e-4424-b9c2-37914d3bb081"
+  },
+  "message_id": 29,
+  "redact_message": null,
+  "created_at": "2026-09-17T13:09:00.583272+00:00",
+  "updated_at": "2026-09-17T13:09:00.583277+00:00"
+}

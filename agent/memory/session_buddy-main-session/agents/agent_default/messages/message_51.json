@@ -1,0 +1,15 @@
+{
+  "message": {
+    "role": "user",
+    "content": [
+      {
+        "text": "create a sam init and a template for this"
+      }
+    ],
+    "tracking_id": "2e25773a-7eb6-4085-960c-1cbe165bc03b"
+  },
+  "message_id": 51,
+  "redact_message": null,
+  "created_at": "2026-09-17T13:52:20.144269+00:00",
+  "updated_at": "2026-09-17T13:52:20.144273+00:00"
+}

@@ -1,0 +1,32 @@
+{
+  "message": {
+    "role": "assistant",
+    "content": [
+      {
+        "toolUse": {
+          "toolUseId": "tooluse_e74a4ef5501f40a9b745335e",
+          "name": "REST_Agent",
+          "input": {
+            "task_description": "POST /users"
+          }
+        }
+      }
+    ],
+    "metadata": {
+      "usage": {
+        "inputTokens": 529,
+        "outputTokens": 21,
+        "totalTokens": 550
+      },
+      "metrics": {
+        "latencyMs": 10449,
+        "timeToFirstByteMs": 19
+      }
+    },
+    "tracking_id": "dde8e6d5-3ad8-4826-8db3-a428e3951fed"
+  },
+  "message_id": 1,
+  "redact_message": null,
+  "created_at": "2026-09-17T09:23:37.197496+00:00",
+  "updated_at": "2026-09-17T09:23:37.197507+00:00"
+}

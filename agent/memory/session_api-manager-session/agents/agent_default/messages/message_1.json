@@ -1,0 +1,32 @@
+{
+  "message": {
+    "role": "assistant",
+    "content": [
+      {
+        "toolUse": {
+          "toolUseId": "tooluse_15f8d4b3f26941c3a6ab475b",
+          "name": "REST_Agent",
+          "input": {
+            "task_description": "Create a POST endpoint for new user signup with the following details: endpoint: /users, HTTP method: POST, request schema: {\"username\": str, \"email\": str, \"password\": str}, response schema: {\"username\": str, \"email\": str, \"message\": str}"
+          }
+        }
+      }
+    ],
+    "metadata": {
+      "usage": {
+        "inputTokens": 670,
+        "outputTokens": 79,
+        "totalTokens": 749
+      },
+      "metrics": {
+        "latencyMs": 22450,
+        "timeToFirstByteMs": 17
+      }
+    },
+    "tracking_id": "bead731a-14e0-4e72-a67d-13e9e0506daf"
+  },
+  "message_id": 1,
+  "redact_message": null,
+  "created_at": "2026-09-17T09:28:13.827443+00:00",
+  "updated_at": "2026-09-17T09:28:13.827459+00:00"
+}

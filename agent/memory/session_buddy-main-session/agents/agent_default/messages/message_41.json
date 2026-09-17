@@ -1,0 +1,32 @@
+{
+  "message": {
+    "role": "assistant",
+    "content": [
+      {
+        "toolUse": {
+          "toolUseId": "tooluse_6fdfd7018a4545ec8c7dddc3",
+          "name": "sam_cli_agent",
+          "input": {
+            "task_description": "Add a github issue in my repo"
+          }
+        }
+      }
+    ],
+    "metadata": {
+      "usage": {
+        "inputTokens": 3938,
+        "outputTokens": 25,
+        "totalTokens": 3963
+      },
+      "metrics": {
+        "latencyMs": 48057,
+        "timeToFirstByteMs": 17
+      }
+    },
+    "tracking_id": "2f17f71a-602b-4077-a1d5-59a655ad914e"
+  },
+  "message_id": 41,
+  "redact_message": null,
+  "created_at": "2026-09-17T13:34:54.760073+00:00",
+  "updated_at": "2026-09-17T13:34:54.760078+00:00"
+}

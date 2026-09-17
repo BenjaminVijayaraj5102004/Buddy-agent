@@ -1,0 +1,15 @@
+{
+  "message": {
+    "role": "user",
+    "content": [
+      {
+        "text": "List out the tools you are using to write code"
+      }
+    ],
+    "tracking_id": "7b4a3079-a8e2-4ee2-9cd5-2fc8b68b5f18"
+  },
+  "message_id": 16,
+  "redact_message": null,
+  "created_at": "2026-09-17T09:44:14.328231+00:00",
+  "updated_at": "2026-09-17T09:44:14.328235+00:00"
+}

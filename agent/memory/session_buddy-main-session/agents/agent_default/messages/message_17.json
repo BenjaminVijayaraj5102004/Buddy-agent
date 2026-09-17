@@ -1,0 +1,34 @@
+{
+  "message": {
+    "role": "assistant",
+    "content": [
+      {
+        "toolUse": {
+          "toolUseId": "tooluse_06dc9f5483f945419460324d",
+          "name": "search_memory",
+          "input": {
+            "max_search_results": 1,
+            "query": "Benjamin",
+            "stores": "['buddy_longterm_memory']"
+          }
+        }
+      }
+    ],
+    "metadata": {
+      "usage": {
+        "inputTokens": 1401,
+        "outputTokens": 38,
+        "totalTokens": 1439
+      },
+      "metrics": {
+        "latencyMs": 40949,
+        "timeToFirstByteMs": 24
+      }
+    },
+    "tracking_id": "8b9273f9-7c44-4977-baee-3d9556b7fdc4"
+  },
+  "message_id": 17,
+  "redact_message": null,
+  "created_at": "2026-09-17T10:01:13.997709+00:00",
+  "updated_at": "2026-09-17T10:01:13.997714+00:00"
+}

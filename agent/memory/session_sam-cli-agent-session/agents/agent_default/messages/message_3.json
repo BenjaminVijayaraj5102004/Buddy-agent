@@ -1,0 +1,26 @@
+{
+  "message": {
+    "role": "assistant",
+    "content": [
+      {
+        "text": "Here is the code that matches the specifications:\n```\nimport boto3\n\ndef deploy_static_website(bucket_name, region):\n    s3 = boto3.client('s3', region_name=region)\n    s3.upload_file('index.html', bucket_name, 'index.html')\n    s3.upload_file('style.css', bucket_name, 'style.css')\n    website_config = {\n        'IndexDocument': 'index.html',\n        'ErrorDocument': 'index.html'\n    }\n    s3.put_bucket_website_configuration(Bucket=bucket_name, WebsiteConfiguration=website_config)\n\nbucket_name = 'my-static-website'\nregion = 'us-west-2'\ndeploy_static_website(bucket_name, region)\n```\nNote that you'll need to replace `my-static-website` with your actual bucket name, and `us-west-2` with your actual region. Also, make sure you have the necessary credentials set up to use the AWS SDK."
+      }
+    ],
+    "metadata": {
+      "usage": {
+        "inputTokens": 2050,
+        "outputTokens": 192,
+        "totalTokens": 2242
+      },
+      "metrics": {
+        "latencyMs": 32982,
+        "timeToFirstByteMs": 18
+      }
+    },
+    "tracking_id": "22405a7b-ab09-4d49-87fd-77dd0f74672e"
+  },
+  "message_id": 3,
+  "redact_message": null,
+  "created_at": "2026-09-17T13:07:35.234639+00:00",
+  "updated_at": "2026-09-17T13:07:35.234644+00:00"
+}

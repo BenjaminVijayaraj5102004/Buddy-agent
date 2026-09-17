@@ -1,0 +1,26 @@
+{
+  "message": {
+    "role": "assistant",
+    "content": [
+      {
+        "text": "```python\nimport github\ng = github.Github()\n\n# Create a new GitHub issue\nissue = g.repository(\"username\", \"repository\").create_issue(\n    \"Add pagination to items endpoint\",\n    \"We need to add pagination to our items API endpoint to improve performance and user experience. This will involve adding new routes for retrieving paginated items and updating the existing endpoint to handle pagination.\"\n)\n\nprint(\"Issue created: \" + issue.title)\n```"
+      }
+    ],
+    "metadata": {
+      "usage": {
+        "inputTokens": 2050,
+        "outputTokens": 92,
+        "totalTokens": 2142
+      },
+      "metrics": {
+        "latencyMs": 40543,
+        "timeToFirstByteMs": 23
+      }
+    },
+    "tracking_id": "28bbeb02-5ead-4a98-9339-ecf326d1b0af"
+  },
+  "message_id": 3,
+  "redact_message": null,
+  "created_at": "2026-09-17T13:47:43.134704+00:00",
+  "updated_at": "2026-09-17T13:47:43.134707+00:00"
+}
