@@ -26,6 +26,13 @@ DEFAULT_AUTO_APPROVED_TOOLS: Set[str] = {
     "sam build",
     "sam local invoke",
     "sam_deploy",
+    # Text Editor operations (safe for autonomous execution)
+    "create_text_file",
+    "get_text_file_contents",
+    "insert_text_file_contents",
+    "append_text_file_contents",
+    "patch_text_file_contents",
+    # Note: 'delete_text_file_contents' is intentionally excluded to require strict HITL confirmation
 }
 
 
