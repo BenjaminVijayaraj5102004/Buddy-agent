@@ -1,0 +1,244 @@
+"""
+Interactive Dialogs & Tables for Buddy Agent UI
+Provides Help, Models, Sessions Archive & Switcher, and MCP Tools Catalog modals and tables.
+"""
+
+import sys
+import os
+import uuid
+from typing import Optional
+from rich.console import Console
+from rich.table import Table
+from rich.panel import Panel
+from rich.prompt import Prompt
+from rich.text import Text
+
+BUDDY_AGENT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
+if BUDDY_AGENT_ROOT not in sys.path:
+    sys.path.insert(0, BUDDY_AGENT_ROOT)
+
+from .config import (
+    COLOR_PEACH, COLOR_AMBER, COLOR_MINT, COLOR_BLUE,
+    COLOR_PURPLE, COLOR_ROSE, COLOR_TEXT, COLOR_MUTED,
+    MODELS_CATALOG
+)
+from .state import SessionState
+from .tools_catalog import get_non_hardcoded_mcp_tools
+
+
+def show_help_table(console: Optional[Console] = None) -> None:
+    """Renders the comprehensive help & keybindings cheat-sheet table."""
+    if console is None:
+        console = Console()
+
+    table = Table(
+        title="💡 [bold #00ff55]BUDDY AGENT // TACTICAL COMMAND MANUAL[/bold #00ff55]",
+        border_style=f"dim {COLOR_MUTED}",
+        header_style=f"bold {COLOR_PEACH}",
+        expand=True,
+        padding=(0, 1),
+    )
+
+    table.add_column("Command / Hotkey", style=f"bold {COLOR_BLUE}", ratio=3)
+    table.add_column("Category", style=f"bold {COLOR_AMBER}", ratio=2)
+    table.add_column("Description", style=f"dim {COLOR_TEXT}", ratio=5)
+
+    commands = [
+        ("/tools", "Governance", "List active MCP tools (GitHub, SAM CLI, Text Editor)"),
+        ("/top", "Telemetry", "Launch interactive btop++ live system & AI radar"),
+        ("/menu", "Interface", "Open Project I.G.I. 3D tactical HUD configuration menu"),
+        ("/model", "AI Satellite", "Switch LLM satellite (Groq Llama-3.3, Bedrock Claude, Ollama)"),
+        ("/session", "Memory", "View, paste, or switch session UUID and context"),
+        ("/demo", "Mission", "Execute automated FastAPI health-check agent demo"),
+        ("/clear", "Display", "Clear screen and redraw tactical HUD banner"),
+        ("/help", "Manual", "Display this tactical command reference"),
+        ("/exit", "System", "Save session and exit tactical shell cleanly"),
+    ]
+
+    for cmd, cat, desc in commands:
+        table.add_row(cmd, cat, desc)
+
+    console.print()
+    console.print(table)
+    console.print()
+
+
+def show_models_dialog(session: SessionState, console: Optional[Console] = None) -> None:
+    """Displays supported satellite AI models and prompts user to switch."""
+    if console is None:
+        console = Console()
+
+    table = Table(
+        title="🧠 [bold #00ff55]SATELLITE AI MODEL MATRIX[/bold #00ff55]",
+        border_style=f"dim {COLOR_MUTED}",
+        header_style=f"bold {COLOR_PEACH}",
+        expand=True
+    )
+    table.add_column("#", style=f"bold {COLOR_AMBER}", width=4)
+    table.add_column("Model Key", style=f"bold {COLOR_BLUE}", width=12)
+    table.add_column("Full Designation", style=f"bold {COLOR_TEXT}", width=32)
+    table.add_column("Speed / Latency", style=f"bold {COLOR_MINT}", width=16)
+    table.add_column("Status", style=f"dim {COLOR_TEXT}", width=12)
+
+    for m in MODELS_CATALOG:
+        is_active = (m["key"] == session.model_key)
+        status_str = f"[{COLOR_MINT}]● ACTIVE[/{COLOR_MINT}]" if is_active else "[dim]STANDBY[/dim]"
+        table.add_row(f"[{m['id']}]", m["key"], m["name"],  status_str)
+
+    console.print()
+    console.print(table)
+    console.print()
+
+    choice = Prompt.ask(
+        f"[{COLOR_PEACH}]Select Model [1-{len(MODELS_CATALOG)}] or Key (e.g. groq, bedrock, ollama) or Enter to keep[/{COLOR_PEACH}]",
+        default=""
+    ).strip()
+
+    if choice:
+        for m in MODELS_CATALOG:
+            if choice == m["id"] or choice.lower() == m["key"] or choice.lower() in m["name"].lower():
+                session.model_key = m["key"]
+                session.reset_agent()
+                console.print(f"[{COLOR_MINT}]✨ Model switched to: {m['name']}[/{COLOR_MINT}]\n")
+                return
+        console.print(f"[{COLOR_ROSE}]⚠️ Keeping current model.[/{COLOR_ROSE}]\n")
+
+
+def clean_session_id(s: str) -> str:
+    """Cleans 0x prefix or extra whitespace from user-entered session IDs."""
+    s = s.strip()
+    if s.lower().startswith("0x") and len(s) > 2:
+        s = s[2:]
+    return s.strip()
+
+
+def show_session_dialog(session: SessionState, console: Optional[Console] = None) -> None:
+    """Shows session details and lets the user switch, resume, or paste a session ID."""
+    if console is None:
+        console = Console()
+
+    stored_sessions: list[str] = []
+    try:
+        from agent.memory import list_stored_sessions
+        stored_sessions = list_stored_sessions()
+    except Exception:
+        pass
+
+    box_content = Text()
+    box_content.append("🔑 ACTIVE SESSION UUID:\n", style="bold #facc15")
+    box_content.append(f"{session.session_id}\n\n", style="bold #00ff55")
+    box_content.append(f"📊 Telemetry: {session.messages_count} messages | 📥 In: {session.total_input_tokens:,} tokens | 📤 Out: {session.total_output_tokens:,} tokens\n", style="dim #94a3b8")
+    box_content.append("💡 Copy the UUID above to resume this exact state anytime.", style="italic #38bdf8")
+
+    console.print()
+    console.print(Panel(box_content, title="[bold #00ff55] 💾 BUDDY AGENT // SESSION CONTEXT [/]", border_style="bold #00ff55", padding=(1, 2)))
+    console.print()
+
+    if stored_sessions:
+        table = Table(
+            title="📁 [bold #00ff55]STORED SESSIONS ARCHIVE (./agent/memory/sessions_data)[/bold #00ff55]",
+            border_style=f"dim {COLOR_MUTED}",
+            header_style=f"bold {COLOR_PEACH}",
+            expand=True,
+            padding=(0, 1),
+        )
+        table.add_column("#", style=f"bold {COLOR_AMBER}", width=4)
+        table.add_column("Session UUID", style=f"bold {COLOR_TEXT}", ratio=6)
+        table.add_column("Status", style=f"bold {COLOR_MINT}", width=12)
+
+        for idx, sid in enumerate(stored_sessions[:8], 1):
+            is_active = (sid.lower() == session.session_id.lower())
+            status_str = f"[{COLOR_MINT}]● ACTIVE[/{COLOR_MINT}]" if is_active else "[dim]SAVED[/dim]"
+            table.add_row(f"[{idx}]", sid, status_str)
+
+        console.print(table)
+        console.print()
+
+    console.print(f"[{COLOR_PEACH}]Enter [bold]n[/bold] for new session, [bold]#[/bold] from list, paste [bold]Session UUID[/bold], or press [bold]Enter[/bold] to keep current:[/{COLOR_PEACH}]")
+    raw_input = Prompt.ask("").strip()
+
+    if not raw_input:
+        console.print(f"[{COLOR_MUTED}]Keeping current session: {session.session_id}[/{COLOR_MUTED}]\n")
+        return
+
+    # Check for new session
+    if raw_input.lower() in ("n", "new"):
+        new_id = str(uuid.uuid4())
+        session.session_id = new_id
+        session.messages_count = 0
+        session.total_input_tokens = 0
+        session.total_output_tokens = 0
+        session.history.clear()
+        session.reset_agent()
+        try:
+            from agent.memory import set_current_session_id
+            set_current_session_id(new_id)
+        except Exception:
+            pass
+        console.print(f"[{COLOR_MINT}]✨ Started new session: {session.session_id}[/{COLOR_MINT}]\n")
+        return
+
+    # Check for selection by number
+    if raw_input.isdigit() and stored_sessions:
+        idx = int(raw_input) - 1
+        if 0 <= idx < len(stored_sessions):
+            target_id = stored_sessions[idx]
+            session.session_id = target_id
+            session.reset_agent()
+            try:
+                from agent.memory import set_current_session_id
+                set_current_session_id(target_id)
+            except Exception:
+                pass
+            console.print(f"[{COLOR_MINT}]🔄 Switched to session #{idx+1}: {session.session_id}[/{COLOR_MINT}]\n")
+            return
+
+    # Check for 'r' or 'resume'
+    if raw_input.lower() in ("r", "resume"):
+        raw_input = Prompt.ask(f"[{COLOR_PEACH}]Paste Session UUID[/{COLOR_PEACH}]").strip()
+        if not raw_input:
+            return
+
+    # Direct paste of session UUID
+    target_id = clean_session_id(raw_input)
+    if target_id:
+        session.session_id = target_id
+        session.reset_agent()
+        try:
+            from agent.memory import set_current_session_id
+            set_current_session_id(target_id)
+        except Exception:
+            pass
+        console.print(f"[{COLOR_MINT}]🔄 Resumed session: {session.session_id}[/{COLOR_MINT}]\n")
+
+
+def show_tool_list_table(console: Optional[Console] = None) -> None:
+    """Renders the 3-column MCP tools catalog for GitHub, SAM CLI, and Text Editor."""
+    if console is None:
+        console = Console()
+
+    github_tools, sam_tools, text_tools = get_non_hardcoded_mcp_tools()
+
+    table = Table(
+        title="🛠️ [bold #00ff55]BUDDY AGENT // MCP TOOLS CATALOG[/bold #00ff55]",
+        border_style=f"dim {COLOR_MUTED}",
+        header_style=f"bold {COLOR_PEACH}",
+        expand=True,
+        padding=(0, 1),
+    )
+
+    table.add_column("🐙 GitHub MCP Tools", style=f"bold {COLOR_TEXT}", ratio=4)
+    table.add_column("⚡ SAM CLI MCP Tools", style=f"bold {COLOR_TEXT}", ratio=4)
+    table.add_column("📝 Text Editor MCP Tools", style=f"bold {COLOR_TEXT}", ratio=4)
+
+    max_len = max(len(github_tools), len(sam_tools), len(text_tools))
+
+    for i in range(max_len):
+        col1 = f"• [bold {COLOR_BLUE}]{github_tools[i][0]}[/]\n  [dim]{github_tools[i][1]}[/]" if i < len(github_tools) else ""
+        col2 = f"• [bold {COLOR_AMBER}]{sam_tools[i][0]}[/]\n  [dim]{sam_tools[i][1]}[/]" if i < len(sam_tools) else ""
+        col3 = f"• [bold {COLOR_PURPLE}]{text_tools[i][0]}[/]\n  [dim]{text_tools[i][1]}[/]" if i < len(text_tools) else ""
+        table.add_row(col1, col2, col3)
+
+    console.print()
+    console.print(table)
+    console.print()
