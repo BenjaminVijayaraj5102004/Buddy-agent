@@ -37,8 +37,10 @@ from .animations import BuddyEmpathyComplimentsAnimation
 from .tools_catalog import get_non_hardcoded_mcp_tools
 from .dialogs import (
     show_help_table, show_models_dialog,
-    show_session_dialog, show_tool_list_table
+    show_session_dialog, show_tool_list_table,
+    show_readme_dialog
 )
+from .credits import run_credits_movie_scroll, show_credits_dialog
 from .executor import execute_agent_task
 from .banner import render_banner
 from .collector import SystemCollector, format_bytes
@@ -71,6 +73,9 @@ __all__ = [
     "show_models_dialog",
     "show_session_dialog",
     "show_tool_list_table",
+    "show_readme_dialog",
+    "show_credits_dialog",
+    "run_credits_movie_scroll",
     "execute_agent_task",
     "render_banner",
     "SystemCollector",

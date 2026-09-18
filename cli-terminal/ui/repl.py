@@ -25,8 +25,10 @@ from .config import (
 from .state import SessionState
 from .banner import render_banner
 from .dialogs import (
-    show_help_table, show_models_dialog, show_session_dialog, show_tool_list_table
+    show_help_table, show_models_dialog, show_session_dialog, show_tool_list_table,
+    show_readme_dialog
 )
+from .credits import show_credits_dialog
 from .executor import execute_agent_task
 
 # Prompt Toolkit integration
@@ -57,6 +59,8 @@ def run_interactive_shell(session: SessionState, console: Optional[Console] = No
         "/menu",
         "/model",
         "/session",
+        "/credits",
+        "/readme",
         "/demo",
         "/clear",
         "/exit",
@@ -148,6 +152,17 @@ def run_interactive_shell(session: SessionState, console: Optional[Console] = No
                 console.clear()
                 console.print(render_banner(session))
                 console.print()
+                continue
+            elif cmd in ("/credits", "credits"):
+                show_credits_dialog(console)
+                console.clear()
+                console.print(render_banner(session))
+                continue
+            elif cmd in ("/readme", "readme", "about"):
+                show_readme_dialog(console)
+                console.input()
+                console.clear()
+                console.print(render_banner(session))
                 continue
             elif cmd in ("/demo", "demo"):
                 execute_agent_task(

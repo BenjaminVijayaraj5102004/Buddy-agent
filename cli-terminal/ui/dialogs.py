@@ -20,7 +20,7 @@ if BUDDY_AGENT_ROOT not in sys.path:
 from .config import (
     COLOR_PEACH, COLOR_AMBER, COLOR_MINT, COLOR_BLUE,
     COLOR_PURPLE, COLOR_ROSE, COLOR_TEXT, COLOR_MUTED,
-    MODELS_CATALOG
+    IGI_GREEN_BRIGHT, MODELS_CATALOG
 )
 from .state import SessionState
 from .tools_catalog import get_non_hardcoded_mcp_tools
@@ -241,4 +241,42 @@ def show_tool_list_table(console: Optional[Console] = None) -> None:
 
     console.print()
     console.print(table)
+    console.print()
+
+
+def show_readme_dialog(console: Optional[Console] = None) -> None:
+    """Renders the Project I.G.I. tactical ReadMe and architecture manual."""
+    if console is None:
+        console = Console()
+
+    table = Table.grid(padding=(0, 1), expand=True)
+    table.add_column()
+
+    table.add_row(Text("✦ BUDDY AGENT // SYSTEM MANUAL & ARCHITECTURE ✦\n", style=f"bold {IGI_GREEN_BRIGHT}", justify="center"))
+    table.add_row(Text("─" * 78, style=f"dim {COLOR_MUTED}"))
+    
+    sections = [
+        ("1. EXECUTIVE OVERVIEW", "Buddy Agent is an autonomous, production-grade agentic AI pair programmer built on Python 3.14 and the Strands Agents framework. It combines deep multi-agent delegation with a tactical Project I.G.I. HUD and real-time Btop++ system telemetry."),
+        ("2. MULTI-AGENT TOPOLOGY", "• Master Orchestrator (Buddy Agent): Intent classification, semantic memory routing, and response synthesis.\n• API Manager: End-to-end REST/FastAPI microservice endpoint generation with strict Pydantic schemas.\n• SAM CLI Deploy Agent: CloudFormation infrastructure packaging, deployment, and sync.\n• GitHub Agent: Branching, pull request lifecycles, and code inspection."),
+        ("3. MODEL CONTEXT PROTOCOL (MCP)", "Integrates dedicated MCP clients for GitHub, AWS SAM CLI, and atomic Text Editing with zero hardcoded tools, giving the agent deterministic environment control."),
+        ("4. RESILIENT MEMORY ARCHITECTURE", "Multi-tier state persistence supporting session archiving, UUID hot-swapping, and sliding window context compression without loss of state across agent reloads."),
+        ("5. TACTICAL HUD & TELEMETRY", "• Project I.G.I. 3D extruded menus and CRT green theme matrices.\n• Btop++ live per-core CPU braille curves, RSS memory meters, network I/O, process management, and 360° sonar radar."),
+    ]
+
+    for title, body in sections:
+        table.add_row(Text(f"\n{title}", style=f"bold {COLOR_PEACH}"))
+        table.add_row(Text(body, style=f"dim {COLOR_TEXT}"))
+
+    table.add_row(Text("\n" + "─" * 78, style=f"dim {COLOR_MUTED}"))
+    table.add_row(Text("Press Enter or 'q' to return to tactical menu...", style=f"bold {COLOR_MINT}", justify="center"))
+
+    panel = Panel(
+        table,
+        title="📖 [bold #00ff55]TACTICAL README // OPERATIONS MANUAL[/bold #00ff55]",
+        border_style=f"bold {IGI_GREEN_BRIGHT}",
+        padding=(1, 2)
+    )
+
+    console.print()
+    console.print(panel)
     console.print()

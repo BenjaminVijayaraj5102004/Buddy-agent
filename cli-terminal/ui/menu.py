@@ -29,7 +29,8 @@ from rich.align import Align
 from .theme import get_theme, THEMES
 from .monitor import get_key_non_blocking, flush_input, run_btop_monitor
 from .ascii_art import render_igi_header
-from .dialogs import show_tool_list_table, show_session_dialog, show_models_dialog
+from .dialogs import show_tool_list_table, show_session_dialog, show_models_dialog, show_readme_dialog
+from .credits import run_credits_movie_scroll, show_credits_dialog
 from .config import (
     IGI_GREEN_BRIGHT, IGI_GREEN_MID, IGI_GREEN_DIM,
     IGI_METALLIC, IGI_WHITE, IGI_AMBER
@@ -53,6 +54,8 @@ def render_igi_main_menu(selected_idx: int = 0, theme_name: str = "igi", session
         ("Configuration", "Configure satellite AI models, sessions, HUD themes & radar"),
         ("Telemetry & Radar", "Full-screen live system resources, interactive processes & AI radar"),
         ("Mission Briefing", "View tactical keybindings and operations manual"),
+        ("End Credits & Creator", "Cinematic Dune-style end credits & Benjamin's AI profile"),
+        ("Read Me & Manual", "System topology, MCP specifications & architecture overview"),
         ("Quit", "Abort mission and exit CLI"),
     ]
     
@@ -82,7 +85,7 @@ def render_igi_main_menu(selected_idx: int = 0, theme_name: str = "igi", session
     content.add_row(Text(""))
     content.add_row(Text("─" * 78, style=f"dim {color_mid}"))
     
-    foot = Text("Read Me   •   Credits   •   ▲/▼ Navigate   •   Enter Select   •   q Quit", style=f"bold {color_mid}", justify="center")
+    foot = Text("Read Me [r]   •   Credits [c]   •   ▲/▼ Navigate   •   Enter Select   •   q Quit", style=f"bold {color_mid}", justify="center")
     content.add_row(foot)
     
     return Panel(
@@ -279,7 +282,7 @@ def run_btop_game_interface(session_obj, console_obj: Optional[Console] = None):
                         options_opt_idx = max(0, options_opt_idx - 1)
                 elif key in ('j', 'down', 's_key'):
                     if current_screen == "main_menu":
-                        main_menu_idx = min(7, main_menu_idx + 1)
+                        main_menu_idx = min(9, main_menu_idx + 1)
                     elif current_screen == "options":
                         max_opt = 4 if options_tab == 3 else (3 if options_tab in (1, 4) else (2 if options_tab in (0, 2) else 3))
                         options_opt_idx = min(max_opt, options_opt_idx + 1)
@@ -293,6 +296,20 @@ def run_btop_game_interface(session_obj, console_obj: Optional[Console] = None):
                         options_opt_idx = 0
                     elif current_screen == "main_menu" and key == 'h':
                         current_screen = "help"
+                elif key == 'c' and current_screen == "main_menu":
+                    live.stop()
+                    flush_input()
+                    run_credits_movie_scroll(console_obj)
+                    flush_input()
+                    console_obj.clear()
+                    live.start()
+                elif key == 'r' and current_screen == "main_menu":
+                    live.stop()
+                    flush_input()
+                    show_readme_dialog(console_obj)
+                    flush_input()
+                    console_obj.clear()
+                    live.start()
                 elif key == 'm':
                     current_screen = "main_menu"
                 elif key in ('\r', '\n', ' '):  # Enter or Space
@@ -350,7 +367,21 @@ def run_btop_game_interface(session_obj, console_obj: Optional[Console] = None):
                             live.start()
                         elif main_menu_idx == 6:  # MISSION BRIEFING
                             current_screen = "help"
-                        elif main_menu_idx == 7:  # QUIT
+                        elif main_menu_idx == 7:  # END CREDITS & CREATOR
+                            live.stop()
+                            flush_input()
+                            run_credits_movie_scroll(console_obj)
+                            flush_input()
+                            console_obj.clear()
+                            live.start()
+                        elif main_menu_idx == 8:  # READ ME & MANUAL
+                            live.stop()
+                            flush_input()
+                            show_readme_dialog(console_obj)
+                            flush_input()
+                            console_obj.clear()
+                            live.start()
+                        elif main_menu_idx == 9:  # QUIT
                             break
                     elif current_screen == "options":
                         if options_tab == 0:  # General

@@ -32,6 +32,8 @@ from ui import (
     show_models_dialog,
     show_help_table,
     show_session_dialog,
+    show_readme_dialog,
+    show_credits_dialog,
     execute_agent_task,
     run_interactive_shell,
     run_btop_monitor,
@@ -147,6 +149,18 @@ def menu_command():
     """Launch interactive Project I.G.I. tactical HUD menu and dashboard."""
     session = SessionState()
     run_btop_game_interface(session, console)
+
+
+@app.command("credits")
+def credits_command():
+    """Display cinematic movie end credits & creator architecture overview."""
+    show_credits_dialog(console)
+
+
+@app.command("readme")
+def readme_command():
+    """Display tactical operations manual and system topology overview."""
+    show_readme_dialog(console)
 
 
 @app.callback(invoke_without_command=True)
