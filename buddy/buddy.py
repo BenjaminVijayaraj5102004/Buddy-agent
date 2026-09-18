@@ -1,10 +1,13 @@
+import agent.trace
 from strands import Agent
 from strands.tools import tool
 from agent.model import model
 from agent.memory import memory_manager, get_session_manager
 from agent.services.api_manager import API_MANAGER
 from agent.guardrils import BUDDY_AGENT_PROMPT
-import agent.trace
+from agent.hooks import HumanInTheLoopHook
+from agent.services.local_deploy_agent.sam_cli import sam_cli_agent 
+from agent.services.github_agent import github_agent
 
 
 @tool(
@@ -16,11 +19,27 @@ def call_api_manager(task_description: str) -> str:
     response = API_MANAGER(task_description)
     return str(response)
 
+@tool(
+    name="sam_cli_agent",
+    description="Delegates all AWS SAM-related tasks (SAM init, SAM deploy) to the SAM CLI Agent.",
+)
+def call_sam_cli_agent(task_description: str) -> str:
+    response = sam_cli_agent(task_description)
+    return str(response)
+
+@tool(
+    name="github_agent",
+    description="Delegates all GitHub operations (issues, pull requests, branches, commits, repo metadata) to the GitHub Agent.",
+)
+def call_github_agent(task_description: str) -> str:
+    response = github_agent(task_description)
+    return str(response)
 
 buddy_agent = Agent(
     name="Buddy",
     model=model,
-    tools=[call_api_manager],
+    tools=[call_api_manager, call_sam_cli_agent, call_github_agent],
+    hooks=[HumanInTheLoopHook()],
     memory_manager=memory_manager,
     session_manager=get_session_manager("buddy-main-session"),
     system_prompt=BUDDY_AGENT_PROMPT,
