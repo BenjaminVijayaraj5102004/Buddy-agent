@@ -1,0 +1,26 @@
+{
+  "message": {
+    "role": "assistant",
+    "content": [
+      {
+        "text": "Based on the documentation, it seems that the `search_users` function is the most relevant to the provided query. \n\nHere's an example of how you can use this function:\n\n```\nsearch_users(query=\"username:benjamin\")\n```\n\nThis will search for users with the username \"benjamin\"."
+      }
+    ],
+    "metadata": {
+      "usage": {
+        "inputTokens": 2050,
+        "outputTokens": 62,
+        "totalTokens": 2112
+      },
+      "metrics": {
+        "latencyMs": 40379,
+        "timeToFirstByteMs": 25
+      }
+    },
+    "tracking_id": "d15583ff-5ad5-4c7b-b443-c53231c47b65"
+  },
+  "message_id": 1,
+  "redact_message": null,
+  "created_at": "2026-09-18T11:43:08.555468+00:00",
+  "updated_at": "2026-09-18T11:43:08.555475+00:00"
+}

@@ -35,6 +35,10 @@ class Settings(BaseSettings):
     TEXT_EDITOR_MCP_COMMAND: str = "uvx"
     TEXT_EDITOR_MCP_ARGS: list[str] = ["mcp-text-editor"]
 
+    # Groq Model Configuration
+    GROQ_API_KEY: str 
+    GROQ_MODEL_ID: str = "openai/gpt-oss-120b"
+
     model_config = SettingsConfigDict(
         env_file=".env",
         env_file_encoding="utf-8",

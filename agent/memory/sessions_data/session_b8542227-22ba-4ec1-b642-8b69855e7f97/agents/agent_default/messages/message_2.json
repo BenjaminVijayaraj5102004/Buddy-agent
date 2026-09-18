@@ -1,0 +1,23 @@
+{
+  "message": {
+    "role": "user",
+    "content": [
+      {
+        "toolResult": {
+          "toolUseId": "tooluse_177bc3a3c9eb434cbc03fd1c",
+          "status": "success",
+          "content": [
+            {
+              "text": "Based on the documentation, it seems that the `search_users` function is the most relevant to the provided query. \n\nHere's an example of how you can use this function:\n\n```\nsearch_users(query=\"username:benjamin\")\n```\n\nThis will search for users with the username \"benjamin\".\n"
+            }
+          ]
+        }
+      }
+    ],
+    "tracking_id": "189e2de0-4e28-434b-888a-62b72f606307"
+  },
+  "message_id": 2,
+  "redact_message": null,
+  "created_at": "2026-09-18T11:43:08.561461+00:00",
+  "updated_at": "2026-09-18T11:43:08.561476+00:00"
+}

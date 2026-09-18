@@ -1,0 +1,15 @@
+{
+  "message": {
+    "role": "user",
+    "content": [
+      {
+        "text": "What is my project name?"
+      }
+    ],
+    "tracking_id": "a28d14f8-189e-40c9-90b1-837bf6b3430a"
+  },
+  "message_id": 2,
+  "redact_message": null,
+  "created_at": "2026-09-18T11:35:44.655506+00:00",
+  "updated_at": "2026-09-18T11:35:44.655516+00:00"
+}

@@ -1,0 +1,15 @@
+{
+  "message": {
+    "role": "user",
+    "content": [
+      {
+        "text": "Hi, remember that my project name is SuperApp"
+      }
+    ],
+    "tracking_id": "a78a5ea0-0ecc-4e63-a22b-e04af6e49fca"
+  },
+  "message_id": 0,
+  "redact_message": null,
+  "created_at": "2026-09-18T11:35:14.566367+00:00",
+  "updated_at": "2026-09-18T11:35:14.566373+00:00"
+}

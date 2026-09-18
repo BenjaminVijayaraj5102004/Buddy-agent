@@ -1,0 +1,26 @@
+{
+  "message": {
+    "role": "assistant",
+    "content": [
+      {
+        "text": "Your project name is SuperApp. I've recalled it from our memory. What would you like to do with SuperApp today?"
+      }
+    ],
+    "metadata": {
+      "usage": {
+        "inputTokens": 505,
+        "outputTokens": 27,
+        "totalTokens": 532
+      },
+      "metrics": {
+        "latencyMs": 7450,
+        "timeToFirstByteMs": 36
+      }
+    },
+    "tracking_id": "37429ba9-56ef-48a1-94c4-b27bf0d6e196"
+  },
+  "message_id": 3,
+  "redact_message": null,
+  "created_at": "2026-09-18T11:35:52.416919+00:00",
+  "updated_at": "2026-09-18T11:35:52.416933+00:00"
+}

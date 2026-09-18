@@ -1,0 +1,15 @@
+{
+  "message": {
+    "role": "user",
+    "content": [
+      {
+        "text": "Hi, my name is Benjamin and I am building an authentication API."
+      }
+    ],
+    "tracking_id": "1d05f82a-bd80-46c2-a5bf-df54b204a32b"
+  },
+  "message_id": 0,
+  "redact_message": null,
+  "created_at": "2026-09-18T11:39:12.958223+00:00",
+  "updated_at": "2026-09-18T11:39:12.958228+00:00"
+}

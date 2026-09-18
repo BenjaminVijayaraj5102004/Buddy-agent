@@ -1,0 +1,26 @@
+{
+  "message": {
+    "role": "assistant",
+    "content": [
+      {
+        "text": "Since the question is asking about the user's name, there is no function that directly answers this question. However, I can assume that the question is asking about the user's name in the context of a GitHub repository.\n\nIn this case, the \"github_agent\" function would be the most relevant.\n\n{\"name\": \"github_agent\", \"parameters\": {\"task_description\": \"Fetch user profile information\"}}"
+      }
+    ],
+    "metadata": {
+      "usage": {
+        "inputTokens": 1196,
+        "outputTokens": 81,
+        "totalTokens": 1277
+      },
+      "metrics": {
+        "latencyMs": 37579,
+        "timeToFirstByteMs": 23
+      }
+    },
+    "tracking_id": "958c1927-dfee-403d-8d88-fb3bdacc4373"
+  },
+  "message_id": 5,
+  "redact_message": null,
+  "created_at": "2026-09-18T17:50:16.798779+00:00",
+  "updated_at": "2026-09-18T17:50:16.798802+00:00"
+}

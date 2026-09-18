@@ -1,0 +1,23 @@
+{
+  "message": {
+    "role": "user",
+    "content": [
+      {
+        "toolResult": {
+          "toolUseId": "tf621pmyk",
+          "status": "error",
+          "content": [
+            {
+              "text": "Error: EventLoopException - Error code: 429 - {'error': {'message': 'Rate limit reached for model `qwen/qwen3.8-27b` in organization `org_01kh8hhmshftrsae1pddpvbpv9` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 196991, Requested 4308. Please try again in 9m21.168s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}"
+            }
+          ]
+        }
+      }
+    ],
+    "tracking_id": "6e3ad600-35ac-4ae9-963b-3f32aa73e397"
+  },
+  "message_id": 2,
+  "redact_message": null,
+  "created_at": "2026-09-18T12:25:58.570529+00:00",
+  "updated_at": "2026-09-18T12:25:58.570539+00:00"
+}

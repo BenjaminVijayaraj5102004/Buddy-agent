@@ -1,0 +1,15 @@
+{
+  "message": {
+    "role": "user",
+    "content": [
+      {
+        "text": "Benjamin is building an authentication API"
+      }
+    ],
+    "tracking_id": "a6ad6a8c-200d-40e3-9b0e-5f1728895c5e"
+  },
+  "message_id": 0,
+  "redact_message": null,
+  "created_at": "2026-09-18T11:39:24.798077+00:00",
+  "updated_at": "2026-09-18T11:39:24.798084+00:00"
+}

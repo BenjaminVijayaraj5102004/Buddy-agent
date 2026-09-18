@@ -1,0 +1,23 @@
+{
+  "message": {
+    "role": "user",
+    "content": [
+      {
+        "toolResult": {
+          "toolUseId": "tooluse_9f97a116146344c1b9a06517",
+          "status": "success",
+          "content": [
+            {
+              "text": "Based on the provided documentation, the `search_users` function is used to find GitHub users by username, real name, or other profile information. To find a user with the username \"benjamin\", you can use the following function call:\n\n```json\n{\"type\":\"function\",\"name\":\"search_users\",\"parameters{\"query\":\"benjamin\"}}\n```\n\nThis will return a list of users matching the query \"benjamin\".\n"
+            }
+          ]
+        }
+      }
+    ],
+    "tracking_id": "3949e0b7-43e2-46b8-b2c4-c65e0c5a894f"
+  },
+  "message_id": 5,
+  "redact_message": null,
+  "created_at": "2026-09-18T11:45:23.262676+00:00",
+  "updated_at": "2026-09-18T11:45:23.262683+00:00"
+}

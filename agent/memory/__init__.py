@@ -1,11 +1,15 @@
 from agent.memory.session_memory.session_memory import (
     FileSessionManager,
     S3SessionManager,
+    generate_new_session_id,
+    get_current_session_id,
     get_s3_session_manager,
     get_session_manager,
     list_stored_sessions,
     session_manager,
+    set_current_session_id,
 )
+
 from agent.memory.longterm_memory.storage import (
     BedrockKnowledgeBaseConfig,
     BedrockKnowledgeBaseStore,
@@ -27,14 +31,27 @@ from agent.memory.longterm_memory.storage import (
     search_memory_entries_sync,
 )
 
+from agent.memory.conversation_manager import (
+    SafeSlidingWindowConversationManager,
+    SafeSummarizingConversationManager,
+)
+
 __all__ = [
+    # Conversation Managers
+    "SafeSlidingWindowConversationManager",
+    "SafeSummarizingConversationManager",
+
     # Session Memory
     "FileSessionManager",
     "S3SessionManager",
     "get_session_manager",
     "get_s3_session_manager",
+    "get_current_session_id",
+    "set_current_session_id",
+    "generate_new_session_id",
     "session_manager",
     "list_stored_sessions",
+
     # Longterm Memory
     "LocalFileStorage",
     "FileMemoryStore",

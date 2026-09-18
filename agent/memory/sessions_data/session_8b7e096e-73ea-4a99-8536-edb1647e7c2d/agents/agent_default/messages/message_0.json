@@ -1,0 +1,15 @@
+{
+  "message": {
+    "role": "user",
+    "content": [
+      {
+        "text": "Create a FastAPI POST endpoint for health check using Pydantic v2. The endpoint should be defined in the file 'test/health_check.py'. Include necessary imports, a Pydantic model for the request body (if needed) and a response model, and a FastAPI app instance. Ensure the endpoint returns a simple JSON indicating status, e.g., {'status': 'ok'}. The endpoint must be a POST method at path '/health'. No database or ORM logic. Provide pure API contract with mock response.\n[Workspace Directory: E:\\Hackathon\\buddy-agent]"
+      }
+    ],
+    "tracking_id": "b0fd7a02-937b-44ae-b106-04391a4581b8"
+  },
+  "message_id": 0,
+  "redact_message": null,
+  "created_at": "2026-09-18T17:50:34.085723+00:00",
+  "updated_at": "2026-09-18T17:50:34.085730+00:00"
+}

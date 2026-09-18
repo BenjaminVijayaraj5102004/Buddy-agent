@@ -1,0 +1,15 @@
+{
+  "message": {
+    "role": "user",
+    "content": [
+      {
+        "text": "Create a health check REST API endpoint using FastAPI (Python).\n\nRequirements:\n- HTTP Method: POST\n- Route: /health\n- Framework: FastAPI with Pydantic schemas\n- Target file path: app.py\n\nImplementation details:\n- Define a FastAPI application instance.\n- Create a Pydantic request model (BaseModel) for the incoming payload (e.g., HealthCheckRequest) with at least one field such as `service: str`.\n- Create a Pydantic response model (BaseModel) for the response (e.g., HealthCheckResponse) with a `status` field and a `timestamp` field.\n- Implement the POST /health endpoint that accepts the request body and returns a well-formed health check response indicating the service is healthy, including the current UTC timestamp.\n- Keep the endpoint as a pure API contract with a mock/in-memory response — DO NOT include any database, ORM, or persistence logic.\n- Include an `if __name__ == \"__main__\":` block that runs the app via uvicorn for local execution.\n\nReturn the complete code for app.py."
+      }
+    ],
+    "tracking_id": "a2812d6a-f6cc-41b6-aff4-e26e58b29afb"
+  },
+  "message_id": 0,
+  "redact_message": null,
+  "created_at": "2026-09-18T12:23:29.173806+00:00",
+  "updated_at": "2026-09-18T12:23:29.173811+00:00"
+}

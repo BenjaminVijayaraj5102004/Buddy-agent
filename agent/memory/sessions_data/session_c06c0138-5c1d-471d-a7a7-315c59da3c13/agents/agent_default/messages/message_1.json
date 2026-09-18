@@ -1,0 +1,26 @@
+{
+  "message": {
+    "role": "assistant",
+    "content": [
+      {
+        "text": "{\"name\": \"Direct Response\", \"parameters\": {\"query\": \"what is my name\"}}"
+      }
+    ],
+    "metadata": {
+      "usage": {
+        "inputTokens": 886,
+        "outputTokens": 20,
+        "totalTokens": 906
+      },
+      "metrics": {
+        "latencyMs": 4190,
+        "timeToFirstByteMs": 20
+      }
+    },
+    "tracking_id": "1ba23188-d332-4947-b04c-754501d28360"
+  },
+  "message_id": 1,
+  "redact_message": null,
+  "created_at": "2026-09-18T11:41:38.716052+00:00",
+  "updated_at": "2026-09-18T11:41:38.716059+00:00"
+}

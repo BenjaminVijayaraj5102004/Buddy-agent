@@ -1,0 +1,15 @@
+{
+  "message": {
+    "role": "user",
+    "content": [
+      {
+        "text": "Create a POST /health endpoint using FastAPI and Pydantic v2 and save it to test/health_router.py"
+      }
+    ],
+    "tracking_id": "c620751f-c20e-4d6b-87dd-cf983e31d311"
+  },
+  "message_id": 0,
+  "redact_message": null,
+  "created_at": "2026-09-18T17:28:21.947419+00:00",
+  "updated_at": "2026-09-18T17:28:21.947425+00:00"
+}

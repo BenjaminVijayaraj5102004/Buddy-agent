@@ -1,0 +1,26 @@
+{
+  "message": {
+    "role": "assistant",
+    "content": [
+      {
+        "text": "I've stored that in our conversation memory. Your project name is indeed \"SuperApp\". What can I help you with next, Buddy? Do you need assistance with coding, design, or something else for SuperApp?"
+      }
+    ],
+    "metadata": {
+      "usage": {
+        "inputTokens": 445,
+        "outputTokens": 45,
+        "totalTokens": 490
+      },
+      "metrics": {
+        "latencyMs": 29741,
+        "timeToFirstByteMs": 25
+      }
+    },
+    "tracking_id": "5d49309f-fc7b-4c24-9702-00c786b19c70"
+  },
+  "message_id": 1,
+  "redact_message": null,
+  "created_at": "2026-09-18T11:35:44.640793+00:00",
+  "updated_at": "2026-09-18T11:35:44.640813+00:00"
+}
