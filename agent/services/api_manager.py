@@ -1,8 +1,8 @@
 from strands import Agent
 from strands.tools import tool
-from agent.services.api_agent.REST import rest_agent as rest_api_agent
-from agent.model import model, get_groq_model, get_model , ollama_model
-from agent.memory import memory_manager, get_session_manager
+from agent.services.api_agent.REST import rest_agent
+from agent.model import model, get_groq_model, get_model, ollama_model
+from agent.memory import get_session_manager, SafeSlidingWindowConversationManager
 from agent.guardrils import API_MANAGER_PROMPT
 from agent.hooks import HumanInTheLoopHook
 from agent.skills import api_manager_skills
@@ -15,18 +15,22 @@ from agent.state import APIManagerOutput
 )
 def call_rest_agent(task_description: str) -> str:
     """Invokes the REST API agent to create API endpoints and schemas without database logic."""
-    response = rest_api_agent(task_description)
+    import os
+    cwd = os.path.abspath(os.getcwd())
+    full_task = f"{task_description}\n[Workspace Directory: {cwd}]"
+    response = rest_agent(full_task)
     return str(response)
 
 
 API_MANAGER = Agent(
     name="API_MANAGER",
-    model=ollama_model,
+    model=get_model(),
     tools=[call_rest_agent],
     plugins=[api_manager_skills],
     hooks=[HumanInTheLoopHook()],
-    memory_manager=memory_manager,
-    session_manager=get_session_manager("api-manager-session"),
+    session_manager=get_session_manager(),
+    conversation_manager=SafeSlidingWindowConversationManager(window_size=20),
     system_prompt=API_MANAGER_PROMPT,
 )
+
 
