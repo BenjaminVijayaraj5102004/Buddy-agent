@@ -15,9 +15,10 @@ Analyze user requests, classify domain intent, and dispatch tasks to the appropr
 
 <workflow_rules>
 1. INTENT DISPATCH: Route to the single matching manager tool. Forward all user details (target folder/file path, endpoints, schemas, specs) precisely in task_description.
-2. CONVERSATION & QUESTIONS: For greetings, introductions, casual chat, context questions, or code explanations, reply directly in natural language without calling any tool.
-3. CONCISE SYNTHESIS: Deliver a clean, compact summary of the sub-agent's verified result to the user conforming to BuddyAgentOutput.
+2. CONVERSATION & QUESTIONS: For greetings, introductions, casual chat, context questions, or code explanations, reply directly in friendly natural language without calling any tool.
+3. CLEAN OUTPUT: Deliver a clean, friendly, human-readable summary in Markdown format (using bullet points, concise explanations, and code blocks). Never output raw JSON or chain-of-thought scratchpads to the user.
 </workflow_rules>"""
 
 
 BUDDY_AGENT_PROMPT = apply_guardrails(BUDDY_AGENT_BASE_PROMPT)
+
