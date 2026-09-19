@@ -4,7 +4,7 @@ import json
 from typing import Any, Callable, Optional, Set
 from strands.hooks import BeforeToolCallEvent, HookProvider, HookRegistry
 
-# Safe tools permitted to run without human intervention
+# Safe hardcoded tools and skills permitted to run without human intervention
 DEFAULT_AUTO_APPROVED_TOOLS: Set[str] = {
     # Core agent & delegation tools (both tool names and callable names)
     "api_manager",
@@ -15,32 +15,33 @@ DEFAULT_AUTO_APPROVED_TOOLS: Set[str] = {
     "call_rest_agent",
     "github_agent",
     "call_github_agent",
-    # Codebase inspection & memory tools
+    # Skills Plugin tools
+    "skills",
+    "load_skill",
+    "agent_skills",
+    # Codebase inspection & GitHub MCP tools
     "search_code",
     "search_repositories",
     "get_file_contents",
+    # Memory tools
     "search_memory",
     "add_memory",
     # SAM CLI operations
     "sam init",
     "sam build",
     "sam local invoke",
-    "sam_deploy",
-    # Text Editor operations (safe for autonomous execution)
+    # Text Editor operations (safe creation, reading, and non-destructive editing)
     "create_text_file",
     "get_text_file_contents",
     "insert_text_file_contents",
     "append_text_file_contents",
     "patch_text_file_contents",
-    # Note: 'delete_text_file_contents' is intentionally excluded to require strict HITL confirmation
+    # Note: 'delete_text_file_contents' and unlisted/dangerous tools are strictly intercepted by HITL
 }
 
 
-
-
-
 class HumanInTheLoopHook(HookProvider):
-    """Intercepts tool executions and prompts human operator for approval, usage guidance, or rejection."""
+    """Intercepts unapproved/dangerous tool executions and prompts human operator for approval or rejection."""
 
     def __init__(
         self,
@@ -129,15 +130,15 @@ class HumanInTheLoopHook(HookProvider):
             if not tool_description and hasattr(event.selected_tool, "mcp_tool"):
                 tool_description = getattr(event.selected_tool.mcp_tool, "description", "")
 
-        # Safe tools in auto_approved_tools execute directly without HITL
+        # Safe hardcoded tools & skills execute directly without HITL
         if tool_name in self.auto_approved_tools:
             return
 
-        # Intercept tool for human review and guidance
+        # Intercept any non-whitelisted/destructive tool for strict HITL review
         is_approved, message = self.feedback_handler(tool_name, tool_description, tool_input)
 
         if is_approved:
-            # If the user provided guidance during approval, inject it into the task context
+            # If the operator provided guidance, inject it into the tool input
             if message and isinstance(tool_input, dict):
                 if "task_description" in tool_input and isinstance(tool_input["task_description"], str):
                     tool_input["task_description"] += f"\n[Human Operator Guidance]: {message}"
