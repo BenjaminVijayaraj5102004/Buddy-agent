@@ -159,8 +159,21 @@ def credits_command():
 
 @app.command("readme")
 def readme_command():
-    """Display tactical operations manual and system topology overview."""
+    """Display interactive tactical operations manual and system architecture documentation."""
     show_readme_dialog(console)
+
+
+@app.command("manual")
+def manual_command():
+    """Display interactive tactical operations manual and system architecture documentation."""
+    show_readme_dialog(console)
+
+
+@app.command("docs")
+def docs_command():
+    """Display interactive tactical operations manual and system architecture documentation."""
+    show_readme_dialog(console)
+
 
 
 @app.callback(invoke_without_command=True)

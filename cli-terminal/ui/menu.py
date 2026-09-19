@@ -215,7 +215,8 @@ def render_igi_help_modal(theme_name: str = "igi") -> Table:
     content.add_row("  • ▲ / ▼ / w / j", "Navigate menu options and process cursor")
     content.add_row("  • Tab / ◄ / ►", "Switch configuration tabs (General, Session, AI, Theme, Radar)")
     content.add_row("  • Enter / Space", "Execute selected tactical action or toggle setting")
-    content.add_row("  • /session, /tools, /help", "Interactive commands available inside AI shell")
+    content.add_row("  • r", "Open interactive Read Me, Architecture & Manual viewer")
+    content.add_row("  • /readme, /tools, /session", "Interactive commands available inside AI shell")
     content.add_row("  • q / Esc", "Return to main HUD / Abort mission")
 
     wrapper = Table.grid(padding=(0, 0), expand=True)

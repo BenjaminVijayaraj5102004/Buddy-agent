@@ -26,6 +26,9 @@ from .state import SessionState
 from .tools_catalog import get_non_hardcoded_mcp_tools
 
 
+from rich.markdown import Markdown
+
+
 def show_help_table(console: Optional[Console] = None) -> None:
     """Renders the comprehensive help & keybindings cheat-sheet table."""
     if console is None:
@@ -44,14 +47,16 @@ def show_help_table(console: Optional[Console] = None) -> None:
     table.add_column("Description", style=f"dim {COLOR_TEXT}", ratio=5)
 
     commands = [
-        ("/tools", "Governance", "List active MCP tools (GitHub, SAM CLI, Text Editor)"),
-        ("/top", "Telemetry", "Launch interactive btop++ live system & AI radar"),
+        ("/readme, /manual", "Manual", "Interactive system documentation, architecture & manual reader"),
+        ("/tools, /tool_list", "Governance", "List active MCP tools (GitHub, SAM CLI, Text Editor)"),
+        ("/top, /monitor", "Telemetry", "Launch interactive btop++ live system & AI radar"),
         ("/menu", "Interface", "Open Project I.G.I. 3D tactical HUD configuration menu"),
-        ("/model", "AI Satellite", "Switch LLM satellite (Groq Llama-3.3, Bedrock Claude, Ollama)"),
+        ("/model, /models", "AI Satellite", "Switch LLM satellite models per agent or synchronized"),
         ("/session", "Memory", "View, paste, or switch session UUID and context"),
+        ("/demo", "Mission", "Run automated FastAPI endpoint scaffolding demonstration"),
         ("/clear", "Display", "Clear screen and redraw tactical HUD banner"),
         ("/help", "Manual", "Display this tactical command reference"),
-        ("/exit", "System", "Save session and exit tactical shell cleanly"),
+        ("/exit, /quit", "System", "Save session and exit tactical shell cleanly"),
     ]
 
     for cmd, cat, desc in commands:
@@ -313,32 +318,124 @@ def show_tool_list_table(console: Optional[Console] = None) -> None:
     console.print()
 
 
+def load_readme_sections() -> tuple[str, list[tuple[str, str]]]:
+    """Loads README.md from project root and splits into titled sections."""
+    readme_path = os.path.join(BUDDY_AGENT_ROOT, "README.md")
+    if not os.path.exists(readme_path):
+        fallback_text = "# Buddy Agent\n\nAutonomous Pair Programming & Cloud Infrastructure System."
+        return fallback_text, [("Overview", fallback_text)]
+
+    try:
+        with open(readme_path, "r", encoding="utf-8") as f:
+            full_content = f.read()
+    except Exception as e:
+        full_content = f"# Buddy Agent\n\nError reading README.md: {e}"
+        return full_content, [("Overview", full_content)]
+
+    lines = full_content.split("\n")
+    sections: list[tuple[str, str]] = []
+    cur_title = "Header"
+    cur_lines: list[str] = []
+
+    for line in lines:
+        if line.startswith("## "):
+            if cur_lines:
+                sections.append((cur_title, "\n".join(cur_lines).strip()))
+            cur_title = line[3:].strip()
+            cur_lines = [line]
+        else:
+            cur_lines.append(line)
+
+    if cur_lines:
+        sections.append((cur_title, "\n".join(cur_lines).strip()))
+
+    return full_content, sections
+
+
 def show_readme_dialog(console: Optional[Console] = None) -> None:
-    """Renders the Project I.G.I. tactical ReadMe and architecture manual."""
+    """Renders the interactive Project I.G.I. tactical ReadMe and architecture manual viewer."""
     if console is None:
         console = Console()
 
-    table = Table.grid(padding=(0, 1), expand=True)
-    table.add_column()
+    full_content, all_sections = load_readme_sections()
+    # Filter out top Header and Table of Contents for the chapter index
+    chapters = [s for s in all_sections if s[0] not in ("Header", "Table of Contents")]
 
-    table.add_row(Text("✦ BUDDY AGENT // SYSTEM MANUAL & ARCHITECTURE ✦\n", style=f"bold {IGI_GREEN_BRIGHT}", justify="center"))
-    table.add_row(Text("─" * 78, style=f"dim {COLOR_MUTED}"))
-    
-    sections = [
-        ("1. EXECUTIVE OVERVIEW", "Buddy Agent is an autonomous, production-grade agentic AI pair programmer built on Python 3.14 and the Strands Agents framework. It combines deep multi-agent delegation with a tactical Project I.G.I. HUD and real-time Btop++ system telemetry."),
-        ("2. MULTI-AGENT TOPOLOGY", "• Master Orchestrator (Buddy Agent): Intent classification, semantic memory routing, and response synthesis.\n• API Manager: End-to-end REST/FastAPI microservice endpoint generation with strict Pydantic schemas.\n• SAM CLI Deploy Agent: CloudFormation infrastructure packaging, deployment, and sync.\n• GitHub Agent: Branching, pull request lifecycles, and code inspection."),
-        ("3. MODEL CONTEXT PROTOCOL (MCP)", "Integrates dedicated MCP clients for GitHub, AWS SAM CLI, and atomic Text Editing with zero hardcoded tools, giving the agent deterministic environment control."),
-        ("4. RESILIENT MEMORY ARCHITECTURE", "Multi-tier state persistence supporting session archiving, UUID hot-swapping, and sliding window context compression without loss of state across agent reloads."),
-        ("5. TACTICAL HUD & TELEMETRY", "• Project I.G.I. 3D extruded menus and CRT green theme matrices.\n• Btop++ live per-core CPU braille curves, RSS memory meters, network I/O, process management, and 360° sonar radar."),
-    ]
+    while True:
+        console.clear()
+        
+        # Header Table
+        hdr_table = Table.grid(padding=(0, 1), expand=True)
+        hdr_table.add_column()
+        hdr_table.add_row(Text("📖 BUDDY AGENT // SYSTEM MANUAL & DOCUMENTATION\n", style=f"bold {IGI_GREEN_BRIGHT}", justify="center"))
+        hdr_table.add_row(Text("─" * 78, style=f"dim {COLOR_MUTED}"))
+        console.print(hdr_table)
 
-    for title, body in sections:
-        table.add_row(Text(f"\n{title}", style=f"bold {COLOR_PEACH}"))
-        table.add_row(Text(body, style=f"dim {COLOR_TEXT}"))
+        # Chapter Navigator Grid
+        menu_table = Table(
+            title="📑 [bold #00ff55]MANUAL CHAPTERS & ARCHITECTURE INDEX[/bold #00ff55]",
+            border_style=f"dim {COLOR_MUTED}",
+            header_style=f"bold {COLOR_PEACH}",
+            expand=True,
+            padding=(0, 1),
+        )
+        menu_table.add_column("Chapter", style=f"bold {COLOR_AMBER}", width=10)
+        menu_table.add_column("Section Title", style=f"bold {COLOR_TEXT}", ratio=4)
+        menu_table.add_column("Key Topics", style=f"dim {COLOR_MINT}", ratio=5)
 
-    table.add_row(Text("\n" + "─" * 78, style=f"dim {COLOR_MUTED}", justify="center"))
-    table.add_row(Text("Press Enter or 'q' to return to tactical menu...", style=f"bold {COLOR_MINT}", justify="center"))
+        chapter_descriptions = {
+            "Overview": "Core capabilities, Strands framework, micro-agents",
+            "System Architecture": "Architectural layers, delegation flows & diagram",
+            "Multi-Agent Topology": "Buddy orchestrator, API manager, REST, GitHub, SAM CLI",
+            "Dynamic Model Routing and BYOM": "Groq, Ollama, AWS Bedrock catalogs & custom BYOM",
+            "Model Context Protocol (MCP) Integration": "GitHub MCP, SAM CLI MCP, Text Editor MCP tools",
+            "Memory Architecture and State Persistence": "Session UUID persistence, S3 storage, sliding window",
+            "Tactical HUD and System Telemetry": "Btop++ live braille load, memory RSS, 360° radar",
+            "Governance, Security, and Human Approval": "Human-in-the-loop (HITL) hooks, RBAC security, tracing",
+            "Engineering and Model Stack": "Gemini 3.7 Flash interface & Gemini 3.7 orchestration",
+            "Installation and Quickstart": "Prerequisites, uv setup, environment variables & run",
+            "CLI Reference": "Tactical commands, telemetry, session and model hotkeys",
+            "Project Structure": "Directory tree & module layout",
+            "Environment Configuration": "API keys, model IDs, endpoints & tracing variables",
+        }
 
-    console.print()
-    console.print(table)
-    console.print()
+        for idx, (title, _) in enumerate(chapters, 1):
+            desc = chapter_descriptions.get(title, "System documentation and technical specifications")
+            menu_table.add_row(f"[{idx}]", title, desc)
+
+        console.print(menu_table)
+        console.print()
+
+        nav_info = Text("Commands: [1-" + str(len(chapters)) + "] View Chapter  •  [F] Full Document  •  [P] Terminal Pager  •  [Q / Enter] Return", style=f"bold {COLOR_MINT}", justify="center")
+        console.print(nav_info)
+        console.print()
+
+        choice = Prompt.ask(
+            f"[{COLOR_PEACH}]Select Chapter [1-{len(chapters)}, F, P, Q][/{COLOR_PEACH}]",
+            default="q"
+        ).strip().lower()
+
+        if choice in ("q", "quit", "exit", ""):
+            break
+        elif choice in ("f", "all", "full"):
+            console.clear()
+            console.print(Text("─" * 78, style=f"dim {COLOR_MUTED}"))
+            console.print(Markdown(full_content, code_theme="monokai", hyperlinks=True))
+            console.print(Text("─" * 78, style=f"dim {COLOR_MUTED}"))
+            console.input(f"\n[{COLOR_MINT}]Press Enter to return to Chapter Index...[/{COLOR_MINT}]")
+        elif choice in ("p", "pager"):
+            with console.pager(styles=True):
+                console.print(Markdown(full_content, code_theme="monokai", hyperlinks=True))
+        elif choice.isdigit():
+            c_idx = int(choice) - 1
+            if 0 <= c_idx < len(chapters):
+                title, body = chapters[c_idx]
+                console.clear()
+                
+                # Render Section
+                console.print(Text("─" * 78, style=f"bold {COLOR_PEACH}"))
+                console.print(Text(f"📖 CHAPTER {choice}: {title.upper()}\n", style=f"bold {IGI_GREEN_BRIGHT}", justify="center"))
+                console.print(Text("─" * 78, style=f"dim {COLOR_MUTED}"))
+                console.print(Markdown(body, code_theme="monokai", hyperlinks=True))
+                console.print(Text("─" * 78, style=f"dim {COLOR_MUTED}"))
+                console.input(f"\n[{COLOR_MINT}]Press Enter to return to Chapter Index...[/{COLOR_MINT}]")

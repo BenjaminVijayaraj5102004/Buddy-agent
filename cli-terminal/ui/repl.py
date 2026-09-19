@@ -54,13 +54,15 @@ def run_interactive_shell(session: SessionState, console: Optional[Console] = No
 
     commands_list = [
         "/help",
+        "/manual",
+        "/readme",
+        "/docs",
         "/tools",
         "/top",
         "/menu",
         "/model",
         "/session",
         "/credits",
-        "/readme",
         "/demo",
         "/clear",
         "/exit",
@@ -158,9 +160,8 @@ def run_interactive_shell(session: SessionState, console: Optional[Console] = No
                 console.clear()
                 console.print(render_banner(session))
                 continue
-            elif cmd in ("/readme", "readme", "about"):
+            elif cmd in ("/readme", "readme", "/manual", "manual", "/docs", "docs", "/doc", "doc", "/guide", "guide", "about"):
                 show_readme_dialog(console)
-                console.input()
                 console.clear()
                 console.print(render_banner(session))
                 continue
