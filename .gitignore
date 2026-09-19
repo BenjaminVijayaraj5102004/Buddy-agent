@@ -9,3 +9,21 @@ wheels/
 # Virtual environments
 .venv
 .env
+
+# Local storage and memory
+storage/
+.strands/
+*.sqlite
+*.db
+
+# Session runtime data directories
+agent/memory/session_data
+agent\memory\sessions_data
+
+
+#example directory
+example/
+test/
+app/
+pyrightconfig.json
+
