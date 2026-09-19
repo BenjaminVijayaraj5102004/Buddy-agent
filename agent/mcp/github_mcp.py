@@ -32,4 +32,4 @@ if __name__ == "__main__":
         tools = github_mcp_client.list_tools_sync()
         print(f"Total available GitHub tools: {len(tools)}\n")
         for item in tools:
-            print(f"- {item.tool_name}: {item.mcp_tool.description}")
+            print(f"- {item.tool_name}: {item.mcp_tool.description}")
