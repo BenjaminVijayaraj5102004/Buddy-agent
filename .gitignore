@@ -26,4 +26,5 @@ example/
 test/
 app/
 pyrightconfig.json
-
+assets/
+cli-terminal/ui/assets/
