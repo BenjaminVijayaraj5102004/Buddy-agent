@@ -101,21 +101,21 @@ def session_command(
 @app.command("chat")
 def chat_command(
     session_id: Optional[str] = typer.Option(None, "--session", "-s", help="Resume an existing session UUID"),
-    model: Optional[str] = typer.Option("groq", "--model", "-m", help="AI Model: groq, ollama, or bedrock"),
+    model: Optional[str] = typer.Option(None, "--model", "-m", help="AI Model: groq, ollama, or bedrock"),
 ):
     """Launch interactive tactical chat shell with live telemetry and auto-completion."""
-    session = SessionState(session_id=session_id, model_key=model or "groq")
+    session = SessionState(session_id=session_id, model_key=model)
     run_interactive_shell(session, console)
 
 
 @app.command("ask")
 def ask_command(
     prompt: str = typer.Argument(..., help="Prompt or task instructions to execute"),
-    model: Optional[str] = typer.Option("groq", "--model", "-m", help="Model to use: groq, ollama, bedrock"),
+    model: Optional[str] = typer.Option(None, "--model", "-m", help="Model to use: groq, ollama, bedrock"),
     session_id: Optional[str] = typer.Option(None, "--session", "-s", help="Session ID for conversation context"),
 ):
     """Execute a one-shot query with live compliments animation and markdown response."""
-    session = SessionState(session_id=session_id, model_key=model or "groq")
+    session = SessionState(session_id=session_id, model_key=model)
     console.print(render_banner(session))
     console.print(f"[bold #00ff55]You >[/bold #00ff55] {prompt}\n")
     execute_agent_task(prompt, session, console)

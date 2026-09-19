@@ -144,11 +144,17 @@ def render_igi_options_menu(active_tab: int, selected_opt: int, session_obj) -> 
         ]
     # Tab 2: Satellite AI
     elif active_tab == 2:
-        current_m = getattr(session_obj, "model_key", "groq")
+        main_inf = session_obj.get_subagent_model_info("main")
+        api_inf = session_obj.get_subagent_model_info("api")
+        gh_inf = session_obj.get_subagent_model_info("github")
+        sam_inf = session_obj.get_subagent_model_info("sam")
         opts = [
-            ("Groq Cloud (Llama 3.3 70B)", "[ACTIVE]" if current_m == "groq" else "[STANDBY]"),
-            ("AWS Bedrock (Claude 3.7)", "[ACTIVE]" if current_m == "bedrock" else "[STANDBY]"),
-            ("Ollama Localhost (Llama 3.1)", "[ACTIVE]" if current_m == "ollama" else "[STANDBY]"),
+            ("🤖 Main Buddy Agent", f"[{main_inf['name']}]"),
+            ("⚡ REST API Agent", f"[{api_inf['name']}]"),
+            ("🐙 GitHub Agent", f"[{gh_inf['name']}]"),
+            ("📦 SAM CLI Deploy Agent", f"[{sam_inf['name']}]"),
+            ("🔄 Sync All Agents to Main", "[PRESS ENTER]"),
+            ("🧠 Satellite Model Matrix Dialog", "[OPEN DIALOG]"),
         ]
     # Tab 3: HUD Theme
     elif active_tab == 3:
@@ -271,13 +277,13 @@ def run_btop_game_interface(session_obj, console_obj: Optional[Console] = None):
                     if current_screen == "main_menu":
                         main_menu_idx = max(0, main_menu_idx - 1)
                     elif current_screen == "options":
-                        max_opt = 4 if options_tab == 3 else (3 if options_tab in (1, 4) else (2 if options_tab in (0, 2) else 3))
+                        max_opt = {0: 2, 1: 3, 2: 5, 3: 4, 4: 3}.get(options_tab, 3)
                         options_opt_idx = max(0, options_opt_idx - 1)
                 elif key in ('j', 'down', 's_key'):
                     if current_screen == "main_menu":
                         main_menu_idx = min(8, main_menu_idx + 1)
                     elif current_screen == "options":
-                        max_opt = 4 if options_tab == 3 else (3 if options_tab in (1, 4) else (2 if options_tab in (0, 2) else 3))
+                        max_opt = {0: 2, 1: 3, 2: 5, 3: 4, 4: 3}.get(options_tab, 3)
                         options_opt_idx = min(max_opt, options_opt_idx + 1)
                 elif key == '\t' or key in ('l', 'right'):
                     if current_screen == "options":
@@ -403,9 +409,15 @@ def run_btop_game_interface(session_obj, console_obj: Optional[Console] = None):
                             elif options_opt_idx == 3:
                                 session_obj.autosave_enabled = not getattr(session_obj, "autosave_enabled", True)
                         elif options_tab == 2:  # Satellite AI
-                            models_keys = ["groq", "bedrock", "ollama"]
-                            session_obj.model_key = models_keys[options_opt_idx % len(models_keys)]
-                            session_obj.reset_agent()
+                            if options_opt_idx in (0, 1, 2, 3, 5):
+                                live.stop()
+                                console_obj.clear()
+                                show_models_dialog(session_obj, console_obj)
+                                console_obj.input("\n[bold #00ff55]Press Enter to return to options...[/]")
+                                console_obj.clear()
+                                live.start()
+                            elif options_opt_idx == 4:  # Sync all agents to main
+                                session_obj.switch_model(session_obj.model_key, agent_name="all")
                         elif options_tab == 3:  # HUD Theme
                             theme_keys = ["igi", "matrix", "tokyo_night", "catppuccin", "dracula"]
                             session_obj.theme = theme_keys[options_opt_idx % len(theme_keys)]

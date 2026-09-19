@@ -63,44 +63,121 @@ def show_help_table(console: Optional[Console] = None) -> None:
 
 
 def show_models_dialog(session: SessionState, console: Optional[Console] = None) -> None:
-    """Displays supported satellite AI models and prompts user to switch."""
+    """Displays multi-agent satellite topology, model matrix, and prompts user to assign models per agent."""
     if console is None:
         console = Console()
 
+    # 1. Multi-Agent Topology Table
+    topo_table = Table(
+        title="🛰️  [bold #00ff55]ACTIVE MULTI-AGENT SATELLITE TOPOLOGY[/bold #00ff55]",
+        border_style=f"dim {COLOR_MUTED}",
+        header_style=f"bold {COLOR_PEACH}",
+        expand=True,
+    )
+    topo_table.add_column("Agent / Role", style=f"bold {COLOR_BLUE}", width=24)
+    topo_table.add_column("Assigned Satellite Model", style=f"bold {COLOR_TEXT}", ratio=4)
+    topo_table.add_column("Provider", style=f"dim {COLOR_MINT}", width=16)
+
+    agents_list = [
+        ("🤖 Main Orchestrator (Buddy)", "main"),
+        ("⚡ REST API Agent", "api"),
+        ("🐙 GitHub Agent", "github"),
+        ("📦 SAM CLI Deploy Agent", "sam"),
+    ]
+
+    for label, akey in agents_list:
+        info = session.get_subagent_model_info(akey)
+        topo_table.add_row(label, info["name"], info["provider"])
+
+    console.print()
+    console.print(topo_table)
+
+    # 2. Available Satellite Models Matrix
     table = Table(
         title="🧠 [bold #00ff55]SATELLITE AI MODEL MATRIX[/bold #00ff55]",
         border_style=f"dim {COLOR_MUTED}",
         header_style=f"bold {COLOR_PEACH}",
-        expand=True
+        expand=True,
     )
     table.add_column("#", style=f"bold {COLOR_AMBER}", width=4)
-    table.add_column("Model Key", style=f"bold {COLOR_BLUE}", width=12)
-    table.add_column("Full Designation", style=f"bold {COLOR_TEXT}", width=32)
-    table.add_column("Speed / Latency", style=f"bold {COLOR_MINT}", width=16)
-    table.add_column("Status", style=f"dim {COLOR_TEXT}", width=12)
+    table.add_column("Provider", style=f"bold {COLOR_BLUE}", width=14)
+    table.add_column("Full Designation", style=f"bold {COLOR_TEXT}", ratio=4)
+    table.add_column("Model ID / Key", style=f"dim {COLOR_TEXT}", ratio=3)
+    table.add_column("Status", style=f"bold {COLOR_MINT}", width=12)
 
     for m in MODELS_CATALOG:
-        is_active = (m["key"] == session.model_key)
+        is_active = any(
+            m["key"].lower() == session.subagent_models.get(k, "").lower()
+            or m.get("model_id", "").lower() == session.subagent_models.get(k, "").lower()
+            or (m["key"] == "groq" and session.subagent_models.get(k, "").lower() in ("groq", "qwen/qwen3.8-27b"))
+            or (m["key"] == "ollama" and session.subagent_models.get(k, "").lower() in ("ollama", "llama3.1:8b"))
+            or (m["key"] == "bedrock" and session.subagent_models.get(k, "").lower() in ("bedrock", "us.anthropic.claude-3-7-sonnet-20250219-v1:0"))
+            for k in ("main", "api", "github", "sam")
+        )
         status_str = f"[{COLOR_MINT}]● ACTIVE[/{COLOR_MINT}]" if is_active else "[dim]STANDBY[/dim]"
-        table.add_row(f"[{m['id']}]", m["key"], m["name"],  status_str)
+        table.add_row(f"[{m['id']}]", m["provider"], m["name"], m.get("model_id", m["key"]), status_str)
 
     console.print()
     console.print(table)
     console.print()
 
+    # Agent target selection
+    console.print(f"[{COLOR_PEACH}]Select Target Agent to Configure:[/{COLOR_PEACH}]")
+    console.print(f"  [1] Main Orchestrator (Buddy)")
+    console.print(f"  [2] REST API Agent")
+    console.print(f"  [3] GitHub Agent")
+    console.print(f"  [4] SAM CLI Deploy Agent")
+    console.print(f"  [5] Synchronize All Agents")
+    target_agent_choice = Prompt.ask(
+        f"[{COLOR_AMBER}]Target Agent [1-5 or Enter to keep current][/{COLOR_AMBER}]",
+        default=""
+    ).strip()
+
+    if not target_agent_choice:
+        return
+
+    agent_target_map = {
+        "1": "main",
+        "2": "api",
+        "3": "github",
+        "4": "sam",
+        "5": "all",
+    }
+    agent_target = agent_target_map.get(target_agent_choice, "main")
+    target_label = "All Agents" if agent_target == "all" else agent_target.upper()
+
     choice = Prompt.ask(
-        f"[{COLOR_PEACH}]Select Model [1-{len(MODELS_CATALOG)}] or Key (e.g. groq, bedrock, ollama) or Enter to keep[/{COLOR_PEACH}]",
+        f"[{COLOR_PEACH}]Select Model [1-{len(MODELS_CATALOG)}] for {target_label} or enter custom ID[/{COLOR_PEACH}]",
         default=""
     ).strip()
 
     if choice:
-        for m in MODELS_CATALOG:
-            if choice == m["id"] or choice.lower() == m["key"] or choice.lower() in m["name"].lower():
-                session.model_key = m["key"]
-                session.reset_agent()
-                console.print(f"[{COLOR_MINT}]✨ Model switched to: {m['name']}[/{COLOR_MINT}]\n")
+        # Check for BYOM selection
+        if choice in ("8", "byom", "custom"):
+            console.print(f"[{COLOR_PEACH}]🔧 Bring Your Own Model (BYOM) Setup for {target_label}:[/{COLOR_PEACH}]")
+            prov = Prompt.ask("   Select Provider [1: Groq, 2: Ollama, 3: Bedrock]", default="1").strip()
+            prov_key = "ollama" if prov in ("2", "ollama") else ("bedrock" if prov in ("3", "bedrock") else "groq")
+            custom_id = Prompt.ask(f"   Enter Custom Model ID for {prov_key.upper()}").strip()
+            if custom_id:
+                full_key = f"{prov_key}:{custom_id}"
+                session.switch_model(full_key, agent_name=agent_target)
+                console.print(f"[{COLOR_MINT}]✨ {target_label} model switched to Custom: {full_key}[/{COLOR_MINT}]\n")
                 return
-        console.print(f"[{COLOR_ROSE}]⚠️ Keeping current model.[/{COLOR_ROSE}]\n")
+
+        for m in MODELS_CATALOG:
+            if (
+                choice == m["id"]
+                or choice.lower() == m["key"].lower()
+                or choice.lower() == m.get("model_id", "").lower()
+                or choice.lower() in m["name"].lower()
+            ):
+                session.switch_model(m["key"], agent_name=agent_target)
+                console.print(f"[{COLOR_MINT}]✨ {target_label} model switched to: {m['name']}[/{COLOR_MINT}]\n")
+                return
+
+        # Direct model string input (e.g. "qwen:7b", "groq:my-model")
+        session.switch_model(choice, agent_name=agent_target)
+        console.print(f"[{COLOR_MINT}]✨ {target_label} model switched to: {choice}[/{COLOR_MINT}]\n")
 
 
 def clean_session_id(s: str) -> str:
@@ -126,7 +203,8 @@ def show_session_dialog(session: SessionState, console: Optional[Console] = None
     box_content = Text()
     box_content.append("🔑 ACTIVE SESSION UUID:\n", style="bold #facc15")
     box_content.append(f"{session.session_id}\n\n", style="bold #00ff55")
-    box_content.append(f"📊 Telemetry: {session.messages_count} messages | 📥 In: {session.total_input_tokens:,} tokens | 📤 Out: {session.total_output_tokens:,} tokens\n", style="dim #94a3b8")
+    box_content.append(f"🤖 Active Model: {session.model_key.upper()} | 📊 Telemetry: {session.messages_count} messages\n", style="bold #38bdf8")
+    box_content.append(f"📥 In: {session.total_input_tokens:,} tokens | 📤 Out: {session.total_output_tokens:,} tokens\n\n", style="dim #94a3b8")
     box_content.append("💡 Copy the UUID above to resume this exact state anytime.", style="italic #38bdf8")
 
     console.print()
@@ -173,11 +251,12 @@ def show_session_dialog(session: SessionState, console: Optional[Console] = None
         session.history.clear()
         session.reset_agent()
         try:
-            from agent.memory import set_current_session_id
+            from agent.memory import set_current_session_id, set_session_model_key
             set_current_session_id(new_id)
+            set_session_model_key(new_id, session.model_key)
         except Exception:
             pass
-        console.print(f"[{COLOR_MINT}]✨ Started new session: {session.session_id}[/{COLOR_MINT}]\n")
+        console.print(f"[{COLOR_MINT}]✨ Started new session: {session.session_id} (Model: {session.model_key})[/{COLOR_MINT}]\n")
         return
 
     # Check for selection by number
@@ -185,14 +264,8 @@ def show_session_dialog(session: SessionState, console: Optional[Console] = None
         idx = int(raw_input) - 1
         if 0 <= idx < len(stored_sessions):
             target_id = stored_sessions[idx]
-            session.session_id = target_id
-            session.reset_agent()
-            try:
-                from agent.memory import set_current_session_id
-                set_current_session_id(target_id)
-            except Exception:
-                pass
-            console.print(f"[{COLOR_MINT}]🔄 Switched to session #{idx+1}: {session.session_id}[/{COLOR_MINT}]\n")
+            session.switch_session(target_id)
+            console.print(f"[{COLOR_MINT}]🔄 Switched to session #{idx+1}: {session.session_id} (Model: {session.model_key})[/{COLOR_MINT}]\n")
             return
 
     # Check for 'r' or 'resume'
@@ -204,14 +277,8 @@ def show_session_dialog(session: SessionState, console: Optional[Console] = None
     # Direct paste of session UUID
     target_id = clean_session_id(raw_input)
     if target_id:
-        session.session_id = target_id
-        session.reset_agent()
-        try:
-            from agent.memory import set_current_session_id
-            set_current_session_id(target_id)
-        except Exception:
-            pass
-        console.print(f"[{COLOR_MINT}]🔄 Resumed session: {session.session_id}[/{COLOR_MINT}]\n")
+        session.switch_session(target_id)
+        console.print(f"[{COLOR_MINT}]🔄 Resumed session: {session.session_id} (Model: {session.model_key})[/{COLOR_MINT}]\n")
 
 
 def show_tool_list_table(console: Optional[Console] = None) -> None:
