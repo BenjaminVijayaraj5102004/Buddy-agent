@@ -1,12 +1,11 @@
 from strands import Agent
 from strands.tools import tool
 from agent.services.api_agent.REST import rest_agent
-from agent.model import model, get_groq_model, get_model, ollama_model
+from agent.model import  get_model
 from agent.memory import get_session_manager, SafeSlidingWindowConversationManager
 from agent.guardrils import API_MANAGER_PROMPT
 from agent.hooks import HumanInTheLoopHook
 from agent.skills import api_manager_skills
-from agent.state import APIManagerOutput
 
 
 @tool(
@@ -18,8 +17,12 @@ def call_rest_agent(task_description: str) -> str:
     import os
     cwd = os.path.abspath(os.getcwd())
     full_task = f"{task_description}\n[Workspace Directory: {cwd}]"
-    response = rest_agent(full_task)
-    return str(response)
+    try:
+        response = rest_agent(full_task)
+        return str(response)
+    except Exception as e:
+        return f"Error executing REST_Agent: {e}"
+
 
 
 API_MANAGER = Agent(

@@ -6,7 +6,7 @@ from agent.mcp.text_editor_mcp import sam_text_editor_mcp_client
 from agent.guardrils import SAM_CLI_AGENT_PROMPT
 from agent.hooks import HumanInTheLoopHook
 from agent.skills import sam_cli_agent_skills
-from agent.state import SAMCLIAgentOutput
+
 
 sam_cli_agent = Agent(
     model=get_model(),
