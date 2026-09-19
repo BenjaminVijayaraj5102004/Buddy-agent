@@ -318,124 +318,303 @@ def show_tool_list_table(console: Optional[Console] = None) -> None:
     console.print()
 
 
-def load_readme_sections() -> tuple[str, list[tuple[str, str]]]:
-    """Loads README.md from project root and splits into titled sections."""
-    readme_path = os.path.join(BUDDY_AGENT_ROOT, "README.md")
-    if not os.path.exists(readme_path):
-        fallback_text = "# Buddy Agent\n\nAutonomous Pair Programming & Cloud Infrastructure System."
-        return fallback_text, [("Overview", fallback_text)]
-
-    try:
-        with open(readme_path, "r", encoding="utf-8") as f:
-            full_content = f.read()
-    except Exception as e:
-        full_content = f"# Buddy Agent\n\nError reading README.md: {e}"
-        return full_content, [("Overview", full_content)]
-
-    lines = full_content.split("\n")
-    sections: list[tuple[str, str]] = []
-    cur_title = "Header"
-    cur_lines: list[str] = []
-
-    for line in lines:
-        if line.startswith("## "):
-            if cur_lines:
-                sections.append((cur_title, "\n".join(cur_lines).strip()))
-            cur_title = line[3:].strip()
-            cur_lines = [line]
-        else:
-            cur_lines.append(line)
-
-    if cur_lines:
-        sections.append((cur_title, "\n".join(cur_lines).strip()))
-
-    return full_content, sections
+import time
+from rich.live import Live
 
 
-def show_readme_dialog(console: Optional[Console] = None) -> None:
-    """Renders the interactive Project I.G.I. tactical ReadMe and architecture manual viewer."""
+def build_readme_movie_corpus() -> list[Text]:
+    """Assembles the cinematic scrolling movie end-card for Buddy Agent documentation and manual."""
+    lines: list[Text] = []
+
+    # Typography & Palette
+    COLOR_TITLE = "#ffffff"
+    COLOR_SUB = "#e4e4e7"
+    COLOR_PLATINUM = "#d4d4d8"
+    COLOR_GREEN = "#00ff66"
+    COLOR_CYAN = "#38bdf8"
+    COLOR_AMBER = "#facc15"
+    COLOR_PURPLE_SOFT = "#c084fc"
+    COLOR_GRAY_LIGHT = "#a1a1aa"
+    COLOR_GRAY_MID = "#71717a"
+    COLOR_GRAY_DARK = "#3f3f46"
+
+    def blank(n: int = 1):
+        for _ in range(n):
+            lines.append(Text(""))
+
+    def centered(text: str, style: str):
+        lines.append(Text(text, style=style, justify="center"))
+
+    def role_pair(label: str, val: str, left_w: int = 30, right_w: int = 48):
+        t = Text(justify="center")
+        t.append(label.rjust(left_w) + "   ", style=f"dim {COLOR_GRAY_LIGHT}")
+        t.append(val.ljust(right_w), style=f"bold {COLOR_SUB}")
+        lines.append(t)
+
+    def section_header(title: str):
+        blank(2)
+        centered("═" * 68, f"dim {COLOR_GRAY_DARK}")
+        centered(title.upper(), f"bold {COLOR_GREEN}")
+        centered("═" * 68, f"dim {COLOR_GRAY_DARK}")
+        blank(1)
+
+    # 1. Opening Header / Title Card
+    blank(3)
+    centered("B U D D Y   A G E N T", f"bold {COLOR_TITLE}")
+    centered("AUTONOMOUS PAIR PROGRAMMING & CLOUD INFRASTRUCTURE ORCHESTRATION", f"bold {COLOR_CYAN}")
+    blank(1)
+    centered("SYSTEM ARCHITECTURE & TECHNICAL OPERATIONS MANUAL", f"dim {COLOR_GRAY_LIGHT}")
+    centered("Release: 2026.09-LTS • Python 3.14 • Strands Agents SDK", f"dim {COLOR_GRAY_MID}")
+    blank(3)
+
+    # 2. Executive Overview
+    section_header("1. EXECUTIVE OVERVIEW")
+    centered("Buddy Agent is an autonomous, production-grade pair programming and infrastructure orchestrator.", f"bold {COLOR_SUB}")
+    centered("It eliminates context fatigue by distributing backend engineering across specialized micro-agents.", f"dim {COLOR_PLATINUM}")
+    blank(1)
+    role_pair("Runtime Engine", "Python 3.14 + Strands Agents SDK")
+    role_pair("Core Architecture", "Hierarchical Micro-Agent Delegation")
+    role_pair("Model Layer", "Dynamic Multi-Provider Model Routing & BYOM")
+    role_pair("Tool Standard", "Standardized Model Context Protocol (MCP)")
+    role_pair("Memory Persistence", "Multi-Tier Session UUIDs + S3 + Knowledge Base")
+    role_pair("Interface HUD", "Project I.G.I. Night-Vision + Btop++ Live Telemetry")
+    blank(2)
+
+    # 3. System Architecture & Topology
+    section_header("2. SYSTEM ARCHITECTURE & TOPOLOGY")
+    centered("The system decomposes high-level user intent into structured, bounded execution plans:", f"dim {COLOR_PLATINUM}")
+    blank(1)
+    centered("┌─────────────────────────────────────────────────────────────┐", f"dim {COLOR_GRAY_MID}")
+    centered("│                   BUDDY ORCHESTRATOR                        │", f"bold {COLOR_CYAN}")
+    centered("│           (Master Planner & Intent Classifier)              │", f"dim {COLOR_GRAY_LIGHT}")
+    centered("└──────────────┬──────────────────────────────┬───────────────┘", f"dim {COLOR_GRAY_MID}")
+    centered("               │                              │                ", f"dim {COLOR_GRAY_MID}")
+    centered("      ┌────────┴─────────┐           ┌────────┴────────┐       ", f"dim {COLOR_GRAY_MID}")
+    centered("      │   API MANAGER    │           │  GITHUB AGENT   │       ", f"bold {COLOR_AMBER}")
+    centered("      │  (Schema Design) │           │ (PRs & Issues)  │       ", f"dim {COLOR_GRAY_LIGHT}")
+    centered("      └────────┬─────────┘           └─────────────────┘       ", f"dim {COLOR_GRAY_MID}")
+    centered("               │                                               ", f"dim {COLOR_GRAY_MID}")
+    centered("      ┌────────┴─────────┐           ┌─────────────────┐       ", f"dim {COLOR_GRAY_MID}")
+    centered("      │    REST AGENT    │           │  SAM CLI AGENT  │       ", f"bold {COLOR_PURPLE_SOFT}")
+    centered("      │ (FastAPI & Text) │           │(AWS Deploy/Sync)│       ", f"dim {COLOR_GRAY_LIGHT}")
+    centered("      └──────────────────┘           └─────────────────┘       ", f"dim {COLOR_GRAY_MID}")
+    blank(1)
+    role_pair("Buddy Orchestrator", "Top-level intent classification, multi-phase plans, agent routing")
+    role_pair("API Manager", "REST route architecture, strict Pydantic schemas, parameter validation")
+    role_pair("REST Agent", "FastAPI microservice implementation and atomic code editing")
+    role_pair("GitHub Agent", "Automated commits, branch management, issue tracking, and PR reviews")
+    role_pair("SAM CLI Agent", "Builds, packages, validates, and deploys CloudFormation templates")
+    blank(2)
+
+    # 4. Dynamic Model Routing & BYOM
+    section_header("3. DYNAMIC MODEL ROUTING & BYOM")
+    centered("Supports independent per-agent LLM allocation across high-speed LPUs, local weights, and cloud:", f"dim {COLOR_PLATINUM}")
+    blank(1)
+    role_pair("Groq Cloud (Default)", "qwen/qwen3.8-27b  (High-Throughput Intent Classification)")
+    role_pair("Groq Cloud (Large)", "openai/gpt-oss-120b  (Context-Heavy Analysis)")
+    role_pair("Groq Cloud (Guard)", "meta-llama/llama-prompt-guard-2-22m  (Prompt Security)")
+    role_pair("Ollama Local (Default)", "llama3.1:8b  (Local Air-Gapped Execution)")
+    role_pair("Ollama Local (Coder)", "qwen2.5-coder:32b  (Precision Code Syntax & Pydantic)")
+    role_pair("Ollama Local (Compact)", "qwen:7b  (Low-Latency Lightweight Scaffolding)")
+    role_pair("AWS Bedrock (Cloud)", "us.anthropic.claude-3-7-sonnet-20250219-v1:0  (Complex Infra)")
+    role_pair("Bring Your Own Model", "Custom syntax: groq:<model_id> or ollama:<model_id>")
+    blank(2)
+
+    # 5. Model Context Protocol (MCP) Integration
+    section_header("4. MODEL CONTEXT PROTOCOL (MCP) INTEGRATION")
+    centered("All external interactions execute via non-hardcoded MCP stdio servers:", f"dim {COLOR_PLATINUM}")
+    blank(1)
+    role_pair("GitHub MCP Client", "create_pull_request • merge_pull_request • create_issue")
+    role_pair("", "list_issues • get_issue • update_issue • create_branch")
+    role_pair("", "list_branches • create_commit • fork_repository")
+    blank(1)
+    role_pair("SAM CLI MCP Client", "sam deploy • sam sync • sam build • sam package")
+    role_pair("", "sam validate • sam logs • sam list • sam delete")
+    blank(1)
+    role_pair("Text Editor MCP Client", "create_or_update_file • replace_file_content")
+    role_pair("", "multi_replace_file_content • delete_text_file_contents")
+    role_pair("", "view_file_contents • list_directory_contents")
+    blank(2)
+
+    # 6. Memory Architecture & State Persistence
+    section_header("5. MEMORY ARCHITECTURE & PERSISTENCE")
+    centered("Multi-tier memory guarantees session continuity and prevents catastrophic forgetting:", f"dim {COLOR_PLATINUM}")
+    blank(1)
+    role_pair("Session UUID Archive", "Disk & Amazon S3 storage preserving turns & subagent models")
+    role_pair("UUID Hot-Swapping", "Paste or select any historic UUID to resume full context")
+    role_pair("Sliding Window Compression", "SafeSlidingWindow preserves system guardrails & active tools")
+    role_pair("Long-Term Vector Memory", "AWS Bedrock Knowledge Base semantic retrieval across sessions")
+    blank(2)
+
+    # 7. Main Menu Operations Manual & How It Works
+    section_header("6. MAIN MENU OPERATIONS MANUAL")
+    centered("Comprehensive guide to each Project I.G.I. HUD menu option and operational workflow:", f"dim {COLOR_PLATINUM}")
+    blank(1)
+    role_pair("1. Play Buddy Agent", "Launches interactive AI pair programming shell.")
+    role_pair("", "Accepts natural language prompts, creates FastAPI endpoints,")
+    role_pair("", "invokes MCP tools, and preserves session state upon exit.")
+    blank(1)
+    role_pair("2. Session Archive", "Displays all past conversation sessions by UUID.")
+    role_pair("", "Allows switching active context, generating fresh UUIDs,")
+    role_pair("", "or pasting past IDs to restore message history and models.")
+    blank(1)
+    role_pair("3. MCP Tools Catalog", "Inspects active tools across GitHub, SAM CLI, and Editor.")
+    role_pair("", "Shows parameter definitions and tool execution scopes.")
+    blank(1)
+    role_pair("4. Configuration", "5-tab tactical configuration screen:")
+    role_pair("  • Tab 0 (General)", "Toggle empathy compliments, sound chimes & default missions.")
+    role_pair("  • Tab 1 (Session)", "Inspect active UUID, regenerate sessions, toggle autosave.")
+    role_pair("  • Tab 2 (Satellite AI)", "Configure models per sub-agent or synchronize all to master.")
+    role_pair("  • Tab 3 (HUD Theme)", "Switch CRT themes (Phosphor Green, Matrix, Tokyo Night, etc.)")
+    role_pair("  • Tab 4 (Radar)", "Configure radar refresh rates, braille curves & telemetry.")
+    blank(1)
+    role_pair("5. Telemetry & Radar", "Full-screen live Btop++ monitoring interface.")
+    role_pair("", "Renders per-core CPU braille curves, RSS memory breakdown,")
+    role_pair("", "interactive process manager, and 360-degree sonar radar.")
+    blank(1)
+    role_pair("6. Mission Briefing", "Displays tactical keybindings and keyboard shortcuts manual.")
+    blank(1)
+    role_pair("7. End Credits & Creator", "Dune-style movie end credits for lead architect Benjamin V.")
+    blank(1)
+    role_pair("8. Read Me & Manual", "Launches this cinematic full documentation & manual scroll.")
+    blank(1)
+    role_pair("9. Quit", "Flushes active session memory and exits CLI cleanly.")
+    blank(2)
+
+    # 8. Tactical CLI Reference
+    section_header("7. CLI REFERENCE & COMMAND MANUAL")
+    centered("Available hotkeys and interactive commands:", f"dim {COLOR_PLATINUM}")
+    blank(1)
+    role_pair("/help", "Displays tactical command reference")
+    role_pair("/readme  /manual", "Launches this cinematic documentation movie scroll")
+    role_pair("/tools  /tool_list", "Lists active non-hardcoded MCP tools")
+    role_pair("/top  /monitor", "Launches live Btop++ system telemetry and radar")
+    role_pair("/menu", "Opens Project I.G.I. tactical configuration menu")
+    role_pair("/model  /models", "Opens multi-agent satellite model assignment matrix")
+    role_pair("/session", "Opens session archive, switch, or paste UUID")
+    role_pair("/demo", "Runs automated FastAPI scaffolding demonstration")
+    role_pair("/clear  /cls", "Clears terminal screen and redraws tactical HUD banner")
+    role_pair("/exit  /quit", "Saves session and exits tactical shell cleanly")
+    blank(2)
+
+    # 9. Engineering & Model Stack
+    section_header("8. ENGINEERING & FOUNDATION MODEL STACK")
+    centered("Architected and engineered using modern foundation models aligned to specific tasks:", f"dim {COLOR_PLATINUM}")
+    blank(1)
+    role_pair("Gemini 3.7 Flash", "Interface design, Project I.G.I. HUD, palette systems,")
+    role_pair("", "and real-time high-throughput telemetry rendering.")
+    blank(1)
+    role_pair("Gemini 3.7", "Complex multi-agent orchestration architecture, state persistence,")
+    role_pair("", "sliding-window context management, and MCP client protocols.")
+    blank(2)
+
+    # 10. Installation & Quickstart
+    section_header("9. INSTALLATION & QUICKSTART")
+    centered("Simple setup workflow with Python 3.14 and uv:", f"dim {COLOR_PLATINUM}")
+    blank(1)
+    role_pair("1. Clone Repository", "git clone https://github.com/BenjaminVijayaraj5102004/Buddy-agent.git")
+    role_pair("2. Install Dependencies", "cd Buddy-agent && uv sync")
+    role_pair("3. Configure Env", "cp .env.example .env (Set GROQ_API_KEY, GITHUB_PAT, OLLAMA_BASE_URL)")
+    role_pair("4. Launch HUD Menu", "uv run python cli-terminal/cli.py")
+    role_pair("5. Interactive REPL", "uv run python -m buddy.buddy")
+    role_pair("6. One-Shot Command", "uv run python cli-terminal/cli.py ask \"Create a FastAPI endpoint\"")
+    blank(3)
+
+    # 11. Closing Signature Card
+    centered("✦  BUDDY AGENT // MISSION STATUS: OPERATIONAL  ✦", f"bold {COLOR_TITLE}")
+    centered("LEAD ARCHITECT: BENJAMIN V  •  B.TECH 2027", f"bold {COLOR_GREEN}")
+    centered("github.com/BenjaminVijayaraj5102004/Buddy-agent", f"bold {COLOR_CYAN}")
+    centered("COPYRIGHT © 2026 BENJAMIN V • ALL RIGHTS RESERVED", f"dim {COLOR_GRAY_LIGHT}")
+    blank(4)
+
+    return lines
+
+
+def run_readme_movie_scroll(console: Optional[Console] = None) -> None:
+    """
+    Runs an authentic cinematic scrolling movie end-card for Buddy Agent documentation.
+    Features smooth continuous scrolling, pause/speed controls, and keyboard navigation.
+    """
     if console is None:
         console = Console()
 
-    full_content, all_sections = load_readme_sections()
-    # Filter out top Header and Table of Contents for the chapter index
-    chapters = [s for s in all_sections if s[0] not in ("Header", "Table of Contents")]
+    corpus = build_readme_movie_corpus()
 
-    while True:
-        console.clear()
-        
-        # Header Table
-        hdr_table = Table.grid(padding=(0, 1), expand=True)
-        hdr_table.add_column()
-        hdr_table.add_row(Text("📖 BUDDY AGENT // SYSTEM MANUAL & DOCUMENTATION\n", style=f"bold {IGI_GREEN_BRIGHT}", justify="center"))
-        hdr_table.add_row(Text("─" * 78, style=f"dim {COLOR_MUTED}"))
-        console.print(hdr_table)
+    # Non-blocking keypress helper
+    def get_key():
+        if sys.platform == "win32":
+            import msvcrt
+            if msvcrt.kbhit():
+                ch = msvcrt.getwch()
+                if ch in ('\x00', '\xe0'):
+                    code = msvcrt.getwch()
+                    if code in ('H', 'w', 'k'): return 'up'
+                    if code in ('P', 's', 'j'): return 'down'
+                return ch.lower()
+        return None
 
-        # Chapter Navigator Grid
-        menu_table = Table(
-            title="📑 [bold #00ff55]MANUAL CHAPTERS & ARCHITECTURE INDEX[/bold #00ff55]",
-            border_style=f"dim {COLOR_MUTED}",
-            header_style=f"bold {COLOR_PEACH}",
-            expand=True,
-            padding=(0, 1),
-        )
-        menu_table.add_column("Chapter", style=f"bold {COLOR_AMBER}", width=10)
-        menu_table.add_column("Section Title", style=f"bold {COLOR_TEXT}", ratio=4)
-        menu_table.add_column("Key Topics", style=f"dim {COLOR_MINT}", ratio=5)
+    term_height = console.height or 32
+    view_height = max(18, term_height - 3)
 
-        chapter_descriptions = {
-            "Overview": "Core capabilities, Strands framework, micro-agents",
-            "System Architecture": "Architectural layers, delegation flows & diagram",
-            "Multi-Agent Topology": "Buddy orchestrator, API manager, REST, GitHub, SAM CLI",
-            "Dynamic Model Routing and BYOM": "Groq, Ollama, AWS Bedrock catalogs & custom BYOM",
-            "Model Context Protocol (MCP) Integration": "GitHub MCP, SAM CLI MCP, Text Editor MCP tools",
-            "Memory Architecture and State Persistence": "Session UUID persistence, S3 storage, sliding window",
-            "Tactical HUD and System Telemetry": "Btop++ live braille load, memory RSS, 360° radar",
-            "Governance, Security, and Human Approval": "Human-in-the-loop (HITL) hooks, RBAC security, tracing",
-            "Engineering and Model Stack": "Gemini 3.7 Flash interface & Gemini 3.7 orchestration",
-            "Installation and Quickstart": "Prerequisites, uv setup, environment variables & run",
-            "CLI Reference": "Tactical commands, telemetry, session and model hotkeys",
-            "Project Structure": "Directory tree & module layout",
-            "Environment Configuration": "API keys, model IDs, endpoints & tracing variables",
-        }
+    total_lines = len(corpus)
+    scroll_pos = 0.0
+    scroll_speed = 0.45  # lines per tick
+    is_paused = False
 
-        for idx, (title, _) in enumerate(chapters, 1):
-            desc = chapter_descriptions.get(title, "System documentation and technical specifications")
-            menu_table.add_row(f"[{idx}]", title, desc)
+    console.clear()
 
-        console.print(menu_table)
-        console.print()
+    with Live(console=console, screen=True, auto_refresh=False) as live:
+        while True:
+            k = get_key()
+            if k in ('q', '\x1b', '\r', '\n'):
+                break
+            elif k == ' ':
+                is_paused = not is_paused
+            elif k in ('+', '='):
+                scroll_speed = min(2.5, scroll_speed + 0.15)
+            elif k in ('-', '_'):
+                scroll_speed = max(0.15, scroll_speed - 0.15)
+            elif k in ('up', 'w', 'k'):
+                scroll_pos = max(0.0, scroll_pos - 3)
+            elif k in ('down', 's', 'j'):
+                scroll_pos = min(float(total_lines - view_height), scroll_pos + 3)
 
-        nav_info = Text("Commands: [1-" + str(len(chapters)) + "] View Chapter  •  [F] Full Document  •  [P] Terminal Pager  •  [Q / Enter] Return", style=f"bold {COLOR_MINT}", justify="center")
-        console.print(nav_info)
-        console.print()
+            # Advance scrolling position
+            if not is_paused:
+                scroll_pos += scroll_speed
+                if scroll_pos >= total_lines:
+                    scroll_pos = 0.0  # Loop back smoothly
 
-        choice = Prompt.ask(
-            f"[{COLOR_PEACH}]Select Chapter [1-{len(chapters)}, F, P, Q][/{COLOR_PEACH}]",
-            default="q"
-        ).strip().lower()
+            # Extract window of lines
+            start_idx = int(scroll_pos)
+            end_idx = min(total_lines, start_idx + view_height)
+            visible_lines = corpus[start_idx:end_idx]
 
-        if choice in ("q", "quit", "exit", ""):
-            break
-        elif choice in ("f", "all", "full"):
-            console.clear()
-            console.print(Text("─" * 78, style=f"dim {COLOR_MUTED}"))
-            console.print(Markdown(full_content, code_theme="monokai", hyperlinks=True))
-            console.print(Text("─" * 78, style=f"dim {COLOR_MUTED}"))
-            console.input(f"\n[{COLOR_MINT}]Press Enter to return to Chapter Index...[/{COLOR_MINT}]")
-        elif choice in ("p", "pager"):
-            with console.pager(styles=True):
-                console.print(Markdown(full_content, code_theme="monokai", hyperlinks=True))
-        elif choice.isdigit():
-            c_idx = int(choice) - 1
-            if 0 <= c_idx < len(chapters):
-                title, body = chapters[c_idx]
-                console.clear()
-                
-                # Render Section
-                console.print(Text("─" * 78, style=f"bold {COLOR_PEACH}"))
-                console.print(Text(f"📖 CHAPTER {choice}: {title.upper()}\n", style=f"bold {IGI_GREEN_BRIGHT}", justify="center"))
-                console.print(Text("─" * 78, style=f"dim {COLOR_MUTED}"))
-                console.print(Markdown(body, code_theme="monokai", hyperlinks=True))
-                console.print(Text("─" * 78, style=f"dim {COLOR_MUTED}"))
-                console.input(f"\n[{COLOR_MINT}]Press Enter to return to Chapter Index...[/{COLOR_MINT}]")
+            # Build borderless grid
+            grid = Table.grid(padding=(0, 0), expand=True)
+            grid.add_column()
+
+            for line in visible_lines:
+                grid.add_row(line)
+
+            # Fill remaining rows if needed
+            for _ in range(view_height - len(visible_lines)):
+                grid.add_row(Text(""))
+
+            # Discrete bottom HUD controls
+            status_str = "PAUSED" if is_paused else f"{scroll_speed:.2f}x"
+            hud_footer = Text(
+                f"   [Space] {status_str}   •   [+/-] Speed   •   [▲/▼] Scroll   •   [q / Enter] Return",
+                style="dim #3f3f46",
+                justify="center"
+            )
+            grid.add_row(hud_footer)
+
+            live.update(grid, refresh=True)
+            time.sleep(0.06)
+
+
+def show_readme_dialog(console: Optional[Console] = None) -> None:
+    """Entrypoint to launch the cinematic README & Manual movie end-card scroll."""
+    run_readme_movie_scroll(console)
+
