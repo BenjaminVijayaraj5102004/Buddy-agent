@@ -12,9 +12,9 @@ from .theme import get_theme
 from .state import SessionState
 
 
-def render_banner(session: SessionState, theme_name: Optional[str] = None) -> Panel:
+def render_banner(session: SessionState, theme_name: Optional[str] = None) -> Table:
     """
-    Renders a clean, compact tactical header for the interactive chat shell.
+    Renders a clean, sleek, compact tactical header for the interactive chat shell with zero box borders.
     """
     active_theme_name = theme_name or getattr(session, "theme", "igi")
     t = get_theme(active_theme_name)
@@ -26,7 +26,7 @@ def render_banner(session: SessionState, theme_name: Optional[str] = None) -> Pa
 
     left = Text()
     left.append("⚡ BUDDY AGENT ", style=f"bold {t['highlight']}")
-    left.append("│ ", style=f"dim {t.get('box_border', t['box'])}")
+    left.append("│ ", style=f"dim {t.get('box_border', t['dim_text'])}")
     left.append("● ONLINE ", style=f"bold {t['meter_low']}")
     left.append(f"• 0x{session.session_id[:8].upper()} ", style=f"bold {t['dim_text']}")
     left.append(f"• Model: {model_info['name']}", style=f"dim {t['text']}")
@@ -38,8 +38,8 @@ def render_banner(session: SessionState, theme_name: Optional[str] = None) -> Pa
 
     content.add_row(left, right)
 
-    return Panel(
-        content,
-        border_style=f"dim {t['highlight']}",
-        padding=(0, 1),
-    )
+    wrapper = Table.grid(padding=(0, 0), expand=True)
+    wrapper.add_column()
+    wrapper.add_row(content)
+    wrapper.add_row(Text("─" * 78, style=f"dim {t.get('box_border', t['dim_text'])}"))
+    return wrapper

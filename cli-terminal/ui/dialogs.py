@@ -49,7 +49,6 @@ def show_help_table(console: Optional[Console] = None) -> None:
         ("/menu", "Interface", "Open Project I.G.I. 3D tactical HUD configuration menu"),
         ("/model", "AI Satellite", "Switch LLM satellite (Groq Llama-3.3, Bedrock Claude, Ollama)"),
         ("/session", "Memory", "View, paste, or switch session UUID and context"),
-        ("/demo", "Mission", "Execute automated FastAPI health-check agent demo"),
         ("/clear", "Display", "Clear screen and redraw tactical HUD banner"),
         ("/help", "Manual", "Display this tactical command reference"),
         ("/exit", "System", "Save session and exit tactical shell cleanly"),
@@ -131,7 +130,10 @@ def show_session_dialog(session: SessionState, console: Optional[Console] = None
     box_content.append("💡 Copy the UUID above to resume this exact state anytime.", style="italic #38bdf8")
 
     console.print()
-    console.print(Panel(box_content, title="[bold #00ff55] 💾 BUDDY AGENT // SESSION CONTEXT [/]", border_style="bold #00ff55", padding=(1, 2)))
+    console.print(Text("💾 BUDDY AGENT // SESSION CONTEXT", style="bold #00ff55", justify="center"))
+    console.print(Text("─" * 78, style="dim #15803d", justify="center"))
+    console.print(box_content)
+    console.print(Text("─" * 78, style="dim #15803d", justify="center"))
     console.print()
 
     if stored_sessions:
@@ -267,16 +269,9 @@ def show_readme_dialog(console: Optional[Console] = None) -> None:
         table.add_row(Text(f"\n{title}", style=f"bold {COLOR_PEACH}"))
         table.add_row(Text(body, style=f"dim {COLOR_TEXT}"))
 
-    table.add_row(Text("\n" + "─" * 78, style=f"dim {COLOR_MUTED}"))
+    table.add_row(Text("\n" + "─" * 78, style=f"dim {COLOR_MUTED}", justify="center"))
     table.add_row(Text("Press Enter or 'q' to return to tactical menu...", style=f"bold {COLOR_MINT}", justify="center"))
 
-    panel = Panel(
-        table,
-        title="📖 [bold #00ff55]TACTICAL README // OPERATIONS MANUAL[/bold #00ff55]",
-        border_style=f"bold {IGI_GREEN_BRIGHT}",
-        padding=(1, 2)
-    )
-
     console.print()
-    console.print(panel)
+    console.print(table)
     console.print()

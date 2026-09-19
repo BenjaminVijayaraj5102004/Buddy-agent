@@ -38,7 +38,7 @@ AESTHETIC_EMERALD_GLOW = "#00ff66"
 AESTHETIC_CYAN_DIM = "#38bdf8"
 
 
-def get_benjamin_black_aesthetic_portrait(width: int = 40) -> List[Text]:
+def get_benjamin_black_aesthetic_portrait(width: int = 42) -> List[Text]:
     """
     Renders Benjamin's photo as high-contrast Black Aesthetic character art.
     Uses multi-stage contrast stretching and platinum/obsidian shaded ramps.
@@ -67,8 +67,17 @@ def get_benjamin_black_aesthetic_portrait(width: int = 40) -> List[Text]:
             for y in range(height):
                 t = Text(justify="center")
                 for x in range(width):
-                    val = img_resized.getpixel((x, y))
-                    char_idx = int(val / 255 * (len(ASCII_RAMP) - 1))
+                    pixel = img_resized.getpixel((x, y))
+                    if isinstance(pixel, (tuple, list)) and len(pixel) > 0:
+                        val = pixel[0] if pixel[0] is not None else 0
+                    elif isinstance(pixel, int):
+                        val = pixel
+                    elif isinstance(pixel, float):
+                        val = int(pixel)
+                    else:
+                        val = 0
+                    char_idx = int((val / 255) * (len(ASCII_RAMP) - 1))
+                    char_idx = max(0, min(char_idx, len(ASCII_RAMP) - 1))
                     char = ASCII_RAMP[char_idx]
 
                     # High-contrast black aesthetic metallic gradient
@@ -123,10 +132,9 @@ def build_credits_corpus() -> List[Text]:
 
     def section_header(title: str):
         blank(2)
-       
         centered(title.upper(), style=f"bold {AESTHETIC_SILVER}")
         blank(1)
-       
+
     blank(3)
     centered("B U D D Y   A G E N T", f"bold {AESTHETIC_WHITE}")
     centered("A U T O N O M O U S   A I   S Y S T E M S", f"dim {AESTHETIC_GRAY_LIGHT}")
@@ -134,7 +142,7 @@ def build_credits_corpus() -> List[Text]:
     centered("OFFICIAL PROJECT CREDITS", f"dim {AESTHETIC_GRAY_MID}")
     blank(3)
 
-    # 2. Creator Card & Black Aesthetic Portrait
+    # 2. Creator Card & Black Aesthetic Photo Portrait
     section_header("CREATOR & LEAD ARCHITECT")
     centered("B E N J A M I N   V", f"bold {AESTHETIC_WHITE}")
     centered("AI Engineer  •  Backend Engineer  •  Systems Architect", f"bold {AESTHETIC_SILVER}")
@@ -197,7 +205,7 @@ def build_credits_corpus() -> List[Text]:
     role_pair("Agent Orchestration Framework", "Strands Agents SDK (Python 3.14)")
     role_pair("Sub-Agent Delegation Layer", "API Manager • SAM CLI Deploy Agent • GitHub Agent")
     role_pair("Model Context Protocol (MCP)", "GitHub MCP Client • SAM CLI MCP • Text Editor MCP")
-    role_pair("Tactical Interface Engine", "Project I.G.I. Tactical HUD • Word-Sculpted ASCII Mask")
+    role_pair("Tactical Interface Engine", "Project I.G.I. Tactical HUD • Black Aesthetic Character Matrix")
     role_pair("Telemetry & Sonar Radar", "Btop++ Real-Time Hardware & CPU Braille Monitor")
     role_pair("Interactive REPL & Hotkeys", "Prompt-Toolkit 3.0 • Rich Interactive TUI Engine")
     role_pair("Session & Memory Architecture", "Resilient Session Manager • Multi-Tier Conversation Archive")

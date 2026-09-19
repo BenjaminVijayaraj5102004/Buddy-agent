@@ -12,16 +12,16 @@ from .theme import get_theme
 
 
 def render_igi_header(version="V1.2.0", theme_name: str = "igi") -> Text:
-    """Renders the iconic Project I.G.I. 3D extruded military HUD header."""
+    """Renders the iconic Project I.G.I. 3D extruded military HUD header cleanly centered."""
     t_colors = get_theme(theme_name)
     color_bright = t_colors.get("highlight", IGI_GREEN_BRIGHT)
     color_dim = t_colors.get("box_border", IGI_GREEN_DIM)
     color_white = t_colors.get("text", IGI_WHITE)
     color_steel = t_colors.get("dim_text", IGI_METALLIC)
 
-    t = Text()
+    t = Text(justify="center")
     # P R O J E C T
-    t.append("P   R   O   J   E   C   T".center(80) + "\n", style=f"bold {color_steel}")
+    t.append("P   R   O   J   E   C   T\n", style=f"bold {color_steel}")
     
     # 3D Steel / Night-Vision Letters: B U D D Y . A G E N T
     logo_lines = [
@@ -30,8 +30,8 @@ def render_igi_header(version="V1.2.0", theme_name: str = "igi") -> Text:
         ("▀▀▀░ ░▀▀▀ ▀▀▀░ ▀▀▀░ ▄▄▄█ ░  ▀░░▀ ▀▀▀▀ ▀▀▀▀ ▀░░▀▀ ░░▀░░", f"bold {color_dim}"),
     ]
     for row_text, color in logo_lines:
-        t.append(row_text.center(80) + "\n", style=color)
-    t.append(f"{version}".rjust(65) + "\n", style=f"dim {color_steel}")
+        t.append(row_text + "\n", style=color)
+    t.append(f"{version}\n", style=f"dim {color_steel}")
     return t
 
 

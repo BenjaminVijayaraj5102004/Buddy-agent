@@ -37,8 +37,8 @@ from .config import (
 )
 
 
-def render_igi_main_menu(selected_idx: int = 0, theme_name: str = "igi", session_id: str = "") -> Panel:
-    """Renders the authentic Project I.G.I. tactical main menu with Session Archive included."""
+def render_igi_main_menu(selected_idx: int = 0, theme_name: str = "igi", session_id: str = "") -> Table:
+    """Renders the clean, borderless Project I.G.I. tactical main menu."""
     t_colors = get_theme(theme_name)
     color_bright = t_colors.get("highlight", IGI_GREEN_BRIGHT)
     color_mid = t_colors.get("title", IGI_GREEN_MID)
@@ -49,12 +49,11 @@ def render_igi_main_menu(selected_idx: int = 0, theme_name: str = "igi", session
     menu_items = [
         ("Play Buddy Agent", f"Launch interactive AI pair programming tactical shell ({sid_short})"),
         ("Session Archive & Memory", f"View, switch, or paste session UUID to resume context"),
-        ("Tactical Demo", "Execute automated FastAPI & SAM scaffold mission"),
         ("MCP Tools Catalog", "Explore active GitHub, SAM CLI & Text Editor MCP tools"),
         ("Configuration", "Configure satellite AI models, sessions, HUD themes & radar"),
         ("Telemetry & Radar", "Full-screen live system resources, interactive processes & AI radar"),
         ("Mission Briefing", "View tactical keybindings and operations manual"),
-        ("End Credits & Creator", "Cinematic Dune-style end credits & Benjamin's AI profile"),
+        ("End Credits & Creator", "Cinematic Dune-style end credits & Anonymous AI profile"),
         ("Read Me & Manual", "System topology, MCP specifications & architecture overview"),
         ("Quit", "Abort mission and exit CLI"),
     ]
@@ -62,9 +61,9 @@ def render_igi_main_menu(selected_idx: int = 0, theme_name: str = "igi", session
     content = Table.grid(padding=(0, 0), expand=True)
     content.add_column()
     
-    hdr = Text("Main Menu\n", style=f"bold {color_white}", justify="center")
+    hdr = Text("MAIN MENU", style=f"bold {color_white}", justify="center")
     content.add_row(hdr)
-    content.add_row(Text("─" * 78, style=f"dim {color_mid}"))
+    content.add_row(Text("─" * 78, style=f"dim {color_mid}", justify="center"))
     content.add_row(Text(""))
     
     grid = Table.grid(padding=(0, 2), expand=True)
@@ -83,20 +82,16 @@ def render_igi_main_menu(selected_idx: int = 0, theme_name: str = "igi", session
         
     content.add_row(grid)
     content.add_row(Text(""))
-    content.add_row(Text("─" * 78, style=f"dim {color_mid}"))
+    content.add_row(Text("─" * 78, style=f"dim {color_mid}", justify="center"))
     
     foot = Text("Read Me [r]   •   Credits [c]   •   ▲/▼ Navigate   •   Enter Select   •   q Quit", style=f"bold {color_mid}", justify="center")
     content.add_row(foot)
     
-    return Panel(
-        content,
-        border_style=f"bold {color_bright}",
-        padding=(1, 2),
-    )
+    return content
 
 
-def render_igi_options_menu(active_tab: int, selected_opt: int, session_obj) -> Panel:
-    """Renders the authentic Project I.G.I. 5-tab tactical configuration screen (General, Session, Satellite AI, Theme, Radar)."""
+def render_igi_options_menu(active_tab: int, selected_opt: int, session_obj) -> Table:
+    """Renders the clean, borderless 5-tab tactical configuration screen (General, Session, Satellite AI, Theme, Radar)."""
     theme_name = getattr(session_obj, "theme", "igi")
     t_colors = get_theme(theme_name)
     color_bright = t_colors.get("highlight", IGI_GREEN_BRIGHT)
@@ -116,9 +111,9 @@ def render_igi_options_menu(active_tab: int, selected_opt: int, session_obj) -> 
         else:
             tab_hdr.append(f"    {tab_name}    ", style=f"bold {color_steel}")
     
-    content.add_row(Text(f"Configuration Options\n", style=f"bold {color_white}", justify="center"))
+    content.add_row(Text(f"CONFIGURATION OPTIONS\n", style=f"bold {color_white}", justify="center"))
     content.add_row(Align.center(tab_hdr))
-    content.add_row(Text("─" * 78, style=f"dim {color_mid}"))
+    content.add_row(Text("─" * 78, style=f"dim {color_mid}", justify="center"))
     content.add_row(Text(""))
 
     grid = Table.grid(padding=(0, 2), expand=True)
@@ -186,19 +181,15 @@ def render_igi_options_menu(active_tab: int, selected_opt: int, session_obj) -> 
 
     content.add_row(grid)
     content.add_row(Text(""))
-    content.add_row(Text("─" * 78, style=f"dim {color_mid}"))
+    content.add_row(Text("─" * 78, style=f"dim {color_mid}", justify="center"))
     foot = Text("Tab Switch Category   •   ▲/▼ Navigate   •   Enter Toggle/Select   •   q / Esc Return", style=f"bold {color_mid}", justify="center")
     content.add_row(foot)
 
-    return Panel(
-        content,
-        border_style=f"bold {color_bright}",
-        padding=(1, 2),
-    )
+    return content
 
 
-def render_igi_help_modal(theme_name: str = "igi") -> Panel:
-    """Renders the Mission Briefing & Tactical Operations Manual."""
+def render_igi_help_modal(theme_name: str = "igi") -> Table:
+    """Renders the Mission Briefing & Tactical Operations Manual borderless."""
     t_colors = get_theme(theme_name)
     color_bright = t_colors.get("highlight", IGI_GREEN_BRIGHT)
     color_mid = t_colors.get("title", IGI_GREEN_MID)
@@ -206,7 +197,7 @@ def render_igi_help_modal(theme_name: str = "igi") -> Panel:
     color_amber = t_colors.get("meter_high", IGI_AMBER)
 
     content = Table.grid(padding=(0, 2), expand=True)
-    content.add_column(style=f"bold {color_amber}", width=20)
+    content.add_column(style=f"bold {color_amber}", width=22)
     content.add_column(style=f"bold {color_white}")
 
     content.add_row("MISSION OBJECTIVE:", "Autonomous AI Pair Programming & Tactical Infrastructure")
@@ -221,12 +212,14 @@ def render_igi_help_modal(theme_name: str = "igi") -> Panel:
     content.add_row("  • /session, /tools, /help", "Interactive commands available inside AI shell")
     content.add_row("  • q / Esc", "Return to main HUD / Abort mission")
 
-    return Panel(
-        content,
-        title=f"[bold {color_bright}] 📖 PROJECT BUDDY // MISSION BRIEFING [/]",
-        border_style=f"bold {color_bright}",
-        padding=(1, 2),
-    )
+    wrapper = Table.grid(padding=(0, 0), expand=True)
+    wrapper.add_column()
+    wrapper.add_row(Text("📖 PROJECT BUDDY // MISSION BRIEFING\n", style=f"bold {color_bright}", justify="center"))
+    wrapper.add_row(Text("─" * 78, style=f"dim {color_mid}", justify="center"))
+    wrapper.add_row(content)
+    wrapper.add_row(Text("─" * 78, style=f"dim {color_mid}", justify="center"))
+    wrapper.add_row(Text("Press 'q' or Esc to return to Main Menu", style=f"bold {color_mid}", justify="center"))
+    return wrapper
 
 
 def run_btop_game_interface(session_obj, console_obj: Optional[Console] = None):
@@ -282,7 +275,7 @@ def run_btop_game_interface(session_obj, console_obj: Optional[Console] = None):
                         options_opt_idx = max(0, options_opt_idx - 1)
                 elif key in ('j', 'down', 's_key'):
                     if current_screen == "main_menu":
-                        main_menu_idx = min(9, main_menu_idx + 1)
+                        main_menu_idx = min(8, main_menu_idx + 1)
                     elif current_screen == "options":
                         max_opt = 4 if options_tab == 3 else (3 if options_tab in (1, 4) else (2 if options_tab in (0, 2) else 3))
                         options_opt_idx = min(max_opt, options_opt_idx + 1)
@@ -328,30 +321,18 @@ def run_btop_game_interface(session_obj, console_obj: Optional[Console] = None):
                             console_obj.input("\n[bold #00ff55]Press Enter to return to Project I.G.I. tactical menu...[/]")
                             console_obj.clear()
                             live.start()
-                        elif main_menu_idx == 2:  # TACTICAL DEMO
-                            live.stop()
-                            console_obj.clear()
-                            from .executor import execute_agent_task
-                            execute_agent_task(
-                                "Create a POST health check endpoint using FastAPI and python framework and store it as app.py",
-                                session_obj,
-                                console_obj
-                            )
-                            console_obj.input("\n[bold #00ff55]Press Enter to return to Project I.G.I. tactical menu...[/]")
-                            console_obj.clear()
-                            live.start()
-                        elif main_menu_idx == 3:  # MCP TOOLS CATALOG
+                        elif main_menu_idx == 2:  # MCP TOOLS CATALOG
                             live.stop()
                             console_obj.clear()
                             show_tool_list_table(console_obj)
                             console_obj.input("\n[bold #00ff55]Press Enter to return to Project I.G.I. tactical menu...[/]")
                             console_obj.clear()
                             live.start()
-                        elif main_menu_idx == 4:  # CONFIGURATION
+                        elif main_menu_idx == 3:  # CONFIGURATION
                             current_screen = "options"
                             options_tab = 0
                             options_opt_idx = 0
-                        elif main_menu_idx == 5:  # TELEMETRY & RADAR (ACTUAL FULL BTOP FEATURES)
+                        elif main_menu_idx == 4:  # TELEMETRY & RADAR (ACTUAL FULL BTOP FEATURES)
                             live.stop()
                             flush_input()
                             active_theme = getattr(session_obj, "theme", "igi")
@@ -365,23 +346,23 @@ def run_btop_game_interface(session_obj, console_obj: Optional[Console] = None):
                             if hasattr(console_obj, "clear") and hasattr(sys.stdout, "isatty") and sys.stdout.isatty():
                                 console_obj.clear()
                             live.start()
-                        elif main_menu_idx == 6:  # MISSION BRIEFING
+                        elif main_menu_idx == 5:  # MISSION BRIEFING
                             current_screen = "help"
-                        elif main_menu_idx == 7:  # END CREDITS & CREATOR
+                        elif main_menu_idx == 6:  # END CREDITS & CREATOR
                             live.stop()
                             flush_input()
                             run_credits_movie_scroll(console_obj)
                             flush_input()
                             console_obj.clear()
                             live.start()
-                        elif main_menu_idx == 8:  # READ ME & MANUAL
+                        elif main_menu_idx == 7:  # READ ME & MANUAL
                             live.stop()
                             flush_input()
                             show_readme_dialog(console_obj)
                             flush_input()
                             console_obj.clear()
                             live.start()
-                        elif main_menu_idx == 9:  # QUIT
+                        elif main_menu_idx == 8:  # QUIT
                             break
                     elif current_screen == "options":
                         if options_tab == 0:  # General
