@@ -1,0 +1,26 @@
+{
+  "message": {
+    "role": "assistant",
+    "content": [
+      {
+        "text": "Here’s a **complete FastAPI module** you can drop into the `app` folder as `matrix.py`.  \nIt defines a **POST** endpoint (`/cart/items`) that validates incoming item data with Pydantic, then forwards the request to an external cart‑management microservice (configured via the `CART_SERVICE_URL` environment variable). No direct database work is performed.\n\n--- \n\n## `app/matrix.py`\n\n```python\n\"\"\"\nFastAPI router for adding items to a shopping cart.\n\n- Endpoint: POST /cart/items\n- Validation: Pydantic model (`Item`)\n- Forwarding: async POST to CART_SERVICE_URL (no DB queries)\n- Responses: standardized `CartResponse` model\n\"\"\"\n\nimport os\nfrom fastapi import APIRouter, HTTPException, status\nfrom pydantic import BaseModel, Field\nimport httpx\n\nrouter = APIRouter()\n\n\n# ----------------------------------------------------------------------\n# Pydantic Schemas\n# ----------------------------------------------------------------------\nclass Item(BaseModel):\n    \"\"\"Payload sent by the client to add an item to the cart.\"\"\"\n    item_id: int\n    quantity: int = Field(..., gt=0, description=\"Must be a positive integer\")\n    price: float = Field(..., ge=0, description=\"Price cannot be negative\")\n    name: str | None = None\n    description: str | None = None\n\n\nclass CartResponse(BaseModel):\n    \"\"\"Standardised response returned to the API consumer.\"\"\"\n    success: bool\n    message: str\n    data: dict | None = None\n\n\n# ----------------------------------------------------------------------\n# Endpoint\n# ----------------------------------------------------------------------\n@router.post(\n    \"/cart/items\",\n    response_model=CartResponse,\n    status_code=status.HTTP_200_OK,\n    tags=[\"Cart\"],\n)\nasync def add_item_to_cart(item: Item) -> CartResponse:\n    \"\"\"\n    Validate the incoming `Item` and forward it to the external cart service.\n    \"\"\"\n    # 1️⃣ Grab the downstream service URL from the environment.\n    cart_service_url = os.getenv(\"CART_SERVICE_URL\")\n    if not cart_service_url:\n        raise HTTPException(\n            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,\n            detail=\"CART_SERVICE_URL environment variable is not set\",\n        )\n\n    # 2️⃣ Forward the request – using async httpx for non‑blocking I/O.\n    async with httpx.AsyncClient() as client:\n        try:\n            response = await client.post(\n                cart_service_url,\n                json=item.model_dump(),   # .model_dump() works for both pydantic v1 & v2\n                timeout=10.0,\n            )\n        except httpx.RequestError as exc:\n            raise HTTPException(\n                status_code=status.HTTP_502_BAD_GATEWAY,\n                detail=f\"Unable to reach cart service: {exc}\",\n            )\n\n    # 3️⃣ Propagate errors from the downstream service.\n    if not response.is_success:\n        raise HTTPException(\n            status_code=status.HTTP_502_BAD_GATEWAY,\n            detail=(\n                f\"Cart service error {response.status_code}: \"\n                f\"{response.text.strip()}\"\n            ),\n        )\n\n    # 4️⃣ Build a clean response for the client.\n    try:\n        payload = response.json()\n    except ValueError:  # response not JSON\n        payload = {\"raw\": response.text}\n\n    return CartResponse(\n        success=True,\n        message=\"Item added to cart\",\n        data=payload,\n    )\n\n\n# Export the router for inclusion in the main FastAPI app.\n__all__ = [\"router\", \"Item\", \"CartResponse\"]\n```\n\n### How to Wire It Up\n\n```python\n# main.py (or wherever you create the FastAPI app)\nfrom fastapi import FastAPI\nfrom app.matrix import router as cart_router\n\napp = FastAPI(title=\"Shopping Cart API\")\napp.include_router(cart_router)\n```\n\n### What the Code Does\n\n| Step | Explanation |\n|------|--------------|\n| **Pydantic validation** | Guarantees `item_id`, `quantity (>0)`, `price (≥0)`, optional `name`/`description`. |\n| **Environment config** | `CART_SERVICE_URL` must be set (e.g., `https://cart‑svc.example.com/add`). |\n| **Forwarding** | Uses `httpx.AsyncClient` to POST the validated JSON to the microservice. |\n| **Error handling** | *Missing env var* → 500, *network issues* → 502, *non‑2xx downstream* → 502, with clear messages. |\n| **Response** | Returns a uniform `CartResponse` (`success`, `message`, optional `data`). |\n\nAll requirements are satisfied: a POST endpoint, data validation, no direct DB interaction, and forwarding to a dedicated cart microservice. 🎉"
+      }
+    ],
+    "metadata": {
+      "usage": {
+        "inputTokens": 1861,
+        "outputTokens": 988,
+        "totalTokens": 2849
+      },
+      "metrics": {
+        "latencyMs": 0,
+        "timeToFirstByteMs": 19109
+      }
+    },
+    "tracking_id": "e914419b-09d0-4ea7-bf1e-c75a5ddfea49"
+  },
+  "message_id": 3,
+  "redact_message": null,
+  "created_at": "2026-09-19T16:53:54.533087+00:00",
+  "updated_at": "2026-09-19T16:53:54.533091+00:00"
+}

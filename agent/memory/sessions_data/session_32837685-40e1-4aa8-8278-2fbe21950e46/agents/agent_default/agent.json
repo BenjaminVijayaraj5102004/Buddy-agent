@@ -1,0 +1,22 @@
+{
+  "agent_id": "default",
+  "state": {
+    "agent_skills": {
+      "last_injected_xml": "<available_skills>\n<skill>\n<name>rest-agent</name>\n<description>REST API Architect skill for authoring Pydantic v2 schemas, FastAPI routes, and saving code to disk via Text Editor MCP tools.</description>\n<location>E:\\Hackathon\\buddy-agent\\agent\\skills\\rest-agent\\SKILL.md</location>\n</skill>\n</available_skills>"
+    }
+  },
+  "conversation_manager_state": {
+    "__name__": "SlidingWindowConversationManager",
+    "removed_message_count": 0
+  },
+  "_internal_state": {
+    "interrupt_state": {
+      "interrupts": {},
+      "context": {},
+      "activated": false
+    },
+    "model_state": {}
+  },
+  "created_at": "2026-09-19T03:51:50.595705+00:00",
+  "updated_at": "2026-09-19T03:52:17.277028+00:00"
+}

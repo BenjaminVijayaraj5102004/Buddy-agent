@@ -1,0 +1,11 @@
+{
+  "session_id": "7764d37d-d56e-44b5-8ebe-839d6e8c019a",
+  "session_type": "agent",
+  "model_key": "ollama",
+  "subagent_models": {
+    "main": "ollama",
+    "api": "groq",
+    "sam": "groq",
+    "github": "ollama"
+  }
+}

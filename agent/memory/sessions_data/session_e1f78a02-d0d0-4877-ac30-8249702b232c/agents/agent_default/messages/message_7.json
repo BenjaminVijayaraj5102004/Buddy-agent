@@ -1,0 +1,32 @@
+{
+  "message": {
+    "role": "assistant",
+    "content": [
+      {
+        "toolUse": {
+          "toolUseId": "tooluse_fceadc39d3ad4e98847884bf",
+          "name": "api_manager",
+          "input": {
+            "task_description": "Create a Kafka API endpoint"
+          }
+        }
+      }
+    ],
+    "metadata": {
+      "usage": {
+        "inputTokens": 1659,
+        "outputTokens": 22,
+        "totalTokens": 1681
+      },
+      "metrics": {
+        "latencyMs": 21613,
+        "timeToFirstByteMs": 32
+      }
+    },
+    "tracking_id": "9af268c9-3d61-437c-b2cb-f985c4e92a67"
+  },
+  "message_id": 7,
+  "redact_message": null,
+  "created_at": "2026-09-19T13:45:59.845650+00:00",
+  "updated_at": "2026-09-19T13:45:59.845656+00:00"
+}

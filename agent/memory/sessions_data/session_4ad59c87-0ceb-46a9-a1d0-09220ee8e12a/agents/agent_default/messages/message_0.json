@@ -1,0 +1,15 @@
+{
+  "message": {
+    "role": "user",
+    "content": [
+      {
+        "text": "Create a sam template in app folder"
+      }
+    ],
+    "tracking_id": "b55ed93c-898c-4010-9e75-30472a2b5145"
+  },
+  "message_id": 0,
+  "redact_message": null,
+  "created_at": "2026-09-19T15:49:33.960237+00:00",
+  "updated_at": "2026-09-19T15:49:33.960241+00:00"
+}

@@ -1,0 +1,26 @@
+{
+  "message": {
+    "role": "assistant",
+    "content": [
+      {
+        "text": "Hello! 👋 How can I help you today? Feel free to let me know what you’re working on—whether it’s building an API, setting up AWS SAM, or anything else you need assistance with."
+      }
+    ],
+    "metadata": {
+      "usage": {
+        "inputTokens": 779,
+        "outputTokens": 86,
+        "totalTokens": 865
+      },
+      "metrics": {
+        "latencyMs": 0,
+        "timeToFirstByteMs": 745
+      }
+    },
+    "tracking_id": "f79b5f3f-158d-4023-aa62-87db11ca6fa5"
+  },
+  "message_id": 1,
+  "redact_message": null,
+  "created_at": "2026-09-19T09:18:21.582559+00:00",
+  "updated_at": "2026-09-19T09:18:21.582564+00:00"
+}

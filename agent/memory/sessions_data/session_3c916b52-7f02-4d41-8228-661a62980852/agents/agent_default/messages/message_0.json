@@ -1,0 +1,15 @@
+{
+  "message": {
+    "role": "user",
+    "content": [
+      {
+        "text": "Create a SAM deploy template (template.yaml) in the 'app' folder. The template should define a simple AWS Lambda function written in Python, using the provided code in the app folder (if any), with appropriate runtime, handler, and necessary IAM role policies. Include basic configuration for deployment, such as a simple API Gateway event (GET /). Ensure the template is ready for `sam build` and `sam deploy` commands.\n[Workspace Directory: E:\\Hackathon\\buddy-agent]"
+      }
+    ],
+    "tracking_id": "adb6f913-5867-4e48-814e-d10bde976d3d"
+  },
+  "message_id": 0,
+  "redact_message": null,
+  "created_at": "2026-09-19T16:07:07.242568+00:00",
+  "updated_at": "2026-09-19T16:07:07.242572+00:00"
+}

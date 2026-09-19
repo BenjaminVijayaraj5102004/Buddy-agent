@@ -1,0 +1,15 @@
+{
+  "message": {
+    "role": "user",
+    "content": [
+      {
+        "text": "can you add kafa endpoint for this"
+      }
+    ],
+    "tracking_id": "039de491-e145-46ec-a2ba-f729fb67749f"
+  },
+  "message_id": 6,
+  "redact_message": null,
+  "created_at": "2026-09-19T13:45:37.922739+00:00",
+  "updated_at": "2026-09-19T13:45:37.922750+00:00"
+}

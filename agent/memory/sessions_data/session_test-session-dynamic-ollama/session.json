@@ -1,0 +1,5 @@
+{
+  "session_id": "test-session-dynamic-ollama",
+  "session_type": "agent",
+  "model_key": "ollama:qwen2.5-coder:32b"
+}

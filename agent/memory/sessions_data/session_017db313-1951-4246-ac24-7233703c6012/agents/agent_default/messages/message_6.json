@@ -1,0 +1,15 @@
+{
+  "message": {
+    "role": "user",
+    "content": [
+      {
+        "text": "discuss previous conversation"
+      }
+    ],
+    "tracking_id": "b1c36b50-8d0f-46f6-896d-191fd88bb601"
+  },
+  "message_id": 6,
+  "redact_message": null,
+  "created_at": "2026-09-19T14:11:14.698045+00:00",
+  "updated_at": "2026-09-19T14:11:14.698057+00:00"
+}

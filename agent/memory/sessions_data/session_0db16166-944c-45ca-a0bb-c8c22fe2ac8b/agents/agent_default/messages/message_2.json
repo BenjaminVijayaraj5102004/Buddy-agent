@@ -1,0 +1,34 @@
+{
+  "message": {
+    "role": "user",
+    "content": [
+      {
+        "toolResult": {
+          "status": "success",
+          "toolUseId": "fc_0e958b04-8022-4d8b-88f4-ace1db25f293",
+          "content": [
+            {
+              "text": "{\n  \"result\": \"ok\",\n  \"file_hash\": \"7c720d6d130187b975267ce5770001cc1e540ef63e974b0195cdb8812d2e051b\",\n  \"reason\": null,\n  \"suggestion\": \"append\",\n  \"hint\": \"For new or empty files, please consider using append_text_file_contents instead\"\n}"
+            }
+          ],
+          "structuredContent": {
+            "result": [
+              {
+                "type": "text",
+                "text": "{\n  \"result\": \"ok\",\n  \"file_hash\": \"7c720d6d130187b975267ce5770001cc1e540ef63e974b0195cdb8812d2e051b\",\n  \"reason\": null,\n  \"suggestion\": \"append\",\n  \"hint\": \"For new or empty files, please consider using append_text_file_contents instead\"\n}",
+                "annotations": null,
+                "_meta": null
+              }
+            ]
+          },
+          "isError": false
+        }
+      }
+    ],
+    "tracking_id": "c486e84c-e844-4bd1-b102-4ced88cd0942"
+  },
+  "message_id": 2,
+  "redact_message": null,
+  "created_at": "2026-09-19T15:50:08.504916+00:00",
+  "updated_at": "2026-09-19T15:50:08.504920+00:00"
+}

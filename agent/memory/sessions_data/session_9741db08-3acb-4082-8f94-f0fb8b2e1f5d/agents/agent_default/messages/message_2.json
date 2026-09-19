@@ -1,0 +1,26 @@
+{
+  "message": {
+    "role": "assistant",
+    "content": [
+      {
+        "text": "Hi there! 👋 I'm Buddy, your AI assistant.\n\nI can help you with:\n- **GitHub tasks** – issues, pull requests, branches, commits\n- **API development** – REST endpoints, FastAPI/Flask routes, schemas\n- **AWS SAM & Infrastructure** – templates, Lambda, S3, deployments\n\nWhat would you like to work on today?"
+      }
+    ],
+    "metadata": {
+      "usage": {
+        "inputTokens": 1088,
+        "outputTokens": 81,
+        "totalTokens": 1169
+      },
+      "metrics": {
+        "latencyMs": 0,
+        "timeToFirstByteMs": 477
+      }
+    },
+    "tracking_id": "cb214791-5127-4fd8-ac3a-985702f32ce2"
+  },
+  "message_id": 2,
+  "redact_message": null,
+  "created_at": "2026-09-19T17:27:18.261552+00:00",
+  "updated_at": "2026-09-19T17:27:18.261555+00:00"
+}

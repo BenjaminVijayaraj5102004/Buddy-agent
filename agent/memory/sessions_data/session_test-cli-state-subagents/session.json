@@ -1,0 +1,11 @@
+{
+  "session_id": "test-cli-state-subagents",
+  "session_type": "agent",
+  "model_key": "groq",
+  "subagent_models": {
+    "main": "groq",
+    "api": "ollama:qwen:7b",
+    "github": "meta-llama/llama-prompt-guard-2-22m",
+    "sam": "groq"
+  }
+}

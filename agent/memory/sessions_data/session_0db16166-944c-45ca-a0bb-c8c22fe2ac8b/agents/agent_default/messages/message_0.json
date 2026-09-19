@@ -1,0 +1,15 @@
+{
+  "message": {
+    "role": "user",
+    "content": [
+      {
+        "text": "Create a SAM template (template.yaml) in the 'app' folder for a simple AWS Lambda function. Include basic configuration: runtime Python 3.9, handler, a simple S3 bucket for deployment, and necessary IAM role permissions.\n[Workspace Directory: E:\\Hackathon\\buddy-agent]"
+      }
+    ],
+    "tracking_id": "b47f0af1-3629-4ef3-b786-bdcbe21b249e"
+  },
+  "message_id": 0,
+  "redact_message": null,
+  "created_at": "2026-09-19T15:49:34.870330+00:00",
+  "updated_at": "2026-09-19T15:49:34.870336+00:00"
+}

@@ -1,0 +1,40 @@
+{
+  "message": {
+    "role": "assistant",
+    "content": [
+      {
+        "toolUse": {
+          "toolUseId": "fc_477e32d2-b1ee-401d-8445-bc93839f29ef",
+          "name": "search_code",
+          "input": {
+            "fields": [
+              "path",
+              "name",
+              "text_matches"
+            ],
+            "page": 1,
+            "path": "",
+            "perPage": 5,
+            "query": "APIRouter FastAPI path"
+          }
+        }
+      }
+    ],
+    "metadata": {
+      "usage": {
+        "inputTokens": 2256,
+        "outputTokens": 117,
+        "totalTokens": 2373
+      },
+      "metrics": {
+        "latencyMs": 0,
+        "timeToFirstByteMs": 6448
+      }
+    },
+    "tracking_id": "7641fa9c-7e4d-49df-954c-ddaea187d3b4"
+  },
+  "message_id": 1,
+  "redact_message": null,
+  "created_at": "2026-09-19T14:02:37.390197+00:00",
+  "updated_at": "2026-09-19T14:02:37.390202+00:00"
+}

@@ -1,0 +1,26 @@
+{
+  "message": {
+    "role": "assistant",
+    "content": [
+      {
+        "text": "**File Created:** `E:/Hackathon/buddy-agent/test/healthchek.py`\n\n### 📋 Summary\n- **Imports**\n  ```python\n  from fastapi import APIRouter\n  ```\n\n- **Router Instance**\n  ```python\n  router = APIRouter()\n  ```\n\n- **Endpoint**\n  - **Method:** `POST`\n  - **Path:** `/health-check`\n  - **Handler:** `health_check`\n  - **Response:** Returns a JSON object `{ \"status\": \"ok\" }`\n  - **Signature:** `async def health_check() -> dict`\n\nThe module provides a pure FastAPI contract with a mock health‑check response, suitable for inclusion in your FastAPI app via `include_router`. No database or external logic is involved."
+      }
+    ],
+    "metadata": {
+      "usage": {
+        "inputTokens": 7082,
+        "outputTokens": 227,
+        "totalTokens": 7309
+      },
+      "metrics": {
+        "latencyMs": 0,
+        "timeToFirstByteMs": 53210
+      }
+    },
+    "tracking_id": "ea1fd2d7-ab09-4aa1-9a18-10e42412cdc7"
+  },
+  "message_id": 11,
+  "redact_message": null,
+  "created_at": "2026-09-19T14:05:53.343454+00:00",
+  "updated_at": "2026-09-19T14:05:53.343459+00:00"
+}

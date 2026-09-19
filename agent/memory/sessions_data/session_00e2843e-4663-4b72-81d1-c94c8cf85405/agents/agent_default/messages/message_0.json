@@ -1,0 +1,15 @@
+{
+  "message": {
+    "role": "user",
+    "content": [
+      {
+        "text": "Create a FastAPI endpoint in a file named 'matrix.py' inside the 'app' folder. The endpoint should be a POST request at path '/cart/items'. It must use Pydantic models for request validation: define an Item schema with required fields: item_id (int), quantity (int, gt=0), price (float, ge=0). Include optional fields such as name (str, optional) and description (str, optional). After validation, the endpoint must forward the request payload to an external cart management microservice via an HTTP POST to the URL configured in the environment variable CART_SERVICE_URL. Use httpx (async) for the outbound call. Implement error handling: if the outbound request fails (network error, non-2xx response), return a 502 Bad Gateway with an appropriate error message. Define a response Pydantic model CartResponse with fields: success (bool), message (str), and optionally data (dict). Return a 200 response with CartResponse on success. Ensure no database or ORM code is present; the endpoint only validates and forwards. Provide the complete code for 'app/matrix.py', including imports, FastAPI app instance (or router if appropriate), and all models and endpoint implementation.\n[Workspace Directory: E:\\Hackathon\\buddy-agent]"
+      }
+    ],
+    "tracking_id": "608fae29-a139-4654-8c95-8200b19407e8"
+  },
+  "message_id": 0,
+  "redact_message": null,
+  "created_at": "2026-09-19T16:51:35.361327+00:00",
+  "updated_at": "2026-09-19T16:51:35.361332+00:00"
+}

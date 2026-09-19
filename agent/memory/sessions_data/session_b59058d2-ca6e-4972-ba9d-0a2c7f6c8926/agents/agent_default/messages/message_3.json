@@ -1,0 +1,26 @@
+{
+  "message": {
+    "role": "assistant",
+    "content": [
+      {
+        "text": "```bash\ncd app\nsam build\nsam deploy --guided\n```"
+      }
+    ],
+    "metadata": {
+      "usage": {
+        "inputTokens": 2050,
+        "outputTokens": 16,
+        "totalTokens": 2066
+      },
+      "metrics": {
+        "latencyMs": 29893,
+        "timeToFirstByteMs": 19
+      }
+    },
+    "tracking_id": "88bece9a-5049-4aad-b32e-12298149d8cb"
+  },
+  "message_id": 3,
+  "redact_message": null,
+  "created_at": "2026-09-19T16:19:30.358992+00:00",
+  "updated_at": "2026-09-19T16:19:30.358996+00:00"
+}

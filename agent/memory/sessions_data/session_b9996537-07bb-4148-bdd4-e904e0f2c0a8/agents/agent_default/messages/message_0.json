@@ -1,0 +1,15 @@
+{
+  "message": {
+    "role": "user",
+    "content": [
+      {
+        "text": "Create a SAM template (template.yaml) in the 'app' folder. The template should define a basic AWS SAM application with a Lambda function (e.g., using Python runtime) and any necessary IAM role permissions. Include a simple API Gateway event trigger (GET /) for the Lambda. Ensure the template follows standard SAM structure and can be built and deployed using 'sam build' and 'sam deploy'.\n[Workspace Directory: E:\\Hackathon\\buddy-agent]"
+      }
+    ],
+    "tracking_id": "4612acef-1c7b-45fb-9ca4-ec37769a1ce3"
+  },
+  "message_id": 0,
+  "redact_message": null,
+  "created_at": "2026-09-19T16:08:07.499998+00:00",
+  "updated_at": "2026-09-19T16:08:07.500001+00:00"
+}

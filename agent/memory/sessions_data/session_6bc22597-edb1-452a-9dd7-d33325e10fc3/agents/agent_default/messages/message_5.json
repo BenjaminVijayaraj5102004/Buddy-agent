@@ -1,0 +1,35 @@
+{
+  "message": {
+    "role": "assistant",
+    "content": [
+      {
+        "toolUse": {
+          "toolUseId": "fc_f0b56230-38b6-4c6b-8be5-5ed815750fef",
+          "name": "search_code",
+          "input": {
+            "page": 1,
+            "path": "",
+            "perPage": 5,
+            "query": "router = APIRouter()"
+          }
+        }
+      }
+    ],
+    "metadata": {
+      "usage": {
+        "inputTokens": 5672,
+        "outputTokens": 139,
+        "totalTokens": 5811
+      },
+      "metrics": {
+        "latencyMs": 0,
+        "timeToFirstByteMs": 24114
+      }
+    },
+    "tracking_id": "4ed1a4b7-0b29-4ffd-a889-2bfa786d3283"
+  },
+  "message_id": 5,
+  "redact_message": null,
+  "created_at": "2026-09-19T14:03:12.087841+00:00",
+  "updated_at": "2026-09-19T14:03:12.087846+00:00"
+}

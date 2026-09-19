@@ -1,0 +1,26 @@
+{
+  "message": {
+    "role": "assistant",
+    "content": [
+      {
+        "text": "**File created:** `app.py`\n\n```python\nfrom fastapi import FastAPI\nfrom pydantic import BaseModel\nimport uvicorn\n\n\nclass HealthResponse(BaseModel):\n    status: str = \"healthy\"\n\n\napp = FastAPI()\n\n\n@app.post(\"/health\", response_model=HealthResponse, tags=[\"Health\"])\nasync def health_check():\n    \"\"\"POST health‑check endpoint returning a static healthy status.\"\"\"\n    return HealthResponse()\n\n\nif __name__ == \"__main__\":\n    uvicorn.run(\"app:app\", host=\"0.0.0.0\", port=8000, reload=True)\n```\n\n**Endpoint summary**\n\n| Method | Path   | Response model | Description                              |\n|--------|--------|----------------|------------------------------------------|\n| POST   | /health| `HealthResponse`| Returns `{ \"status\": \"healthy\" }`. |\n\nRunning `python app.py` starts the FastAPI app on `http://0.0.0.0:8000`. The health check can be tested with:\n\n```bash\ncurl -X POST http://localhost:8000/health\n# => {\"status\":\"healthy\"}\n```"
+      }
+    ],
+    "metadata": {
+      "usage": {
+        "inputTokens": 1227,
+        "outputTokens": 363,
+        "totalTokens": 1590
+      },
+      "metrics": {
+        "latencyMs": 0,
+        "timeToFirstByteMs": 7908
+      }
+    },
+    "tracking_id": "703fc221-91f8-44f1-9095-4944981953fb"
+  },
+  "message_id": 3,
+  "redact_message": null,
+  "created_at": "2026-09-18T19:24:32.930941+00:00",
+  "updated_at": "2026-09-18T19:24:32.930947+00:00"
+}

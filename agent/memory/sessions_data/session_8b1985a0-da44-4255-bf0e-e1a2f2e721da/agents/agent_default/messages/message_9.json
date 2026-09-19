@@ -1,0 +1,32 @@
+{
+  "message": {
+    "role": "assistant",
+    "content": [
+      {
+        "toolUse": {
+          "toolUseId": "tooluse_2747823b67034effbbe93128",
+          "name": "sam_cli_agent",
+          "input": {
+            "task_description": "store the above code in app folder as micro.py"
+          }
+        }
+      }
+    ],
+    "metadata": {
+      "usage": {
+        "inputTokens": 1545,
+        "outputTokens": 28,
+        "totalTokens": 1573
+      },
+      "metrics": {
+        "latencyMs": 17997,
+        "timeToFirstByteMs": 16
+      }
+    },
+    "tracking_id": "05cc17c3-243c-4f8e-8bdb-1d82439720c3"
+  },
+  "message_id": 9,
+  "redact_message": null,
+  "created_at": "2026-09-19T16:23:57.378366+00:00",
+  "updated_at": "2026-09-19T16:23:57.378370+00:00"
+}

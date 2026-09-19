@@ -1,0 +1,32 @@
+{
+  "message": {
+    "role": "assistant",
+    "content": [
+      {
+        "toolUse": {
+          "toolUseId": "tooluse_4db1763fa75d43669f1fa498",
+          "name": "api_manager",
+          "input": {
+            "task_description": "Design a FastAPI endpoint that handles adding items to a shopping cart. The endpoint must be a POST request that accepts item details in the request body. Implement business logic to validate the item data and forward the request to a microservice responsible for cart management, ensuring the endpoint itself does not perform any direct database queries."
+          }
+        }
+      }
+    ],
+    "metadata": {
+      "usage": {
+        "inputTokens": 933,
+        "outputTokens": 80,
+        "totalTokens": 1013
+      },
+      "metrics": {
+        "latencyMs": 40309,
+        "timeToFirstByteMs": 17
+      }
+    },
+    "tracking_id": "1366470d-b4a3-4acc-b869-7775e61e395f"
+  },
+  "message_id": 1,
+  "redact_message": null,
+  "created_at": "2026-09-19T16:58:46.440402+00:00",
+  "updated_at": "2026-09-19T16:58:46.440407+00:00"
+}

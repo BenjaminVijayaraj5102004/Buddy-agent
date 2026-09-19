@@ -5,9 +5,13 @@ from agent.memory.session_memory.session_memory import (
     get_current_session_id,
     get_s3_session_manager,
     get_session_manager,
+    get_session_model_key,
+    get_session_subagent_models,
     list_stored_sessions,
     session_manager,
     set_current_session_id,
+    set_session_model_key,
+    set_session_subagent_models,
 )
 
 from agent.memory.longterm_memory.storage import (
@@ -51,6 +55,10 @@ __all__ = [
     "generate_new_session_id",
     "session_manager",
     "list_stored_sessions",
+    "get_session_model_key",
+    "set_session_model_key",
+    "get_session_subagent_models",
+    "set_session_subagent_models",
 
     # Longterm Memory
     "LocalFileStorage",

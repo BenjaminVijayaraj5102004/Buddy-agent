@@ -1,0 +1,32 @@
+{
+  "message": {
+    "role": "assistant",
+    "content": [
+      {
+        "toolUse": {
+          "toolUseId": "fc_8d787056-8d9a-4480-8a9a-e56643c1bcbf",
+          "name": "sam_cli_agent",
+          "input": {
+            "task_description": "Create a SAM template (template.yaml) in the 'app' folder for a simple AWS Lambda function. Include basic configuration: runtime Python 3.9, handler, a simple S3 bucket for deployment, and necessary IAM role permissions."
+          }
+        }
+      }
+    ],
+    "metadata": {
+      "usage": {
+        "inputTokens": 785,
+        "outputTokens": 159,
+        "totalTokens": 944
+      },
+      "metrics": {
+        "latencyMs": 0,
+        "timeToFirstByteMs": 899
+      }
+    },
+    "tracking_id": "1443470e-44a3-4a7a-aea9-c477062a671f"
+  },
+  "message_id": 1,
+  "redact_message": null,
+  "created_at": "2026-09-19T15:49:34.864795+00:00",
+  "updated_at": "2026-09-19T15:49:34.864799+00:00"
+}

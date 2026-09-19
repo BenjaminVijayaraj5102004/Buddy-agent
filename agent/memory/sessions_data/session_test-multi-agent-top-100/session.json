@@ -1,0 +1,11 @@
+{
+  "session_id": "test-multi-agent-top-100",
+  "session_type": "agent",
+  "model_key": "qwen/qwen3.8-27b",
+  "subagent_models": {
+    "main": "qwen/qwen3.8-27b",
+    "api": "ollama:qwen2.5-coder:32b",
+    "sam": "bedrock",
+    "github": "openai/gpt-oss-120b"
+  }
+}

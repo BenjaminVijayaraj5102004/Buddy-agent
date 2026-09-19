@@ -1,0 +1,23 @@
+{
+  "message": {
+    "role": "user",
+    "content": [
+      {
+        "toolResult": {
+          "toolUseId": "fc_96d59aa7-6936-403f-9e82-ed721c5aaac5",
+          "status": "success",
+          "content": [
+            {
+              "text": "**✅ FastAPI Health‑Check Endpoint Created**\n\n| Item | Details |\n|------|---------|\n| **File** | `E:/Hackathon/buddy-agent/test/healthchek.py` |\n| **Imports** | `from fastapi import APIRouter` |\n| **Router** | `router = APIRouter()` |\n| **HTTP Method** | `POST` |\n| **Path** | `/health-check` |\n| **Handler** | `async def health_check() -> dict` |\n| **Response** | Returns JSON `{ \"status\": \"ok\" }` |\n| **Purpose** | Pure API contract (no DB/ORM logic) – simple health‑check for the service. |\n\n### Code Overview\n```python\nfrom fastapi import APIRouter\n\nrouter = APIRouter()\n\n@router.post(\"/health-check\")\nasync def health_check() -> dict:\n    \"\"\"Return a simple health‑check response.\"\"\"\n    return {\"status\": \"ok\"}\n```\n\nYou can include this router in your main FastAPI app:\n\n```python\nfrom fastapi import FastAPI\nfrom test.healthchek import router as health_router\n\napp = FastAPI()\napp.include_router(health_router)\n```\n\nThe endpoint is ready to receive `POST` requests and will always respond with `{\"status\": \"ok\"}`.\n"
+            }
+          ]
+        }
+      }
+    ],
+    "tracking_id": "f1fb363d-15ed-4b8b-88cd-78ad9226886f"
+  },
+  "message_id": 2,
+  "redact_message": null,
+  "created_at": "2026-09-19T14:06:16.621138+00:00",
+  "updated_at": "2026-09-19T14:06:16.621143+00:00"
+}

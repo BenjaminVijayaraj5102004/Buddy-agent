@@ -1,0 +1,23 @@
+{
+  "message": {
+    "role": "user",
+    "content": [
+      {
+        "toolResult": {
+          "toolUseId": "tooluse_fe21968478bd4ecaa538c04e",
+          "status": "success",
+          "content": [
+            {
+              "text": "```bash\ncd app\nsam build\nsam deploy --guided\n```\n"
+            }
+          ]
+        }
+      }
+    ],
+    "tracking_id": "cb794d1b-bda6-4182-9e19-b104a9e687b6"
+  },
+  "message_id": 6,
+  "redact_message": null,
+  "created_at": "2026-09-19T16:19:30.363582+00:00",
+  "updated_at": "2026-09-19T16:19:30.363585+00:00"
+}

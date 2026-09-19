@@ -1,0 +1,26 @@
+{
+  "message": {
+    "role": "assistant",
+    "content": [
+      {
+        "text": "## FastAPI **`app/matrix.py`** – Cart Item Endpoint\n\n### Overview\n- **Endpoint:** `POST /cart/items`\n- **Purpose:** Validate item data, then forward the payload to an external cart‑management microservice.\n- **No database/ORM logic** – pure API contract with mock forwarding.\n- **Error handling:** Network or non‑2xx responses from the cart service are returned as **502 Bad Gateway**. Missing `CART_SERVICE_URL` triggers a **500 Internal Server Error**.\n\n### Pydantic Models\n| Model | Fields | Details |\n|-------|--------|----------|\n| **`Item`** | `item_id: int`<br>`quantity: int (gt=0)`<br>`price: float (ge=0)`<br>`name: Optional[str]`<br>`description: Optional[str]` | Represents a cart item to be added. |\n| **`CartResponse`** | `success: bool`<br>`message: str`<br>`data: Optional[dict]` | Standardised response returned to the API consumer. |\n\n### Router Definition\n```python\nimport os\nfrom fastapi import APIRouter, HTTPException, status\nfrom pydantic import BaseModel, Field\nimport httpx\n\nrouter = APIRouter()\n\n\nclass Item(BaseModel):\n    \"\"\"Schema for an item to be added to the cart.\"\"\"\n    item_id: int\n    quantity: int = Field(..., gt=0)\n    price: float = Field(..., ge=0)\n    name: str | None = None\n    description: str | None = None\n\n\nclass CartResponse(BaseModel):\n    \"\"\"Response model sent back to the client.\"\"\"\n    success: bool\n    message: str\n    data: dict | None = None\n\n\n@router.post(\n    \"/cart/items\",\n    response_model=CartResponse,\n    status_code=status.HTTP_200_OK,\n    tags=[\"Cart\"],\n)\nasync def add_item_to_cart(item: Item) -> CartResponse:\n    \"\"\"\n    Validate the Item payload and forward it to the external cart service.\n    \"\"\"\n    cart_service_url = os.getenv(\"CART_SERVICE_URL\")\n    if not cart_service_url:\n        raise HTTPException(\n            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,\n            detail=\"CART_SERVICE_URL environment variable is not set\",\n        )\n\n    async with httpx.AsyncClient() as client:\n        try:\n            response = await client.post(cart_service_url, json=item.model_dump())\n        except httpx.RequestError as exc:\n            raise HTTPException(\n                status_code=status.HTTP_502_BAD_GATEWAY,\n                detail=f\"Failed to reach cart service: {exc}\",\n            )\n\n    if not response.is_success:\n        raise HTTPException(\n            status_code=status.HTTP_502_BAD_GATEWAY,\n            detail=(\n                f\"Cart service returned an error: {response.status_code} \"\n                f\"{response.text.strip()}\"\n            ),\n        )\n\n    try:\n        payload = response.json()\n    except ValueError:\n        payload = {\"raw\": response.text}\n\n    return CartResponse(\n        success=True,\n        message=\"Item added to cart\",\n        data=payload,\n    )\n\n\n__all__ = [\"router\", \"Item\", \"CartResponse\"]\n```\n\n### Key Points\n- **Validation:** Handled by the `Item` Pydantic model (`quantity > 0`, `price ≥ 0`).\n- **Forwarding:** Uses **async `httpx`** to POST the validated JSON to the URL stored in `CART_SERVICE_URL`.\n- **Error handling:**  \n  - Missing env var → 500.  \n  - Network errors or non‑2xx from cart service → 502 with descriptive message.\n- **Response:** Returns a `CartResponse` (`success`, `message`, optional `data` from downstream service).\n\nThis file can be included in the main FastAPI app via:\n\n```python\nfrom fastapi import FastAPI\nfrom app.matrix import router as matrix_router\n\napp = FastAPI()\napp.include_router(matrix_router)\n```\n\nAll requirements are satisfied with a clean, contract‑only implementation."
+      }
+    ],
+    "metadata": {
+      "usage": {
+        "inputTokens": 2316,
+        "outputTokens": 995,
+        "totalTokens": 3311
+      },
+      "metrics": {
+        "latencyMs": 0,
+        "timeToFirstByteMs": 22246
+      }
+    },
+    "tracking_id": "832334ac-ebb5-440e-b30a-f3142ea1c1be"
+  },
+  "message_id": 7,
+  "redact_message": null,
+  "created_at": "2026-09-19T16:53:33.397589+00:00",
+  "updated_at": "2026-09-19T16:53:33.397593+00:00"
+}

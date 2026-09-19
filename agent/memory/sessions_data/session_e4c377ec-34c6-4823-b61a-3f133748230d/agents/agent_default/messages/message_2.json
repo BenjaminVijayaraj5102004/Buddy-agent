@@ -1,0 +1,15 @@
+{
+  "message": {
+    "role": "user",
+    "content": [
+      {
+        "text": "benjamin"
+      }
+    ],
+    "tracking_id": "6f09083c-7939-4614-9fbf-99919da64c04"
+  },
+  "message_id": 2,
+  "redact_message": null,
+  "created_at": "2026-09-19T15:43:16.957570+00:00",
+  "updated_at": "2026-09-19T15:43:16.957574+00:00"
+}

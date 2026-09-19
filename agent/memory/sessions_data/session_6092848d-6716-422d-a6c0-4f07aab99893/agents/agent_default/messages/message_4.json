@@ -1,0 +1,23 @@
+{
+  "message": {
+    "role": "user",
+    "content": [
+      {
+        "toolResult": {
+          "toolUseId": "z4metjkfg",
+          "status": "success",
+          "content": [
+            {
+              "text": "Error executing REST_Agent: cannot schedule new futures after shutdown"
+            }
+          ]
+        }
+      }
+    ],
+    "tracking_id": "409fbce0-8000-489d-b834-54bbf89a688b"
+  },
+  "message_id": 4,
+  "redact_message": null,
+  "created_at": "2026-09-19T17:44:10.539058+00:00",
+  "updated_at": "2026-09-19T17:44:10.539061+00:00"
+}

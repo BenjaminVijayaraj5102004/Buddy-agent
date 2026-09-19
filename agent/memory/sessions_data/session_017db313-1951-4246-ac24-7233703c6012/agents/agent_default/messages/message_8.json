@@ -1,0 +1,23 @@
+{
+  "message": {
+    "role": "user",
+    "content": [
+      {
+        "toolResult": {
+          "toolUseId": "tooluse_0886c4329bbd40f9bff65fc6",
+          "status": "success",
+          "content": [
+            {
+              "text": "Error executing github_agent: cannot schedule new futures after shutdown"
+            }
+          ]
+        }
+      }
+    ],
+    "tracking_id": "f4713200-c040-4f8d-90e2-b80b593d483c"
+  },
+  "message_id": 8,
+  "redact_message": null,
+  "created_at": "2026-09-19T14:11:50.607496+00:00",
+  "updated_at": "2026-09-19T14:11:50.607500+00:00"
+}

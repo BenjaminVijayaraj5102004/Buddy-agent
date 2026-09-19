@@ -1,0 +1,32 @@
+{
+  "message": {
+    "role": "assistant",
+    "content": [
+      {
+        "toolUse": {
+          "toolUseId": "tooluse_e58ff0328c4147708a6c3bf9",
+          "name": "api_manager",
+          "input": {
+            "task_description": "Create a FastAPI endpoint for a health check"
+          }
+        }
+      }
+    ],
+    "metadata": {
+      "usage": {
+        "inputTokens": 1104,
+        "outputTokens": 26,
+        "totalTokens": 1130
+      },
+      "metrics": {
+        "latencyMs": 8841,
+        "timeToFirstByteMs": 17
+      }
+    },
+    "tracking_id": "02c113b7-e275-41f8-af2b-5d3ab3a6be9c"
+  },
+  "message_id": 5,
+  "redact_message": null,
+  "created_at": "2026-09-19T05:24:47.199495+00:00",
+  "updated_at": "2026-09-19T05:24:47.199499+00:00"
+}

@@ -1,0 +1,23 @@
+{
+  "message": {
+    "role": "user",
+    "content": [
+      {
+        "toolResult": {
+          "toolUseId": "fc_fece42cc-de8c-4679-a7b8-57186ea6d8cc",
+          "status": "error",
+          "content": [
+            {
+              "text": "Error: APIError - Tool call validation failed: tool call validation failed: parameters for tool get_text_file_contents did not match schema: errors: [`/files/0/ranges/0/end`: expected integer, but got null]"
+            }
+          ]
+        }
+      }
+    ],
+    "tracking_id": "36b16000-66bb-4c9b-a5f2-6aa324a57a41"
+  },
+  "message_id": 12,
+  "redact_message": null,
+  "created_at": "2026-09-19T05:27:15.853965+00:00",
+  "updated_at": "2026-09-19T05:27:15.853975+00:00"
+}

@@ -1,0 +1,15 @@
+{
+  "message": {
+    "role": "user",
+    "content": [
+      {
+        "text": "Create a FastAPI health check endpoint.\n\n- Framework: FastAPI\n- HTTP Method: GET\n- Endpoint path: /health\n- Function name: health_check\n- Request schema: None (no request body)\n- Response schema: JSON object with a single field `status` (string) indicating service health, e.g., {\"status\": \"ok\"}.\n- Implementation: Return a mock response with status \"ok\". No database or external calls.\n- Target file path: E:\\\\Hackathon\\\\buddy-agent\\\\app\\\\main.py (or appropriate FastAPI app file). Ensure the endpoint is added to the FastAPI app instance.\n- Include necessary import statements (from fastapi import FastAPI, APIRouter, etc.) and define a Pydantic model for the response if desired.\n\nProvide the code snippet that can be directly inserted into the target file.\n[Workspace Directory: E:\\Hackathon\\buddy-agent]"
+      }
+    ],
+    "tracking_id": "2d52d9ff-2ead-45d7-85d6-c9b7bbbf9cc6"
+  },
+  "message_id": 4,
+  "redact_message": null,
+  "created_at": "2026-09-19T05:25:31.556461+00:00",
+  "updated_at": "2026-09-19T05:25:31.556486+00:00"
+}

@@ -1,0 +1,26 @@
+{
+  "message": {
+    "role": "assistant",
+    "content": [
+      {
+        "text": "<response>\n<status>OK</status>\n<message>The SAM CLI template has been successfully generated in the app folder.</message>\n<output>\n```bash\nsam init --template-file template.yaml\n```\n</output>\n</response>"
+      }
+    ],
+    "metadata": {
+      "usage": {
+        "inputTokens": 669,
+        "outputTokens": 49,
+        "totalTokens": 718
+      },
+      "metrics": {
+        "latencyMs": 7906,
+        "timeToFirstByteMs": 16
+      }
+    },
+    "tracking_id": "8e383875-29b4-4d6b-9f6f-11517327a9ac"
+  },
+  "message_id": 3,
+  "redact_message": null,
+  "created_at": "2026-09-19T16:11:38.914686+00:00",
+  "updated_at": "2026-09-19T16:11:38.914691+00:00"
+}

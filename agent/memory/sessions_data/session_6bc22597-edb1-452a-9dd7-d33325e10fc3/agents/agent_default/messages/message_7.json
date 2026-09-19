@@ -1,0 +1,39 @@
+{
+  "message": {
+    "role": "assistant",
+    "content": [
+      {
+        "toolUse": {
+          "toolUseId": "fc_e2b51d23-ce23-40ea-ba64-19fe3eb8644e",
+          "name": "get_file_contents",
+          "input": {
+            "fields": [
+              "type",
+              "name",
+              "path"
+            ],
+            "owner": "",
+            "path": "",
+            "repo": ""
+          }
+        }
+      }
+    ],
+    "metadata": {
+      "usage": {
+        "inputTokens": 6792,
+        "outputTokens": 163,
+        "totalTokens": 6955
+      },
+      "metrics": {
+        "latencyMs": 0,
+        "timeToFirstByteMs": 48124
+      }
+    },
+    "tracking_id": "825ff71a-e5e2-465c-9a25-84d7074544b9"
+  },
+  "message_id": 7,
+  "redact_message": null,
+  "created_at": "2026-09-19T14:04:07.623774+00:00",
+  "updated_at": "2026-09-19T14:04:07.623778+00:00"
+}

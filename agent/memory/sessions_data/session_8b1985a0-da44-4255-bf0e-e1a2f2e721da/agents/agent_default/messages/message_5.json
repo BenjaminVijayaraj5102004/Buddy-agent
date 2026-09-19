@@ -1,0 +1,32 @@
+{
+  "message": {
+    "role": "assistant",
+    "content": [
+      {
+        "toolUse": {
+          "toolUseId": "tooluse_fe21968478bd4ecaa538c04e",
+          "name": "sam_cli_agent",
+          "input": {
+            "task_description": "Create a SAM template in app folder with a FastAPI endpoint to add items to a shopping cart. The endpoint must be a POST request that accepts item details in the request body. Implement business logic to validate the item data and forward the request to a microservice responsible for cart management."
+          }
+        }
+      }
+    ],
+    "metadata": {
+      "usage": {
+        "inputTokens": 1119,
+        "outputTokens": 75,
+        "totalTokens": 1194
+      },
+      "metrics": {
+        "latencyMs": 37897,
+        "timeToFirstByteMs": 16
+      }
+    },
+    "tracking_id": "ee5034aa-275e-47e0-8742-fe52d346599c"
+  },
+  "message_id": 5,
+  "redact_message": null,
+  "created_at": "2026-09-19T16:19:00.172520+00:00",
+  "updated_at": "2026-09-19T16:19:00.172524+00:00"
+}

@@ -1,0 +1,15 @@
+{
+  "message": {
+    "role": "user",
+    "content": [
+      {
+        "text": "Framework: FastAPI (Python). Target file path: E:\\Hackathon\\buddy-agent\\app\\api\\v1\\shopping\\cart.py\n\nTask: Design and implement a REST endpoint for adding items to a shopping cart.\n\nEndpoint specification:\n- HTTP Method: POST\n- Route path: /api/v1/shopping/cart/items\n- Purpose: Accepts shopping cart item details in the request body, validates the data, and forwards the request to a downstream cart-management microservice via HTTP (e.g., using httpx.AsyncClient or aiohttp) so the endpoint itself performs ZERO direct database/ORM queries.\n\nRequirements:\n1. **Pydantic Schemas (request and response)**:\n   - `CartItemRequest`: \n     - `product_id: str` (required)\n     - `quantity: int` (required, must be >= 1)\n     - `unit_price: float` (required, must be > 0. Use Field with ge/le bounds or @field_validator)\n     - Optional: `coupon_code: str | None = None`\n   - `AddCartItemResponse`:\n     - `cart_id: str`\n     - `item_id: str`\n     - `product_id: str`\n     - `quantity: int`\n     - `unit_price: pyd\n[Workspace Directory: E:\\Hackathon\\buddy-agent]"
+      }
+    ],
+    "tracking_id": "1ff9b7a0-624b-41a2-85d3-f053c17e278d"
+  },
+  "message_id": 0,
+  "redact_message": null,
+  "created_at": "2026-09-19T17:34:40.788909+00:00",
+  "updated_at": "2026-09-19T17:34:40.788924+00:00"
+}

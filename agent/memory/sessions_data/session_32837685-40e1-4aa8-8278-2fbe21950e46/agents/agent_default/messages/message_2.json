@@ -1,0 +1,23 @@
+{
+  "message": {
+    "role": "user",
+    "content": [
+      {
+        "toolResult": {
+          "toolUseId": "fc_dfbb704c-5938-495d-ba80-b1d1d2c6ec33",
+          "status": "error",
+          "content": [
+            {
+              "text": "Error: EventLoopException - Tool call validation failed: tool call validation failed: parameters for tool get_text_file_contents did not match schema: errors: [`/files/0/ranges/0/end`: expected integer, but got null]"
+            }
+          ]
+        }
+      }
+    ],
+    "tracking_id": "abf01452-13ef-4887-b18a-7ace7de2602b"
+  },
+  "message_id": 2,
+  "redact_message": null,
+  "created_at": "2026-09-19T03:52:16.192842+00:00",
+  "updated_at": "2026-09-19T03:52:16.192859+00:00"
+}

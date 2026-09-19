@@ -1,0 +1,26 @@
+{
+  "message": {
+    "role": "assistant",
+    "content": [
+      {
+        "text": "Here is the code based on the provided specifications:\n\n```python\nfrom fastapi import APIRouter, Path, Depends, HTTPException\nfrom pydantic import BaseModel\nfrom typing import Optional\nfrom datetime import datetime\n\nrouter = APIRouter()\n\nclass ItemUpdate(BaseModel):\n    name: Optional[str] = None\n    description: Optional[str] = \"Default description\"\n    price: Optional[float] = 0.0\n\nclass ItemResponse(BaseModel):\n    id: int\n    name: str\n    description: str\n    price: float\n    updated_at: datetime\n\n@router.put(\"/items/{item_id}\", response_model=ItemResponse)\ndef update_item(\n    item_id: int = Path(..., title=\"Item ID\", description=\"The ID of the item to update\"),\n    item_update: ItemUpdate = Depends(),\n):\n    # Retrieve item data from database (mocked for this example)\n    item_data = {\"id\": item_id, \"name\": \"Item 1\", \"description\": \"This is a description\", \"price\": 10.99}\n\n    # Update item data with provided fields or fallback placeholder values\n    updated_item_data = {\n        \"id\": item_id,\n        \"name\": item_update.name or f\"Item {item_id}\",\n        \"description\": item_update.description or \"Default description\",\n        \"price\": item_update.price or 0.0,\n        \"updated_at\": datetime.utcnow(),\n    }\n\n    # Return updated item data\n    return updated_item_data\n\n# Export the router\n__all__ = [\"router\"]\n```\n\nPlease note that this code uses a mocked database for simplicity. You would need to replace this with your actual database logic."
+      }
+    ],
+    "metadata": {
+      "usage": {
+        "inputTokens": 991,
+        "outputTokens": 349,
+        "totalTokens": 1340
+      },
+      "metrics": {
+        "latencyMs": 94948,
+        "timeToFirstByteMs": 34
+      }
+    },
+    "tracking_id": "4e888ade-cb6e-4fd8-8967-eef81ff5b9c0"
+  },
+  "message_id": 5,
+  "redact_message": null,
+  "created_at": "2026-09-19T13:44:58.441702+00:00",
+  "updated_at": "2026-09-19T13:44:58.441709+00:00"
+}

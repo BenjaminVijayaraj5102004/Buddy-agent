@@ -1,0 +1,15 @@
+{
+  "message": {
+    "role": "user",
+    "content": [
+      {
+        "text": "Create a template in app folder"
+      }
+    ],
+    "tracking_id": "efce54ba-a003-4a47-aea9-a8cc6b973d16"
+  },
+  "message_id": 0,
+  "redact_message": null,
+  "created_at": "2026-09-19T16:10:16.329100+00:00",
+  "updated_at": "2026-09-19T16:10:16.329104+00:00"
+}

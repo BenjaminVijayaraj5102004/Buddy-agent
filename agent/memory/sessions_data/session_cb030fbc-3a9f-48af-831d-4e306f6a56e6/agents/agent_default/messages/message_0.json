@@ -1,0 +1,15 @@
+{
+  "message": {
+    "role": "user",
+    "content": [
+      {
+        "text": "hi"
+      }
+    ],
+    "tracking_id": "1c00f206-e6cf-405b-820b-47da7bacc2ea"
+  },
+  "message_id": 0,
+  "redact_message": null,
+  "created_at": "2026-09-19T09:17:23.245827+00:00",
+  "updated_at": "2026-09-19T09:17:23.245831+00:00"
+}

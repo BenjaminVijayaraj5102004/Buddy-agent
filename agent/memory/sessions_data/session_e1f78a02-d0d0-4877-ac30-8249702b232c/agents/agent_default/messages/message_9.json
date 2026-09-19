@@ -1,0 +1,26 @@
+{
+  "message": {
+    "role": "assistant",
+    "content": [
+      {
+        "text": "Here is the code based on the provided specifications:\n\n```python\nfrom fastapi import APIRouter, Depends, HTTPException\nfrom pydantic import BaseModel\nfrom typing import Optional\nfrom kafka import KafkaProducer\n\nrouter = APIRouter()\n\nclass PublishRequest(BaseModel):\n    topic: str\n    key: Optional[str] = None\n    value: str\n\nclass ConsumeRequest(BaseModel):\n    topic: str\n\nclass PublishResponse(BaseModel):\n    topic: str\n    partition: int\n    offset: int\n\nclass ConsumeResponse(BaseModel):\n    value: str\n    key: str\n    topic: str\n    partition: int\n    offset: int\n\n@router.post(\"/kafka/publish\")\ndef publish_message(\n    publish_request: PublishRequest, \n    producer: KafkaProducer = Depends(get_producer)\n):\n    producer.send(publish_request.topic, key=publish_request.key, value=publish_request.value)\n    return PublishResponse(topic=publish_request.topic, partition=producer.partitions[publish_request.topic][0], offset=producer.offsets[publish_request.topic][0])\n\n@router.get(\"/kafka/consume\")\ndef consume_message(\n    consume_request: ConsumeRequest, \n    producer: KafkaProducer = Depends(get_producer)\n):\n    for message in producer.get_messages(consume_request.topic):\n        return ConsumeResponse(value=message.value, key=message.key, topic=message.topic, partition=message.partition, offset=message.offset)\n\ndef get_producer():\n    return KafkaProducer(bootstrap_servers=\"localhost:9092\")\n\n# Export the router\n__all__ = [\"router\"]\n```\n\nPlease note that this code uses a simple `KafkaProducer` for demonstration purposes. You would need to replace the `bootstrap_servers` parameter with your actual Kafka broker URL."
+      }
+    ],
+    "metadata": {
+      "usage": {
+        "inputTokens": 1634,
+        "outputTokens": 364,
+        "totalTokens": 1998
+      },
+      "metrics": {
+        "latencyMs": 119420,
+        "timeToFirstByteMs": 38
+      }
+    },
+    "tracking_id": "7297e7d7-7476-4117-b1db-3ac77509b3e8"
+  },
+  "message_id": 9,
+  "redact_message": null,
+  "created_at": "2026-09-19T13:48:02.947146+00:00",
+  "updated_at": "2026-09-19T13:48:02.947172+00:00"
+}

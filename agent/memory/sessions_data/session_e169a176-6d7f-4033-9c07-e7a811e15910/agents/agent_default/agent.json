@@ -1,0 +1,25 @@
+{
+  "agent_id": "default",
+  "state": {
+    "agent_skills": {
+      "last_injected_xml": "<available_skills>\n<skill>\n<name>api-manager</name>\n<description>API Engineering Manager skill for decomposing REST API requirements and delegating endpoint/schema creation to REST_Agent.</description>\n<location>E:\\Hackathon\\buddy-agent\\agent\\skills\\api-manager\\SKILL.md</location>\n</skill>\n</available_skills>",
+      "activated_skills": [
+        "api-manager"
+      ]
+    }
+  },
+  "conversation_manager_state": {
+    "__name__": "SlidingWindowConversationManager",
+    "removed_message_count": 1
+  },
+  "_internal_state": {
+    "interrupt_state": {
+      "interrupts": {},
+      "context": {},
+      "activated": false
+    },
+    "model_state": {}
+  },
+  "created_at": "2026-09-19T05:22:49.788229+00:00",
+  "updated_at": "2026-09-19T05:30:21.219509+00:00"
+}

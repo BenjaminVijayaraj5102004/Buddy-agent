@@ -1,0 +1,32 @@
+{
+  "message": {
+    "role": "assistant",
+    "content": [
+      {
+        "toolUse": {
+          "toolUseId": "fc_bf52e960-5176-43be-a2dc-2c36c8917ec8",
+          "name": "sam_cli_agent",
+          "input": {
+            "task_description": "Create an AWS SAM template (template.yaml) in the 'app' folder for a simple Lambda function. Include basic configuration: Transform AWS::Serverless-2016-10-31, a Lambda function written in Python (handler), necessary IAM role permissions (e.g., basic Lambda execution), and a default deployment bucket placeholder. Provide instructions on where to place the code and how to build/deploy."
+          }
+        }
+      }
+    ],
+    "metadata": {
+      "usage": {
+        "inputTokens": 1553,
+        "outputTokens": 147,
+        "totalTokens": 1700
+      },
+      "metrics": {
+        "latencyMs": 0,
+        "timeToFirstByteMs": 757
+      }
+    },
+    "tracking_id": "57fa438c-244b-4c1c-a876-f86dbcdb7d69"
+  },
+  "message_id": 1,
+  "redact_message": null,
+  "created_at": "2026-09-19T16:09:12.195698+00:00",
+  "updated_at": "2026-09-19T16:09:12.195703+00:00"
+}

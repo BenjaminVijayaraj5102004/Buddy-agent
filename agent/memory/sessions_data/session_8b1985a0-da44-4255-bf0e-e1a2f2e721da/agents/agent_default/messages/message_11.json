@@ -1,0 +1,26 @@
+{
+  "message": {
+    "role": "assistant",
+    "content": [
+      {
+        "text": "Here is the final version of `micro.py` that contains the code for the FastAPI endpoint to add items to a shopping cart:\n\n```python\n# micro.py\nfrom fastapi import FastAPI, HTTPException\nfrom pydantic import BaseModel\nfrom starlette.requests import Request\nfrom starlette.responses import JSONResponse\nimport requests\n\napp = FastAPI()\n\nclass Item(BaseModel):\n    id: int\n    name: str\n    price: float\n    quantity: int\n\n@app.post(\"/add-to-cart\")\nasync def add_to_cart(item: Item, request: Request):\n    # Validate item data\n    if not item.id or not item.name or not item.price or not item.quantity:\n        raise HTTPException(status_code=400, detail=\"Invalid item data\")\n\n    # Forward the request to the cart microservice\n    cart_microservice_url = \"http://cart-microservice:8000/add-to-cart\"\n    try:\n        response = requests.post(cart_microservice_url, json=item.dict())\n        response.raise_for_status()\n    except requests.RequestException as e:\n        raise HTTPException(status_code=500, detail=\"Failed to add item to cart\")\n\n    return JSONResponse(content={\"message\": \"Item added to cart successfully\"}, status_code=201)\n```"
+      }
+    ],
+    "metadata": {
+      "usage": {
+        "inputTokens": 1993,
+        "outputTokens": 260,
+        "totalTokens": 2253
+      },
+      "metrics": {
+        "latencyMs": 59796,
+        "timeToFirstByteMs": 19
+      }
+    },
+    "tracking_id": "f2f27719-21eb-4f89-b503-74c36b8fbd07"
+  },
+  "message_id": 11,
+  "redact_message": null,
+  "created_at": "2026-09-19T16:27:56.833564+00:00",
+  "updated_at": "2026-09-19T16:27:56.833568+00:00"
+}

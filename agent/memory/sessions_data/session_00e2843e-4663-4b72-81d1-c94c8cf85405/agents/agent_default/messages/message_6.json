@@ -1,0 +1,23 @@
+{
+  "message": {
+    "role": "user",
+    "content": [
+      {
+        "toolResult": {
+          "toolUseId": "fc_80a0bdac-2633-45ee-852e-e5d761f9790d",
+          "status": "success",
+          "content": [
+            {
+              "text": "**File created:** `E:/Hackathon/buddy-agent/app/matrix.py`\n\n```python\nimport os\nfrom fastapi import APIRouter, HTTPException, status\nfrom pydantic import BaseModel, Field\nimport httpx\n\nrouter = APIRouter()\n\n\nclass Item(BaseModel):\n    \"\"\"Schema representing an item to be added to the cart.\n\n    - **item_id**: Unique identifier of the product.\n    - **quantity**: Number of units, must be greater than 0.\n    - **price**: Unit price, must be non‑negative.\n    - **name**: Optional human‑readable name.\n    - **description**: Optional free‑form description.\n    \"\"\"\n\n    item_id: int\n    quantity: int = Field(..., gt=0)\n    price: float = Field(..., ge=0)\n    name: str | None = None\n    description: str | None = None\n\n\nclass CartResponse(BaseModel):\n    \"\"\"Standardised response returned to the API consumer.\n\n    - **success**: Indicates whether the downstream operation succeeded.\n    - **message**: Human‑readable status/message.\n    - **data**: Optional payload returned by the cart microservice.\n    \"\"\"\n\n    success: bool\n    message: str\n    data: dict | None = None\n\n\n@router.post(\n    \"/cart/items\",\n    response_model=CartResponse,\n    status_code=status.HTTP_200_OK,\n    tags=[\"Cart\"],\n)\nasync def add_item_to_cart(item: Item) -> CartResponse:\n    \"\"\"\n    Validate the incoming ``Item`` payload and forward it to the cart service.\n\n    The cart service URL is read from the ``CART_SERVICE_URL`` environment variable.\n    Any transport or non‑2xx error is translated into a **502 Bad Gateway** response.\n    \"\"\"\n    cart_service_url = os.getenv(\"CART_SERVICE_URL\")\n    if not cart_service_url:\n        raise HTTPException(\n            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,\n            detail=\"CART_SERVICE_URL environment variable is not set\",\n        )\n\n    async with httpx.AsyncClient() as client:\n        try:\n            response = await client.post(cart_service_url, json=item.model_dump())\n        except httpx.RequestError as exc:\n            # Network‑level failure (DNS, connection timeout, etc.)\n            raise HTTPException(\n                status_code=status.HTTP_502_BAD_GATEWAY,\n                detail=f\"Failed to reach cart service: {exc}\",\n            )\n\n    # Treat any non‑2xx status from the cart service as a gateway error.\n    if not response.is_success:\n        raise HTTPException(\n            status_code=status.HTTP_502_BAD_GATEWAY,\n            detail=(\n                f\"Cart service returned an error: {response.status_code} \"\n                f\"{response.text.strip()}\"\n            ),\n        )\n\n    # Parse the downstream response (fallback to raw text if not JSON)\n    try:\n        payload = response.json()\n    except ValueError:\n        payload = {\"raw\": response.text}\n\n    return CartResponse(\n        success=True,\n        message=\"Item added to cart\",\n        data=payload,\n    )\n\n\n__all__ = [\"router\", \"Item\", \"CartResponse\"]\n```\n\n### Summary\n- **Pydantic models**\n  - `Item`: validates required fields (`item_id`, `quantity` > 0, `price` ≥ 0) and optional `name`/`description`.\n  - `CartResponse`: standard response with `success`, `message`, optional `data`.\n- **FastAPI router**\n  - POST endpoint at `/cart/items`.\n  - Reads `CART_SERVICE_URL` from environment.\n  - Forwards the validated request payload to the external cart service using **async httpx**.\n  - Handles network errors and non‑2xx responses, returning **502 Bad Gateway** with a clear message.\n  - On success, returns a `200` response containing a `CartResponse` with the downstream payload.\n- No database/ORM code; the endpoint only validates and forwards.\n"
+            }
+          ]
+        }
+      }
+    ],
+    "tracking_id": "e5dfcbbd-4fcf-462a-b5bd-bfabecb6f6e1"
+  },
+  "message_id": 6,
+  "redact_message": null,
+  "created_at": "2026-09-19T16:53:09.257602+00:00",
+  "updated_at": "2026-09-19T16:53:09.257606+00:00"
+}

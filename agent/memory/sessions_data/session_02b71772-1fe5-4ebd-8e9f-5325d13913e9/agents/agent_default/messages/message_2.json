@@ -1,0 +1,15 @@
+{
+  "message": {
+    "role": "user",
+    "content": [
+      {
+        "text": "create a post api endpoint for items and save it in app folder and name of the files need to be items.py"
+      }
+    ],
+    "tracking_id": "e07ac086-c6a2-4269-961b-410db7cad1b9"
+  },
+  "message_id": 2,
+  "redact_message": null,
+  "created_at": "2026-09-19T09:04:31.222409+00:00",
+  "updated_at": "2026-09-19T09:04:31.222413+00:00"
+}

@@ -1,0 +1,22 @@
+{
+  "agent_id": "default",
+  "state": {
+    "agent_skills": {
+      "last_injected_xml": "<available_skills>\n<skill>\n<name>buddy-agent</name>\n<description>Master orchestrator skill for classifying intent, extracting arguments (file paths, specs), and delegating to api_manager, sam_cli_agent, or github_agent.</description>\n<location>E:\\Hackathon\\buddy-agent\\agent\\skills\\buddy-agent\\SKILL.md</location>\n</skill>\n</available_skills>"
+    }
+  },
+  "conversation_manager_state": {
+    "__name__": "SlidingWindowConversationManager",
+    "removed_message_count": 4
+  },
+  "_internal_state": {
+    "interrupt_state": {
+      "interrupts": {},
+      "context": {},
+      "activated": false
+    },
+    "model_state": {}
+  },
+  "created_at": "2026-09-19T14:02:28.781684+00:00",
+  "updated_at": "2026-09-19T14:06:58.496070+00:00"
+}

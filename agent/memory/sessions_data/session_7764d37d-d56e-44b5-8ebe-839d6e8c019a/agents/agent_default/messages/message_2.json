@@ -1,0 +1,23 @@
+{
+  "message": {
+    "role": "user",
+    "content": [
+      {
+        "toolResult": {
+          "toolUseId": "tooluse_88e67120d9334fe48e9a3d0a",
+          "status": "success",
+          "content": [
+            {
+              "text": "Error executing API_MANAGER: cannot schedule new futures after shutdown"
+            }
+          ]
+        }
+      }
+    ],
+    "tracking_id": "bb8c4a95-37df-414d-a1b0-641ab9a51299"
+  },
+  "message_id": 2,
+  "redact_message": null,
+  "created_at": "2026-09-19T17:44:10.577007+00:00",
+  "updated_at": "2026-09-19T17:44:10.577013+00:00"
+}

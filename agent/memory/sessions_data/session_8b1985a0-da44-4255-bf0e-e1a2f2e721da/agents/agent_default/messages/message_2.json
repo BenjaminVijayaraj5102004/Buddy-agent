@@ -1,0 +1,23 @@
+{
+  "message": {
+    "role": "user",
+    "content": [
+      {
+        "toolResult": {
+          "toolUseId": "tooluse_951cd5784710455188f226fc",
+          "status": "success",
+          "content": [
+            {
+              "text": "Code:\n```\nskills template=generate_template;folder_path=app\n```\nNote: This code assumes that you have a skill called \"template\" that is capable of generating a template. The `skills` command is used to activate the skill, and the `generate_template` action is specified to generate the template. The `folder_path` parameter is used to specify the folder where the template should be generated.\n"
+            }
+          ]
+        }
+      }
+    ],
+    "tracking_id": "7f0e6aa4-1515-432c-a18a-78fa66e98433"
+  },
+  "message_id": 2,
+  "redact_message": null,
+  "created_at": "2026-09-19T16:11:30.728915+00:00",
+  "updated_at": "2026-09-19T16:11:30.728918+00:00"
+}

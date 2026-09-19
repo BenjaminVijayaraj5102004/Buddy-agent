@@ -1,0 +1,32 @@
+{
+  "message": {
+    "role": "assistant",
+    "content": [
+      {
+        "toolUse": {
+          "toolUseId": "fc_e91d3b95-90b1-496c-af48-ffcd646a17ba",
+          "name": "sam_cli_agent",
+          "input": {
+            "task_description": "Create a SAM deploy template (template.yaml) in the 'app' folder. The template should define a simple AWS Lambda function written in Python, using the provided code in the app folder (if any), with appropriate runtime, handler, and necessary IAM role policies. Include basic configuration for deployment, such as a simple API Gateway event (GET /). Ensure the template is ready for `sam build` and `sam deploy` commands."
+          }
+        }
+      }
+    ],
+    "metadata": {
+      "usage": {
+        "inputTokens": 798,
+        "outputTokens": 182,
+        "totalTokens": 980
+      },
+      "metrics": {
+        "latencyMs": 0,
+        "timeToFirstByteMs": 837
+      }
+    },
+    "tracking_id": "cd5d508e-bec4-44e8-96a0-5ef3c35175cc"
+  },
+  "message_id": 2,
+  "redact_message": null,
+  "created_at": "2026-09-19T16:07:07.233820+00:00",
+  "updated_at": "2026-09-19T16:07:07.233824+00:00"
+}

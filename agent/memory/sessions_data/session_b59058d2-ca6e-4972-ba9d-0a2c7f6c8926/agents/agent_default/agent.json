@@ -1,0 +1,22 @@
+{
+  "agent_id": "default",
+  "state": {
+    "agent_skills": {
+      "last_injected_xml": "<available_skills>\n<skill>\n<name>github-agent</name>\n<description>GitHub Operations skill for managing issues, PRs, branches, commits, and repository metadata via live GitHub MCP tools.</description>\n<location>E:\\Hackathon\\buddy-agent\\agent\\skills\\github-agent\\SKILL.md</location>\n</skill>\n</available_skills>"
+    }
+  },
+  "conversation_manager_state": {
+    "__name__": "SlidingWindowConversationManager",
+    "removed_message_count": 0
+  },
+  "_internal_state": {
+    "interrupt_state": {
+      "interrupts": {},
+      "context": {},
+      "activated": false
+    },
+    "model_state": {}
+  },
+  "created_at": "2026-09-19T16:10:10.036726+00:00",
+  "updated_at": "2026-09-19T16:30:14.684613+00:00"
+}

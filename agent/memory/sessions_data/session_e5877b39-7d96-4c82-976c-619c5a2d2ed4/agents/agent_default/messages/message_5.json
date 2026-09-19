@@ -1,0 +1,26 @@
+{
+  "message": {
+    "role": "assistant",
+    "content": [
+      {
+        "text": "Your name is Benjamin."
+      }
+    ],
+    "metadata": {
+      "usage": {
+        "inputTokens": 1019,
+        "outputTokens": 45,
+        "totalTokens": 1064
+      },
+      "metrics": {
+        "latencyMs": 0,
+        "timeToFirstByteMs": 1195
+      }
+    },
+    "tracking_id": "a79bc0a2-cc28-4e54-b7cd-1d05e7f868fa"
+  },
+  "message_id": 5,
+  "redact_message": null,
+  "created_at": "2026-09-18T19:12:03.968319+00:00",
+  "updated_at": "2026-09-18T19:12:03.968325+00:00"
+}

@@ -1,0 +1,5 @@
+{
+  "session_id": "test-session-dynamic-groq",
+  "session_type": "agent",
+  "model_key": "qwen/qwen3.8-27b"
+}

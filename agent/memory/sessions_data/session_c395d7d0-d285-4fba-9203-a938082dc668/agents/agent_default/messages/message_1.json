@@ -1,0 +1,26 @@
+{
+  "message": {
+    "role": "assistant",
+    "content": [
+      {
+        "text": "Hello! How can I assist you today?"
+      }
+    ],
+    "metadata": {
+      "usage": {
+        "inputTokens": 469,
+        "outputTokens": 45,
+        "totalTokens": 514
+      },
+      "metrics": {
+        "latencyMs": 0,
+        "timeToFirstByteMs": 759
+      }
+    },
+    "tracking_id": "e25920a4-4c13-4977-ac65-8c7f444f83e3"
+  },
+  "message_id": 1,
+  "redact_message": null,
+  "created_at": "2026-09-19T07:15:43.709157+00:00",
+  "updated_at": "2026-09-19T07:15:43.709162+00:00"
+}

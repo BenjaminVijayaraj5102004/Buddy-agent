@@ -1,0 +1,5 @@
+{
+  "session_id": "test-session-groq-101",
+  "session_type": "agent",
+  "model_key": "ollama"
+}

@@ -1,0 +1,26 @@
+{
+  "message": {
+    "role": "assistant",
+    "content": [
+      {
+        "text": "Since the question \"what is my name\" does not require any tool invocation, I will not call any of the functions. However, if I must provide a response in the requested format, I will use the \"skills\" function to load the instructions for the \"buddy-agent\" skill, which is the default skill for this conversation.\n\n{\"name\": \"skills\", \"parameters\": {\"skill_name\": \"buddy-agent\"}}"
+      }
+    ],
+    "metadata": {
+      "usage": {
+        "inputTokens": 879,
+        "outputTokens": 87,
+        "totalTokens": 966
+      },
+      "metrics": {
+        "latencyMs": 21181,
+        "timeToFirstByteMs": 19
+      }
+    },
+    "tracking_id": "a14bfa96-b733-4f67-bd02-f7e6386f2de7"
+  },
+  "message_id": 7,
+  "redact_message": null,
+  "created_at": "2026-09-18T19:12:45.329528+00:00",
+  "updated_at": "2026-09-18T19:12:45.329533+00:00"
+}

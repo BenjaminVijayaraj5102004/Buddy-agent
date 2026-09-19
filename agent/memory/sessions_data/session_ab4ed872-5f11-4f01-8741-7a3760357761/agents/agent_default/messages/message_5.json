@@ -1,0 +1,26 @@
+{
+  "message": {
+    "role": "assistant",
+    "content": [
+      {
+        "text": "{\"name\": \"conversation\", \"parameters\": {\"task_description\": \"what is my name\"}}"
+      }
+    ],
+    "metadata": {
+      "usage": {
+        "inputTokens": 939,
+        "outputTokens": 20,
+        "totalTokens": 959
+      },
+      "metrics": {
+        "latencyMs": 8916,
+        "timeToFirstByteMs": 17
+      }
+    },
+    "tracking_id": "6d97db16-8e7b-47bb-adcf-6cd4781722bb"
+  },
+  "message_id": 5,
+  "redact_message": null,
+  "created_at": "2026-09-19T14:15:38.430652+00:00",
+  "updated_at": "2026-09-19T14:15:38.430660+00:00"
+}

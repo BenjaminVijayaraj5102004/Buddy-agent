@@ -1,0 +1,32 @@
+{
+  "message": {
+    "role": "assistant",
+    "content": [
+      {
+        "toolUse": {
+          "toolUseId": "tooluse_0886c4329bbd40f9bff65fc6",
+          "name": "github_agent",
+          "input": {
+            "task_description": "discuss previous conversation"
+          }
+        }
+      }
+    ],
+    "metadata": {
+      "usage": {
+        "inputTokens": 2098,
+        "outputTokens": 21,
+        "totalTokens": 2119
+      },
+      "metrics": {
+        "latencyMs": 45742,
+        "timeToFirstByteMs": 19
+      }
+    },
+    "tracking_id": "eb8213ea-fa19-4ed3-b060-bfc8424fab8d"
+  },
+  "message_id": 7,
+  "redact_message": null,
+  "created_at": "2026-09-19T14:11:14.690527+00:00",
+  "updated_at": "2026-09-19T14:11:14.690532+00:00"
+}

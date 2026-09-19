@@ -1,0 +1,43 @@
+{
+  "message": {
+    "role": "user",
+    "content": [
+      {
+        "toolResult": {
+          "status": "success",
+          "toolUseId": "fc_f0b56230-38b6-4c6b-8be5-5ed815750fef",
+          "content": [
+            {
+              "text": "{\"total_count\":1134592,\"incomplete_results\":false,\"items\":[{\"name\":\"AGENTS.md\",\"path\":\"AGENTS.md\",\"sha\":\"1c15b2b8bfcd7a9f9e0f4ee1875d4eaf84ea3730\",\"repository\":\"zhanymkanov/fastapi-best-practices\",\"text_matches\":[{\"object_url\":\"https://api.github.com/repositories/522822986/contents/AGENTS.md?ref=5e00aa6095521f0d00e4eec2ef0afa44cd566af4\",\"object_type\":\"FileContent\",\"property\":\"content\",\"fragment\":\"```python\\nfrom fastapi import APIRouter, status\\n\\nrouter = APIRouter()\\n\\n\\n@router.post(\",\"matches\":[{\"text\":\"Router\",\"indices\":[33,39]},{\"text\":\"router\",\"indices\":[49,55]},{\"text\":\"=\",\"indices\":[56,57]},{\"text\":\"APIRouter()\",\"indices\":[58,69]},{\"text\":\"Router\",\"indices\":[61,67]},{\"text\":\"router\",\"indices\":[73,79]}]}]},{\"name\":\"README.md\",\"path\":\"README.md\",\"sha\":\"c6511abaad286a81e48e3213b8c751272024c5e0\",\"repository\":\"zhanymkanov/fastapi-best-practices\",\"text_matches\":[{\"object_url\":\"https://api.github.com/repositories/522822986/contents/README.md?ref=5e00aa6095521f0d00e4eec2ef0afa44cd566af4\",\"object_type\":\"FileContent\",\"property\":\"content\",\"fragment\":\"from fastapi import APIRouter\\n\\n\\nrouter = APIRouter()\\n\\n\\n@router.get(\\\"/terrible-ping\\\")\",\"matches\":[{\"text\":\"Router\",\"indices\":[23,29]},{\"text\":\"router\",\"indices\":[32,38]},{\"text\":\"=\",\"indices\":[39,40]},{\"text\":\"APIRouter()\",\"indices\":[41,52]},{\"text\":\"Router\",\"indices\":[44,50]},{\"text\":\"router\",\"indices\":[56,62]}]}]},{\"name\":\"README.md\",\"path\":\"README.md\",\"sha\":\"0cbff6de49bd420053171f3dba2d84fa13a36246\",\"repository\":\"dialoguemd/fastapi-sqla\",\"text_matches\":[{\"object_url\":\"https://api.github.com/repositories/298082175/contents/README.md?ref=6f7184c66b51c551159c69fe4b54b5ac69666b15\",\"object_type\":\"FileContent\",\"property\":\"content\",\"fragment\":\"from sqlalchemy import func, select\\nfrom sqlalchemy.orm import relationship\\n\\nrouter = APIRouter()\\n\\n\\nclass User(Base):\",\"matches\":[{\"text\":\"router\",\"indices\":[77,83]},{\"text\":\"=\",\"indices\":[84,85]},{\"text\":\"APIRouter()\",\"indices\":[86,97]},{\"text\":\"Router\",\"indices\":[89,95]}]}]},{\"name\":\"README.md\",\"path\":\"README.md\",\"sha\":\"cc8c8de6f8547ba7390aa8087bcf6d3efb941e97\",\"repository\":\"rednafi/fastapi-nano\",\"text_matches\":[{\"object_url\":\"https://api.github.com/repositories/267302274/contents/README.md?ref=6557d13c11b8119626a35a12b1522275ac395edd\",\"object_type\":\"FileContent\",\"property\":\"content\",\"fragment\":\"The endpoint is exposed like this:\\n\\n```python\\nrouter = APIRouter()\\nlogger = logging.getLogger(__name__)\\nCurrentUser = Annotated[UserInDB, Depends(get_current_user)]\\n\",\"matches\":[{\"text\":\"router\",\"indices\":[46,52]},{\"text\":\"=\",\"indices\":[53,54]},{\"text\":\"APIRouter()\",\"indices\":[55,66]},{\"text\":\"Router\",\"indices\":[58,64]},{\"text\":\"=\",\"indices\":[74,75]},{\"text\":\"=\",\"indices\":[116,117]}]}]},{\"name\":\"README.md\",\"path\":\"README.md\",\"sha\":\"c02c304496985b9ed6a3497d1020e2a60a12175b\",\"repository\":\"teamhide/fastapi-boilerplate\",\"text_matches\":[{\"object_url\":\"https://api.github.com/repositories/248507413/contents/README.md?ref=df4e6d4f817ec187eeaf2d1c5a877b27c06bb77b\",\"object_type\":\"FileContent\",\"property\":\"content\",\"fragment\":\")\\n\\n\\nuser_router = APIRouter()\\n\\n\\n@user_router.get(\",\"matches\":[{\"text\":\"router\",\"indices\":[9,15]},{\"text\":\"=\",\"indices\":[16,17]},{\"text\":\"APIRouter()\",\"indices\":[18,29]},{\"text\":\"Router\",\"indices\":[21,27]},{\"text\":\"router\",\"indices\":[38,44]}]}]}]}"
+            }
+          ],
+          "metadata": {
+            "io.modelcontextprotocol/serverInfo": {
+              "name": "github-mcp-server",
+              "title": "GitHub MCP Server",
+              "version": "github-mcp-server/remote-7835a232463c42f2f33cb50b3f4fa043cf66697c",
+              "icons": [
+                {
+                  "src": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAABmJLR0QA/wD/AP+gvaeTAAADK0lEQVRIibWVQWhcVRSGv3Pfy0zGdBIMRWk7iziMTpORptpqiNSNG1dNizaFFlxIoYuCC7NwJdiVlhYprtwpighCF9GtuhCRtuCoaWdqGF7HkE4aWm1CpklmJpl3j4vMS99M2k4G9N+8d8659/8u9553H/zPkscVM5lMf03do6iOKbJXIAGgUBJ0GpHvolKfzOfzCx0BEonRWDRemRD0PaC3zSKXED1fLfdcLJUuV9oC0ukXdluxkyq81Ma4VX9Y4x4p5rOzjwSkUvsSdMkVYE+H5oHmjM9IoTA1FyRM8JJIjMbokm83zUW/Vvi5raXwC8rnjWiPdXRyYGCgOyi7wUs0XpkAXmyEa/XV8qmZmZnqc0P7XrXKW2BuKDovgorqLoWMFb4p3rj2I4w7qcHCMSAOctDt7n0X+GiDT6NbrPsXDw50xftzKg7odvcmtXf4DsJTjXBpzbXPzF6/vmgAauoepblbnGTyQLvu2VQmk4kgxEKpvui6cwSCM1Ada5qheq5YzC5tF5DP59dQzjYlZcOzccgyGK65mC+2ax7IWPfLcGxhKARgV7i4vBy70ymgUMj+A9SDWGB3GOCEB/f0VJ/sFJBKjfQS6srAOwD8HR7su/7BTgE2Umn98u9uAgR+ayqpnOkUIK1zZMPTACjyQzOA11ND+z+E8aate4TMs4PD7wu80ezP940nJJMH+ky0XgKeAHkH1TcRXgNywFeoueJN//5T2CCZGT7kWBlV9CSwvwV6n/XuhOddLRuAYjG7hMjHgEH1tEb0BEgWeB44J8aebF2243Nc0fMPMUfgguddLUOoe/r7dlwWJzqGMCxq6q5Wz/jSVQZ+Nb795N69u4thk/6dT7uInNiyYcoU9ZW3FxYWfAjdpp7n1XzjHAbmUJ3wTXQ8gvOZb+oXV1d3zLf6WEcWW3MoJXX9w57n1YKUCdeL+eysOv4oyrQqn65Tv+1adz4WrxzaskXWNs0V5Jq6/is3c7lb4byhRTdzuVvUV0ZQPgDuA6jqlj+fqhvkllE9q+vLL7eab4Afo1RqpJdI9Rhr3ZeCQwuUTqfjvoket7WuS51cjP+5/gWC8y5uIkrtDQAAAABJRU5ErkJggg==",
+                  "mimeType": "image/png",
+                  "theme": "light"
+                },
+                {
+                  "src": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAABmJLR0QA/wD/AP+gvaeTAAAB8ElEQVRIibWVu09UQRSHv9k1IgW7AY0RBWKsTGx9ND4qS5F/wEYLDb0xAY0UxkdrZ2NHYWfsaYyVT4iJwZpNjJooLBQEYz6LvZsdxmH3LtFfN3PO+X5zzzwu/GeFbkF1BJgCJoHjwFgRagDLwAvgeQjhR1+u6qA6q67ZW6vqjDpYFn5YfV0CnOqDOtELPqY2dgFvq6Ee6daWd1HyvPqyBPSV+jQav1H3tbkhMpgF7hXDLaAeQthUzwFXgE/AF0BgFDgBPAshLKhV4CcwVNTPhBAexKsfcfuGbqhdT1imA1+j+lV1GKBSxKeAWpRfTca94HuB+BTVgcuxwWRS8zCEsFbWIISwBcwl0x2m+jnZuKNl4RHjQMJYjoPNJFju0vxt8itiNKHTomqSO7wLeA3YE01VYoPvSf7Jfg2AU8n4W2zwPglO78Igrekw1enMDb1fXKCuUivq7Uz99Tiprq6rvwuzhSLpo3pLvZABn1Vv2nrkUjWLPdlWMFcEF9WD6tuo4EnG4HEG3Nad3KcOqEtRe/bb+ic8Uo9l8i/tAF9UB3bq54StJ3dTvaGOqofM3IuiRalW1PH8bnUKx4tVxLqYyTuf5Czl4JV0IoSwApwB7gLr7enMWtpzG7TeodNFbXmpNfWq6YloxYbUa2q9L+i/1h8/EAGdUrF9ZQAAAABJRU5ErkJggg==",
+                  "mimeType": "image/png",
+                  "theme": "dark"
+                }
+              ]
+            }
+          },
+          "isError": false
+        }
+      }
+    ],
+    "tracking_id": "8d5b04c3-caa8-4445-95ef-0ca463098f75"
+  },
+  "message_id": 6,
+  "redact_message": null,
+  "created_at": "2026-09-19T14:03:19.492220+00:00",
+  "updated_at": "2026-09-19T14:03:19.492224+00:00"
+}

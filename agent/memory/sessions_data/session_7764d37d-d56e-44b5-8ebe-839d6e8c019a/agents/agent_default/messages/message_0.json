@@ -1,0 +1,15 @@
+{
+  "message": {
+    "role": "user",
+    "content": [
+      {
+        "text": "Design a FastAPI endpoint that handles adding items to a shopping cart. The endpoint must be a POST request that accepts item details in the request body. Implement business logic to validate the item data and forward the request to a microservice responsible for cart management, ensuring the endpoint itself does not perform any direct database queries."
+      }
+    ],
+    "tracking_id": "4ecc9261-87ff-47dd-acec-a4c78b7e8e73"
+  },
+  "message_id": 0,
+  "redact_message": null,
+  "created_at": "2026-09-19T17:34:20.823793+00:00",
+  "updated_at": "2026-09-19T17:34:20.823799+00:00"
+}

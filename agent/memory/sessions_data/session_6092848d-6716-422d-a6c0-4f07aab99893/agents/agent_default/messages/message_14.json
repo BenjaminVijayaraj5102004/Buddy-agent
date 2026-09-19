@@ -1,0 +1,34 @@
+{
+  "message": {
+    "role": "user",
+    "content": [
+      {
+        "toolResult": {
+          "status": "success",
+          "toolUseId": "8q6gtz0w6",
+          "content": [
+            {
+              "text": "{\n  \"result\": \"ok\",\n  \"file_hash\": \"485e36710edca259da74f9f5bd4a2122f109907bf4e572c55f235ebe9c62fe83\",\n  \"reason\": null,\n  \"suggestion\": null,\n  \"hint\": null\n}"
+            }
+          ],
+          "structuredContent": {
+            "result": [
+              {
+                "type": "text",
+                "text": "{\n  \"result\": \"ok\",\n  \"file_hash\": \"485e36710edca259da74f9f5bd4a2122f109907bf4e572c55f235ebe9c62fe83\",\n  \"reason\": null,\n  \"suggestion\": null,\n  \"hint\": null\n}",
+                "annotations": null,
+                "_meta": null
+              }
+            ]
+          },
+          "isError": false
+        }
+      }
+    ],
+    "tracking_id": "f4a6c830-8182-454d-bb26-0a0db75b26a9"
+  },
+  "message_id": 14,
+  "redact_message": null,
+  "created_at": "2026-09-19T17:37:56.985110+00:00",
+  "updated_at": "2026-09-19T17:37:56.985115+00:00"
+}

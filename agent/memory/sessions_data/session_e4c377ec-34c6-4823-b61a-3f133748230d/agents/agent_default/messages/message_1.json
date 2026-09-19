@@ -1,0 +1,26 @@
+{
+  "message": {
+    "role": "assistant",
+    "content": [
+      {
+        "text": "Sure! I can help open a pull request for you. Could you let me know a few details so I can create it correctly?\n\n- **Repository** (owner/name or URL)  \n- **Source branch** (the branch that has the changes)  \n- **Target branch** (the branch you want to merge into, e.g., `main` or `develop`)  \n- **Pull‑request title**  \n- **Pull‑request description** (any context, issue links, etc.)  \n- **Reviewers or assignees** you’d like to add (optional)\n\nOnce I have that information I’ll hand the request off to the GitHub agent to create the PR. 🚀"
+      }
+    ],
+    "metadata": {
+      "usage": {
+        "inputTokens": 781,
+        "outputTokens": 351,
+        "totalTokens": 1132
+      },
+      "metrics": {
+        "latencyMs": 0,
+        "timeToFirstByteMs": 1656
+      }
+    },
+    "tracking_id": "78258e2e-f5ee-4eec-893f-4aaea67babfa"
+  },
+  "message_id": 1,
+  "redact_message": null,
+  "created_at": "2026-09-19T15:43:02.253933+00:00",
+  "updated_at": "2026-09-19T15:43:02.253937+00:00"
+}

@@ -1,0 +1,23 @@
+{
+  "message": {
+    "role": "user",
+    "content": [
+      {
+        "toolResult": {
+          "toolUseId": "tooluse_fceadc39d3ad4e98847884bf",
+          "status": "success",
+          "content": [
+            {
+              "text": "Sure! I’d be happy to help set up an API endpoint that interacts with Kafka, but I’ll need a few more details to make sure I build exactly what you need:\n\n1. **Operation type** – Should the endpoint **publish** messages to a Kafka topic, **consume** messages, or both?\n2. **HTTP method & path** – What route and HTTP method would you like (e.g., `POST /kafka/publish`, `GET /kafka/consume`)?\n3. **Request schema** – If publishing, what fields should the request body contain (e.g., `topic`, `key`, `value`, optional headers)?\n4. **Response schema** – What should the endpoint return (e.g., a confirmation with a Kafka offset/partition, the consumed message, error info)?\n5. **Kafka configuration** – Do you have a broker URL or any specific settings you want baked into the code, or should I use placeholders?\n6. **File location** – Where would you like the generated FastAPI file to live (e.g., `E:\\Hackathon\\buddy-agent\\app\\kafka_endpoint.py`)?\n\nOnce I have these specifics, I’ll delegate the implementation to our REST‑API agent and then provide you with a clean summary of the created endpoint and schemas.\n"
+            }
+          ]
+        }
+      }
+    ],
+    "tracking_id": "0a8e45f8-e44b-4f79-ad75-0f1349669ac2"
+  },
+  "message_id": 8,
+  "redact_message": null,
+  "created_at": "2026-09-19T13:46:03.202932+00:00",
+  "updated_at": "2026-09-19T13:46:03.202945+00:00"
+}

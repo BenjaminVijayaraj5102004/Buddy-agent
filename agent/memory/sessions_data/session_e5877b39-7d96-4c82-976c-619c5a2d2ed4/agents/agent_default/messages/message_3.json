@@ -1,0 +1,26 @@
+{
+  "message": {
+    "role": "assistant",
+    "content": [
+      {
+        "text": "hello benjamin, welcome to our development environment. how can i assist you today?"
+      }
+    ],
+    "metadata": {
+      "usage": {
+        "inputTokens": 752,
+        "outputTokens": 18,
+        "totalTokens": 770
+      },
+      "metrics": {
+        "latencyMs": 6344,
+        "timeToFirstByteMs": 49
+      }
+    },
+    "tracking_id": "b8759d8b-cf43-4f74-b40b-526bebc9ae6a"
+  },
+  "message_id": 3,
+  "redact_message": null,
+  "created_at": "2026-09-18T19:10:57.983769+00:00",
+  "updated_at": "2026-09-18T19:10:57.983779+00:00"
+}

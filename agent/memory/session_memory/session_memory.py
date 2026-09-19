@@ -141,3 +141,90 @@ def list_stored_sessions(storage_dir: str | Path = DEFAULT_SESSIONS_DIR) -> list
         if item.is_dir() and item.name.startswith("session_"):
             sessions.append(item.name.replace("session_", "", 1))
     return sessions
+
+
+def get_session_model_key(session_id: str, storage_dir: str | Path = DEFAULT_SESSIONS_DIR) -> str | None:
+    """Get the saved model key for a session if it exists."""
+    sid = session_id.strip() if session_id else ""
+    if not sid:
+        return None
+    session_path = os.path.join(str(storage_dir), f"session_{sid}")
+    session_file = os.path.join(session_path, "session.json")
+    if os.path.exists(session_file):
+        try:
+            with open(session_file, "r", encoding="utf-8") as f:
+                data = json.load(f)
+                if isinstance(data, dict) and "model_key" in data:
+                    return data["model_key"]
+        except Exception:
+            pass
+    return None
+
+
+def set_session_model_key(session_id: str, model_key: str, storage_dir: str | Path = DEFAULT_SESSIONS_DIR) -> None:
+    """Persist the chosen model key into the session metadata file."""
+    sid = session_id.strip() if session_id else ""
+    if not sid or not model_key:
+        return
+    session_path = os.path.join(str(storage_dir), f"session_{sid}")
+    os.makedirs(session_path, exist_ok=True)
+    session_file = os.path.join(session_path, "session.json")
+    data = {}
+    if os.path.exists(session_file):
+        try:
+            with open(session_file, "r", encoding="utf-8") as f:
+                data = json.load(f)
+        except Exception:
+            data = {}
+    data["session_id"] = sid
+    data["session_type"] = data.get("session_type", "agent")
+    data["model_key"] = model_key
+    try:
+        with open(session_file, "w", encoding="utf-8") as f:
+            json.dump(data, f, indent=2)
+    except Exception:
+        pass
+
+
+def get_session_subagent_models(session_id: str, storage_dir: str | Path = DEFAULT_SESSIONS_DIR) -> dict[str, str]:
+    """Get the saved sub-agent model assignments for a session if they exist."""
+    sid = session_id.strip() if session_id else ""
+    if not sid:
+        return {}
+    session_path = os.path.join(str(storage_dir), f"session_{sid}")
+    session_file = os.path.join(session_path, "session.json")
+    if os.path.exists(session_file):
+        try:
+            with open(session_file, "r", encoding="utf-8") as f:
+                data = json.load(f)
+                if isinstance(data, dict) and "subagent_models" in data and isinstance(data["subagent_models"], dict):
+                    return data["subagent_models"]
+        except Exception:
+            pass
+    return {}
+
+
+def set_session_subagent_models(session_id: str, subagent_models: dict[str, str], storage_dir: str | Path = DEFAULT_SESSIONS_DIR) -> None:
+    """Persist sub-agent model assignments dictionary into the session metadata file."""
+    sid = session_id.strip() if session_id else ""
+    if not sid or not isinstance(subagent_models, dict):
+        return
+    session_path = os.path.join(str(storage_dir), f"session_{sid}")
+    os.makedirs(session_path, exist_ok=True)
+    session_file = os.path.join(session_path, "session.json")
+    data = {}
+    if os.path.exists(session_file):
+        try:
+            with open(session_file, "r", encoding="utf-8") as f:
+                data = json.load(f)
+        except Exception:
+            data = {}
+    data["session_id"] = sid
+    data["session_type"] = data.get("session_type", "agent")
+    data["subagent_models"] = subagent_models
+    try:
+        with open(session_file, "w", encoding="utf-8") as f:
+            json.dump(data, f, indent=2)
+    except Exception:
+        pass
+
