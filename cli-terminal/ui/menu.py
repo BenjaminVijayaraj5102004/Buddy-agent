@@ -149,12 +149,12 @@ def render_igi_options_menu(active_tab: int, selected_opt: int, session_obj) -> 
         gh_inf = session_obj.get_subagent_model_info("github")
         sam_inf = session_obj.get_subagent_model_info("sam")
         opts = [
-            ("🤖 Main Buddy Agent", f"[{main_inf['name']}]"),
-            ("⚡ REST API Agent", f"[{api_inf['name']}]"),
-            ("🐙 GitHub Agent", f"[{gh_inf['name']}]"),
-            ("📦 SAM CLI Deploy Agent", f"[{sam_inf['name']}]"),
-            ("🔄 Sync All Agents to Main", "[PRESS ENTER]"),
-            ("🧠 Satellite Model Matrix Dialog", "[OPEN DIALOG]"),
+            ("Main Buddy Agent", f"[{main_inf['name']}]"),
+            ("REST API Agent", f"[{api_inf['name']}]"),
+            ("GitHub Agent", f"[{gh_inf['name']}]"),
+            ("SAM CLI Deploy Agent", f"[{sam_inf['name']}]"),
+            ("Sync All Agents to Main", "[PRESS ENTER]"),
+            ("Satellite Model Matrix Dialog", "[OPEN DIALOG]"),
         ]
     # Tab 3: HUD Theme
     elif active_tab == 3:
@@ -221,7 +221,7 @@ def render_igi_help_modal(theme_name: str = "igi") -> Table:
 
     wrapper = Table.grid(padding=(0, 0), expand=True)
     wrapper.add_column()
-    wrapper.add_row(Text("📖 PROJECT BUDDY // MISSION BRIEFING\n", style=f"bold {color_bright}", justify="center"))
+    wrapper.add_row(Text(" PROJECT BUDDY - MISSION BRIEFING\n", style=f"bold {color_bright}", justify="center"))
     wrapper.add_row(Text("─" * 78, style=f"dim {color_mid}", justify="center"))
     wrapper.add_row(content)
     wrapper.add_row(Text("─" * 78, style=f"dim {color_mid}", justify="center"))

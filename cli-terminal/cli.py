@@ -45,7 +45,7 @@ console = Console(highlight=True)
 
 app = typer.Typer(
     name="buddy",
-    help="⚡ BUDDY AGENT - Tactical AI Companion & Btop Telemetry Monitor",
+    help=" BUDDY AGENT - Tactical AI Companion & Btop Telemetry Monitor",
     add_completion=False,
     no_args_is_help=False,
 )
@@ -93,7 +93,7 @@ def session_command(
             set_current_session_id(session_id)
         except Exception:
             pass
-        console.print(f"[bold #00ff55]🔄 Activated Session UUID:[/] [bold #38bdf8]{session.session_id}[/]\n")
+        console.print(f"[bold #00ff55] Activated Session UUID:[/] [bold #38bdf8]{session.session_id}[/]\n")
     else:
         show_session_dialog(session, console)
 

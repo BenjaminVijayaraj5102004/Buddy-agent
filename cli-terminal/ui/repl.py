@@ -94,7 +94,7 @@ def run_interactive_shell(session: SessionState, console: Optional[Console] = No
             # Tactical single prompt header
             cwd_name = os.path.basename(os.getcwd()) or "workspace"
             console.print(
-                f"[dim]╭─[/dim] 🎯 [bold {COLOR_PEACH}]PROJECT BUDDY // TACTICAL HUD[/bold {COLOR_PEACH}] "
+                f"[dim]╭─[/dim]  [bold {COLOR_PEACH}]PROJECT BUDDY // TACTICAL HUD[/bold {COLOR_PEACH}] "
                 f"[dim]in[/dim] [bold {COLOR_BLUE}]~/{cwd_name}[/bold {COLOR_BLUE}] "
                 f"[dim]on[/dim] [bold {COLOR_PURPLE}]satellite:{session.model_key}[/bold {COLOR_PURPLE}] "
                 f"[dim]•[/dim] [bold #38bdf8]{session.session_id}[/bold #38bdf8]"
@@ -184,10 +184,10 @@ def run_interactive_shell(session: SessionState, console: Optional[Console] = No
 
     # Graceful exit with clean session preservation message
     exit_text = Text()
-    exit_text.append("💾 SESSION SAVED & PRESERVED!\n", style="bold #facc15")
-    exit_text.append(f"🔑 Session ID: {session.session_id}\n\n", style="bold #00ff55")
-    exit_text.append("📋 Copy and paste this ID in the Session Menu or run /session to resume your conversation.\n", style="dim #94a3b8")
-    exit_text.append("⚡ Tactical HUD Shutdown. Have a productive day, Champ! 🐾\n", style="bold #38bdf8")
+    exit_text.append("SESSION SAVED & PRESERVED!\n", style="bold #facc15")
+    exit_text.append(f" Session ID: {session.session_id}\n\n", style="bold #00ff55")
+    exit_text.append(" Copy and paste this ID in the Session Menu or run /session to resume your conversation.\n", style="dim #94a3b8")
+    exit_text.append(" Tactical HUD Shutdown. Have a productive day, Champ! \n", style="bold #38bdf8")
 
     console.print()
     console.print(Text("─" * 78, style="dim #15803d", justify="center"))

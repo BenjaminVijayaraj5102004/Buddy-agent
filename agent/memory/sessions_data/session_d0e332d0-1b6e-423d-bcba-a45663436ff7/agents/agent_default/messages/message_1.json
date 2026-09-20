@@ -1,0 +1,32 @@
+{
+  "message": {
+    "role": "assistant",
+    "content": [
+      {
+        "toolUse": {
+          "toolUseId": "epsmqf67d",
+          "name": "skills",
+          "input": {
+            "skill_name": "rest-agent"
+          }
+        }
+      }
+    ],
+    "metadata": {
+      "usage": {
+        "inputTokens": 3360,
+        "outputTokens": 28,
+        "totalTokens": 3388
+      },
+      "metrics": {
+        "latencyMs": 0,
+        "timeToFirstByteMs": 8792
+      }
+    },
+    "tracking_id": "e5b2e304-ad17-4597-9cf6-d4888cac5c84"
+  },
+  "message_id": 1,
+  "redact_message": null,
+  "created_at": "2026-09-20T17:52:34.642979+00:00",
+  "updated_at": "2026-09-20T17:52:34.642984+00:00"
+}

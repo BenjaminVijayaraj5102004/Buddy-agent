@@ -7,6 +7,8 @@ per-core meters, disk IO, network sparklines, process table, and Tactical Radar 
 import time
 import sys
 import os
+from typing import Dict, Any, List, Optional
+
 
 if hasattr(sys.stdout, "reconfigure"):
     sys.stdout.reconfigure(encoding="utf-8")
@@ -289,7 +291,7 @@ class BtopRenderer:
         targets_table.add_column("RADAR VECTOR / ENDPOINT", style=f"bold {t.get('text', '#f0fdf4')}")
         targets_table.add_column("STATUS", justify="right", style=f"bold {t.get('meter_low', '#22c55e')}", width=12)
         
-        radar_targets = collector_obj.get_radar_targets() if collector_obj else []
+        radar_targets: List[Dict[str, Any]] = collector_obj.get_radar_targets() if collector_obj else []
         if not radar_targets:
             radar_targets = [
                 {"type": "UPLINK", "label": "Groq Satellite Llama-3.3 (US-CENTRAL)", "status": "ONLINE", "pid": 4096},
@@ -299,9 +301,9 @@ class BtopRenderer:
             
         for tgt in radar_targets[:5]:
             targets_table.add_row(
-                tgt["type"],
-                tgt["label"],
-                tgt["status"],
+                str(tgt["type"]),
+                str(tgt["label"]),
+                str(tgt["status"]),
             )
             
         grid.add_row(radar_text, targets_table)
@@ -401,7 +403,7 @@ class BtopRenderer:
         ai_info.add_row(l1)
 
         l2 = Text()
-        l2.append("💬 Buddy says: ", style=f"bold {buddy_col}")
+        l2.append(" Buddy says: ", style=f"bold {buddy_col}")
         l2.append(f"\"{status_msg}\"", style=f"italic {highlight_col}")
         ai_info.add_row(l2)
 
@@ -409,7 +411,7 @@ class BtopRenderer:
 
         return Panel(
             grid,
-            title=f"[bold {buddy_col}] 🧸 BUDDY AGENT // Satellite AI Telemetry & Empathy Companion [/]",
+            title=f"[bold {buddy_col}] BUDDY AGENT // Satellite AI Telemetry & Empathy Companion [/]",
             title_align="left",
             border_style=buddy_col,
             padding=(0, 1),
@@ -443,7 +445,7 @@ class BtopRenderer:
 
         return Panel(
             content,
-            title=f"[bold {highlight_col}] 🔍 Tactical Process Inspector // PID {p_details.get('pid')} [/]",
+            title=f"[bold {highlight_col}]  Tactical Process Inspector // PID {p_details.get('pid')} [/]",
             border_style=highlight_col,
             padding=(1, 2),
         )
@@ -457,7 +459,7 @@ class BtopRenderer:
         content = Table.grid(padding=(0, 1), expand=True)
         content.add_column()
 
-        content.add_row(Text("⚠️  CONFIRM TACTICAL PROCESS TERMINATION", style=f"bold {crit_col}", justify="center"))
+        content.add_row(Text(" CONFIRM TACTICAL PROCESS TERMINATION", style=f"bold {crit_col}", justify="center"))
         content.add_row(Text("─" * 60, style=f"dim {border_col}"))
         content.add_row(Text(f"Process Name : {p_info.get('name')}", style=f"bold {t.get('text', '#f0fdf4')}"))
         content.add_row(Text(f"Process PID  : {p_info.get('pid')}", style=f"bold {t.get('text', '#f0fdf4')}"))
@@ -487,7 +489,7 @@ class BtopRenderer:
 
         if self.status_notification and (time.time() - self.status_notification_time < 3.0):
             elements.append(Panel(
-                Text(f"🔔 {self.status_notification}", style=f"bold {self.theme.get('highlight', '#00ff55')}"),
+                Text(f"{self.status_notification}", style=f"bold {self.theme.get('highlight', '#00ff55')}"),
                 border_style=f"bold {self.theme.get('highlight', '#00ff55')}",
                 padding=(0, 1),
             ))

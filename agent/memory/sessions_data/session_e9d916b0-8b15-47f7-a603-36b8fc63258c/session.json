@@ -1,0 +1,11 @@
+{
+  "session_id": "e9d916b0-8b15-47f7-a603-36b8fc63258c",
+  "session_type": "agent",
+  "model_key": "groq",
+  "subagent_models": {
+    "main": "groq",
+    "api": "groq",
+    "github": "groq",
+    "sam": "groq"
+  }
+}

@@ -353,7 +353,7 @@ def run_btop_monitor(
                     
                     modal_panel = Panel(
                         help_content,
-                        title=f"[bold {t.get('title', '#22c55e')}] 📖 Tactical Telemetry & Radar Operations Manual [/]",
+                        title=f"[bold {t.get('title', '#22c55e')}]  Tactical Telemetry & Radar Operations Manual [/]",
                         border_style=t.get('highlight', '#00ff55'),
                         padding=(1, 2),
                     )
@@ -361,8 +361,8 @@ def run_btop_monitor(
                 elif in_filter_mode:
                     t = renderer.theme
                     filter_box = Panel(
-                        Text(f"Filter Keyword: {filter_buffer}█", style=f"bold {t.get('highlight', '#00ff55')}"),
-                        title=f"[bold {t.get('highlight', '#00ff55')}] 🔍 Search Processes (Enter to apply, Esc to cancel) [/]",
+                        Text(f"Filter Keyword: {filter_buffer}", style=f"bold {t.get('highlight', '#00ff55')}"),
+                        title=f"[bold {t.get('highlight', '#00ff55')}]  Search Processes (Enter to apply, Esc to cancel) [/]",
                         border_style=t.get('highlight', '#00ff55'),
                         padding=(1, 2),
                     )

@@ -1,0 +1,32 @@
+{
+  "message": {
+    "role": "assistant",
+    "content": [
+      {
+        "toolUse": {
+          "toolUseId": "j4k5xfbt4",
+          "name": "skills",
+          "input": {
+            "skill_name": "buddy-agent"
+          }
+        }
+      }
+    ],
+    "metadata": {
+      "usage": {
+        "inputTokens": 1123,
+        "outputTokens": 29,
+        "totalTokens": 1152
+      },
+      "metrics": {
+        "latencyMs": 0,
+        "timeToFirstByteMs": 439
+      }
+    },
+    "tracking_id": "cbdd224c-afd3-4652-8700-6c1532a08db2"
+  },
+  "message_id": 3,
+  "redact_message": null,
+  "created_at": "2026-09-20T09:15:13.330365+00:00",
+  "updated_at": "2026-09-20T09:15:13.330369+00:00"
+}

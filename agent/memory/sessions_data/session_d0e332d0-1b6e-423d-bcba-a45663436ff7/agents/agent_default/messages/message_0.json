@@ -1,0 +1,15 @@
+{
+  "message": {
+    "role": "user",
+    "content": [
+      {
+        "text": "Create a POST API endpoint for a health check using the FastAPI framework.\n\nRequirements:\n- HTTP Method: POST\n- Endpoint path/name: /health\n- Framework: FastAPI\n- Target file path: E:\\Hackathon\\buddy-agent\\groq_generated_code.py\n- Include a Pydantic v2 schema for the request body (e.g., a HealthCheckRequest with an optional service name/message field) and a response schema (e.g., HealthCheckResponse with status, message, and a timestamp field).\n- The endpoint should return a success status (HTTP 200) with a JSON body such as { \"status\": \"ok\", \"message\": \"Service is healthy\" }.\n- Keep the implementation as a pure API contract with mock responses only. Do NOT include any database, ORM, or external dependency logic (no DB sessions, no queries, no external service calls).\n- The code should be a standalone, runnable FastAPI application file (include `from fastapi import FastAPI` and an `app = FastAPI()` instance).\n\nPlease write the complete file content into E:\\Hackathon\\buddy-agent\\groq_generated_\n[Workspace Directory: E:\\Hackathon\\buddy-agent]"
+      }
+    ],
+    "tracking_id": "cfd6c0d4-c711-47cc-9bc4-1a7e68bd920f"
+  },
+  "message_id": 0,
+  "redact_message": null,
+  "created_at": "2026-09-20T17:52:25.844233+00:00",
+  "updated_at": "2026-09-20T17:52:25.844236+00:00"
+}

@@ -1,0 +1,11 @@
+{
+  "session_id": "2d57d5d0-0a32-4b59-ae65-f62177866cec",
+  "session_type": "agent",
+  "model_key": "ollama",
+  "subagent_models": {
+    "main": "ollama",
+    "api": "ollama",
+    "github": "ollama",
+    "sam": "ollama"
+  }
+}

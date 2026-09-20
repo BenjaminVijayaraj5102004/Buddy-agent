@@ -1,0 +1,23 @@
+{
+  "message": {
+    "role": "user",
+    "content": [
+      {
+        "toolResult": {
+          "toolUseId": "0yfayq11c",
+          "status": "success",
+          "content": [
+            {
+              "text": "# REST Agent Skill\n\n## Tool Usage & Implementation\n1. **File Creation & Local Editing (Text Editor MCP)**:\n   - `create_text_file`: Write complete, unescaped Python code directly to target absolute file path.\n   - `get_text_file_contents` / `patch_text_file_contents`: Inspect or update existing local files on disk.\n2. **GitHub MCP Tools (Remote Reconnaissance & Code Search)**:\n   - `search_code`: Search GitHub for existing patterns, schema structures, and routes.\n   - `get_file_contents`: Read remote GitHub repo files (requires `owner` and `repo`). *Never pass local disk paths.*\n   - `search_repositories`: Find relevant template or reference repositories.\n3. **Code Standards**:\n   - Complete Pydantic v2 `BaseModel` classes with explicit type annotations.\n   - Clean FastAPI `APIRouter` route handlers.\n   - Strictly zero database/ORM logic (use mock dictionaries or in-memory stubs).\n\n---\nLocation: E:\\Hackathon\\buddy-agent\\agent\\skills\\rest-agent\\SKILL.md"
+            }
+          ]
+        }
+      }
+    ],
+    "tracking_id": "13b621e4-1e87-406d-9800-2a40c8fb60a5"
+  },
+  "message_id": 2,
+  "redact_message": null,
+  "created_at": "2026-09-20T09:15:17.683411+00:00",
+  "updated_at": "2026-09-20T09:15:17.683415+00:00"
+}

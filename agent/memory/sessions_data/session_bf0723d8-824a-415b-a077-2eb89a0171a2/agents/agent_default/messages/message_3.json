@@ -1,0 +1,26 @@
+{
+  "message": {
+    "role": "assistant",
+    "content": [
+      {
+        "text": "Here's the code for `ollama_healthcheck.py`:\n```python\nfrom fastapi import FastAPI\nfrom pydantic import BaseModel\n\napp = FastAPI()\n\nclass Healthcheck(BaseModel):\n    pass\n\n@app.get(\"/healthcheck\")\nasync def healthcheck():\n    return {\"status\": \"ok\"}\n```\nThis code defines a simple FastAPI app with a single endpoint `/healthcheck` that returns a JSON response with a \"status\" key set to \"ok\". The code is stored in a file named `ollama_healthcheck.py`."
+      }
+    ],
+    "metadata": {
+      "usage": {
+        "inputTokens": 976,
+        "outputTokens": 113,
+        "totalTokens": 1089
+      },
+      "metrics": {
+        "latencyMs": 21939,
+        "timeToFirstByteMs": 17
+      }
+    },
+    "tracking_id": "d174ca3f-d168-498c-bec1-24dd63efbd35"
+  },
+  "message_id": 3,
+  "redact_message": null,
+  "created_at": "2026-09-20T09:26:23.540471+00:00",
+  "updated_at": "2026-09-20T09:26:23.540474+00:00"
+}

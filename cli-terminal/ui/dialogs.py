@@ -84,10 +84,10 @@ def show_models_dialog(session: SessionState, console: Optional[Console] = None)
     topo_table.add_column("Provider", style=f"dim {COLOR_MINT}", width=16)
 
     agents_list = [
-        ("🤖 Main Orchestrator (Buddy)", "main"),
-        ("⚡ REST API Agent", "api"),
-        ("🐙 GitHub Agent", "github"),
-        ("📦 SAM CLI Deploy Agent", "sam"),
+        ("Main Orchestrator (Buddy)", "main"),
+        ("REST API Agent", "api"),
+        (" GitHub Agent", "github"),
+        ("SAM CLI Deploy Agent", "sam"),
     ]
 
     for label, akey in agents_list:
@@ -112,15 +112,24 @@ def show_models_dialog(session: SessionState, console: Optional[Console] = None)
 
     for m in MODELS_CATALOG:
         is_active = any(
-            m["key"].lower() == session.subagent_models.get(k, "").lower()
-            or m.get("model_id", "").lower() == session.subagent_models.get(k, "").lower()
-            or (m["key"] == "groq" and session.subagent_models.get(k, "").lower() in ("groq", "qwen/qwen3.8-27b"))
-            or (m["key"] == "ollama" and session.subagent_models.get(k, "").lower() in ("ollama", "llama3.1:8b"))
-            or (m["key"] == "bedrock" and session.subagent_models.get(k, "").lower() in ("bedrock", "us.anthropic.claude-3-7-sonnet-20250219-v1:0"))
+            m["key"] == session.subagent_models.get(k, "")
+            or m.get("model_id", "") == session.subagent_models.get(k, "")
+            or (m["key"] == "groq" and session.subagent_models.get(k, "") in ("groq", "qwen/qwen3.8-27b"))
+            or (m["key"] == "ollama" and session.subagent_models.get(k, "") in ("ollama", "llama3.1:8b"))
+            or (m["key"] == "bedrock" and session.subagent_models.get(k, "") in ("bedrock", "us.anthropic.claude-3-7-sonnet-20250219-v1:0"))
             for k in ("main", "api", "github", "sam")
         )
         status_str = f"[{COLOR_MINT}]● ACTIVE[/{COLOR_MINT}]" if is_active else "[dim]STANDBY[/dim]"
-        table.add_row(f"[{m['id']}]", m["provider"], m["name"], m.get("model_id", m["key"]), status_str)
+        table.add_row(
+            f"[{m['id']}]",
+            str(m["provider"]),
+            str(m["name"]),
+            str(m.get("model_id", m["key"])),
+            status_str,
+        )
+
+
+
 
     console.print()
     console.print(table)
@@ -206,14 +215,14 @@ def show_session_dialog(session: SessionState, console: Optional[Console] = None
         pass
 
     box_content = Text()
-    box_content.append("🔑 ACTIVE SESSION UUID:\n", style="bold #facc15")
+    box_content.append("ACTIVE SESSION UUID:\n", style="bold #facc15")
     box_content.append(f"{session.session_id}\n\n", style="bold #00ff55")
-    box_content.append(f"🤖 Active Model: {session.model_key.upper()} | 📊 Telemetry: {session.messages_count} messages\n", style="bold #38bdf8")
-    box_content.append(f"📥 In: {session.total_input_tokens:,} tokens | 📤 Out: {session.total_output_tokens:,} tokens\n\n", style="dim #94a3b8")
-    box_content.append("💡 Copy the UUID above to resume this exact state anytime.", style="italic #38bdf8")
+    box_content.append(f"Active Model: {session.model_key.upper()} |  Telemetry: {session.messages_count} messages\n", style="bold #38bdf8")
+    box_content.append(f" In: {session.total_input_tokens:,} tokens |  Out: {session.total_output_tokens:,} tokens\n\n", style="dim #94a3b8")
+    box_content.append(" Copy the UUID above to resume this exact state anytime.", style="italic #38bdf8")
 
     console.print()
-    console.print(Text("💾 BUDDY AGENT // SESSION CONTEXT", style="bold #00ff55", justify="center"))
+    console.print(Text("BUDDY AGENT // SESSION CONTEXT", style="bold #00ff55", justify="center"))
     console.print(Text("─" * 78, style="dim #15803d", justify="center"))
     console.print(box_content)
     console.print(Text("─" * 78, style="dim #15803d", justify="center"))
@@ -221,7 +230,7 @@ def show_session_dialog(session: SessionState, console: Optional[Console] = None
 
     if stored_sessions:
         table = Table(
-            title="📁 [bold #00ff55]STORED SESSIONS ARCHIVE (./agent/memory/sessions_data)[/bold #00ff55]",
+            title=" [bold #00ff55]STORED SESSIONS ARCHIVE (./agent/memory/sessions_data)[/bold #00ff55]",
             border_style=f"dim {COLOR_MUTED}",
             header_style=f"bold {COLOR_PEACH}",
             expand=True,
@@ -261,7 +270,7 @@ def show_session_dialog(session: SessionState, console: Optional[Console] = None
             set_session_model_key(new_id, session.model_key)
         except Exception:
             pass
-        console.print(f"[{COLOR_MINT}]✨ Started new session: {session.session_id} (Model: {session.model_key})[/{COLOR_MINT}]\n")
+        console.print(f"[{COLOR_MINT}]Started new session: {session.session_id} (Model: {session.model_key})[/{COLOR_MINT}]\n")
         return
 
     # Check for selection by number
@@ -270,7 +279,7 @@ def show_session_dialog(session: SessionState, console: Optional[Console] = None
         if 0 <= idx < len(stored_sessions):
             target_id = stored_sessions[idx]
             session.switch_session(target_id)
-            console.print(f"[{COLOR_MINT}]🔄 Switched to session #{idx+1}: {session.session_id} (Model: {session.model_key})[/{COLOR_MINT}]\n")
+            console.print(f"[{COLOR_MINT}] Switched to session #{idx+1}: {session.session_id} (Model: {session.model_key})[/{COLOR_MINT}]\n")
             return
 
     # Check for 'r' or 'resume'
@@ -283,7 +292,7 @@ def show_session_dialog(session: SessionState, console: Optional[Console] = None
     target_id = clean_session_id(raw_input)
     if target_id:
         session.switch_session(target_id)
-        console.print(f"[{COLOR_MINT}]🔄 Resumed session: {session.session_id} (Model: {session.model_key})[/{COLOR_MINT}]\n")
+        console.print(f"[{COLOR_MINT}] Resumed session: {session.session_id} (Model: {session.model_key})[/{COLOR_MINT}]\n")
 
 
 def show_tool_list_table(console: Optional[Console] = None) -> None:
@@ -301,9 +310,9 @@ def show_tool_list_table(console: Optional[Console] = None) -> None:
         padding=(0, 1),
     )
 
-    table.add_column("🐙 GitHub MCP Tools", style=f"bold {COLOR_TEXT}", ratio=4)
-    table.add_column("⚡ SAM CLI MCP Tools", style=f"bold {COLOR_TEXT}", ratio=4)
-    table.add_column("📝 Text Editor MCP Tools", style=f"bold {COLOR_TEXT}", ratio=4)
+    table.add_column("GitHub MCP Tools", style=f"bold {COLOR_TEXT}", ratio=4)
+    table.add_column("SAM CLI MCP Tools", style=f"bold {COLOR_TEXT}", ratio=4)
+    table.add_column("Text Editor MCP Tools", style=f"bold {COLOR_TEXT}", ratio=4)
 
     max_len = max(len(github_tools), len(sam_tools), len(text_tools))
 

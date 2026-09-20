@@ -1,0 +1,34 @@
+{
+  "message": {
+    "role": "user",
+    "content": [
+      {
+        "toolResult": {
+          "status": "success",
+          "toolUseId": "128dzd07m",
+          "content": [
+            {
+              "text": "{\n  \"result\": \"ok\",\n  \"file_hash\": \"36226886256dc067de26dc070dd60df5cd7aa250d7e4af3517515c9430181dd4\",\n  \"reason\": null,\n  \"suggestion\": \"append\",\n  \"hint\": \"For new or empty files, please consider using append_text_file_contents instead\"\n}"
+            }
+          ],
+          "structuredContent": {
+            "result": [
+              {
+                "type": "text",
+                "text": "{\n  \"result\": \"ok\",\n  \"file_hash\": \"36226886256dc067de26dc070dd60df5cd7aa250d7e4af3517515c9430181dd4\",\n  \"reason\": null,\n  \"suggestion\": \"append\",\n  \"hint\": \"For new or empty files, please consider using append_text_file_contents instead\"\n}",
+                "annotations": null,
+                "_meta": null
+              }
+            ]
+          },
+          "isError": false
+        }
+      }
+    ],
+    "tracking_id": "2c200efd-80ed-468d-8fc0-d964aa5507e8"
+  },
+  "message_id": 4,
+  "redact_message": null,
+  "created_at": "2026-09-20T09:37:48.435067+00:00",
+  "updated_at": "2026-09-20T09:37:48.435072+00:00"
+}

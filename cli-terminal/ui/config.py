@@ -2,6 +2,7 @@
 Configuration, Constants, Palettes, and Model Catalog for Buddy Agent UI
 """
 
+from typing import List, Dict, Any
 import random
 
 APP_NAME = "PROJECT BUDDY AGENT"
@@ -44,7 +45,7 @@ def get_random_champ_compliment() -> str:
 
 
 # Supported AI Model Catalog
-MODELS_CATALOG = [
+MODELS_CATALOG: List[Dict[str, Any]] = [
     {
         "id": "1",
         "key": "groq",
