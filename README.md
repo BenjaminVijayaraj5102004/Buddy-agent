@@ -1,6 +1,7 @@
 # Buddy Agent
 
 Autonomous Pair Programming and Infrastructure Orchestration System
+![](https://komarev.com/ghpvc/?username=your-github-username)
 
 ---
 
